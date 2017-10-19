@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ServiceCenter.BL.Interfaces;
+using Unity;
+using Unity.Lifetime;
+
+
+namespace ServiceCenter.BL.Tests.Common
+{
+    [TestClass]
+    public abstract class BaseTestClass
+    {
+        protected IUnityContainer Container;
+        [TestInitialize]
+        public virtual void InitContainer()
+        {
+            this.Container = new UnityContainer();
+            RegisterTypes();
+        }
+
+        [TestCleanup]
+        public virtual void CleanUp()
+        {
+            if (this.Container != null)
+                this.Container.Dispose();
+        }
+
+
+
+        private void RegisterTypes()
+        {
+            this.Container.RegisterType<IOrderService, OrderService.OrderService>();
+        }
+    }
+}
