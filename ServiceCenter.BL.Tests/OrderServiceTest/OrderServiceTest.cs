@@ -21,10 +21,13 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
             };
 
         [TestMethod]
-        public void ShouldAddOrder()
+        public void ShouldAddAndDeleteOrder()
         {
             var context = Container.Resolve<IOrderService>();
             context.AddOrder(orderDto);
+            Assert.IsNotNull(context.GetOrderById("99E5DFA7-99A9-4F0D-91A5-AA64CFB98709"));
+            context.DeleteOrder("99E5DFA7-99A9-4F0D-91A5-AA64CFB98709");
+            Assert.IsNull(context.GetOrderById("99E5DFA7-99A9-4F0D-91A5-AA64CFB98709"));
         }
 
 
