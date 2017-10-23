@@ -11,7 +11,7 @@ namespace ServiceCenter.WcfService
         {
 			// register all your components with the container here
             container
-                .RegisterType<IOrderService, OrderService>();
+                .RegisterType<IOrderService, OrderService>().RegisterType<DBContext, ServiceCenterContext>(new PerResolveLifetimeManager);
             //    .RegisterType<DataContext>(new HierarchicalLifetimeManager());
         }
     }    

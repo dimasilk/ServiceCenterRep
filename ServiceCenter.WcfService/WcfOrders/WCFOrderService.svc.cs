@@ -6,6 +6,7 @@ using ServiceCenter.BL.Interfaces;
 
 namespace ServiceCenter.WcfService.WcfOrders
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)] 
     [ServiceContract]
     public class WcfOrderService : IWcfOrderService
     {
