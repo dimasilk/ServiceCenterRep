@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using ServiceCenter.DataModels;
 
 namespace ServiceCenter.BL.DTO
 {
+    [DataContract]
     public class OrderDTO
     {
         public OrderDTO() { }
@@ -20,11 +22,22 @@ namespace ServiceCenter.BL.DTO
             this.DeviceModel = dataModel.DeviceModel;
         }
 
+        [DataMember]
         public string Id { get; set; }
+
+        [DataMember]
         public string Device { get; set; }
+
+        [DataMember]
         public string Manufacturer { get; set; }
+
+        [DataMember]
         public string DeviceModel { get; set; }
+
+        [DataMember]
         public string SerialNumber { get; set; }
+
+        [DataMember]
         public bool Urgently { get; set; }
 
 
