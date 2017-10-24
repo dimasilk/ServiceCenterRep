@@ -28,7 +28,6 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
             var context = Container.Resolve<ServiceCenterContext>();
             service.AddOrder(orderDto, context);
             Assert.IsNotNull(service.GetOrderById("99E5DFA7-99A9-4F0D-91A5-AA64CFB98709", context));
-            service = Container.Resolve<IOrderService>();
             service.DeleteOrder("99E5DFA7-99A9-4F0D-91A5-AA64CFB98709", context);
             Assert.IsNull(service.GetOrderById("99E5DFA7-99A9-4F0D-91A5-AA64CFB98709", context));
         }
