@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ServiceCenter.BL.Interfaces;
+using ServiceCenter.DataModels;
 using Unity;
 using Unity.Lifetime;
+
 
 
 namespace ServiceCenter.BL.Tests.Common
@@ -34,6 +36,7 @@ namespace ServiceCenter.BL.Tests.Common
         private void RegisterTypes()
         {
             this.Container.RegisterType<IOrderService, OrderService.OrderService>();
+            this.Container.RegisterType<ServiceCenterContext>();
         }
     }
 }

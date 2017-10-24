@@ -12,70 +12,71 @@ namespace ServiceCenter.BL.OrderService
 {
     public class OrderService : IOrderService
     {
-        public IEnumerable<DTO.OrderDTO> GetAllOrders()
+        public IEnumerable<DTO.OrderDTO> GetAllOrders(ServiceCenterContext context)
         {
-            using (var context = new ServiceCenterContext())
-            {
-                var res = context.Orders.ToList();
-                if(res != null) return res.Select(x => new OrderDTO(x)).ToList();
-            }
+            var res = context.Orders.ToList();
+            if (res != null) return res.Select(x => new OrderDTO(x)).ToList();
+
             return null;
         }
 
-        public IEnumerable<DTO.OrderDTO> GetOrdersByUserId(string userId)
+        public IEnumerable<DTO.OrderDTO> GetOrdersByUserId(string userId, ServiceCenterContext context)
         {
-          /*  using (var context = new ServiceCenterContext())
-            {
-                var res = context.Orders.Where(x => x.userId = userId);
-                return res?.Select(x => new OrderDTO(x)).ToList();
-            }*/
+            /*  using (var context = new ServiceCenterContext())
+              {
+                  var res = context.Orders.Where(x => x.userId = userId);
+                  return res?.Select(x => new OrderDTO(x)).ToList();
+              }*/
             throw new NotImplementedException();
         }
 
-        public DTO.OrderDTO GetOrderById(string orderId)
+        public DTO.OrderDTO GetOrderById(string orderId, ServiceCenterContext context)
         {
-            using (var context = new ServiceCenterContext())
-            {
-                var res = context.Orders.Find(orderId);
-                if (res != null) return new OrderDTO(res);
-            }
+
+            var res = context.Orders.Find(orderId);
+            if (res != null) return new OrderDTO(res);
+
             return null;
         }
 
-        public void DeleteOrder(string orderId)
+        public void DeleteOrder(string orderId, ServiceCenterContext context)
         {
-            using (var context = new ServiceCenterContext())
+
+            var o = context.Orders.FirstOrDefault(x => x.Id == orderId);
+            if (o != null)
             {
-                OrderDataModel dataModel = new OrderDataModel();
-                GetOrderById(orderId).CopyTo(dataModel);
-                context.Entry(dataModel).State = System.Data.Entity.EntityState.Deleted;
+                context.Orders.Remove(o);
                 context.SaveChanges();
-                return;
             }
+
+            /*OrderDataModel dataModel = new OrderDataModel();
+            GetOrderById(orderId, context).CopyTo(dataModel);
+            //context.Orders.Remove(dataModel);
+            context.Entry(dataModel).State = System.Data.Entity.EntityState.Deleted;
+            context.SaveChanges();*/
+            return;
+
         }
 
-        public void UpdateOrder(DTO.OrderDTO orderModel)
+        public void UpdateOrder(DTO.OrderDTO orderModel, ServiceCenterContext context)
         {
-            using (var context = new ServiceCenterContext())
-            {
-                OrderDataModel dataModel = new OrderDataModel();
-                orderModel.CopyTo(dataModel);
-                context.Entry(dataModel).State = System.Data.Entity.EntityState.Modified;
-                context.SaveChanges();
-                return;
-            }
+            OrderDataModel dataModel = new OrderDataModel();
+            orderModel.CopyTo(dataModel);
+            context.Entry(dataModel).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+            return;
+
         }
 
-        public void AddOrder(DTO.OrderDTO orderModel)
+        public void AddOrder(DTO.OrderDTO orderModel, ServiceCenterContext context)
         {
-            using (var context = new ServiceCenterContext())
-            {
-                OrderDataModel dataModel = new OrderDataModel();
-                orderModel.CopyTo(dataModel);
-                context.Orders.Add(dataModel);
-                context.SaveChanges();
-                return;
-            }
+
+            OrderDataModel dataModel = new OrderDataModel();
+            orderModel.CopyTo(dataModel);
+            context.Orders.Add(dataModel);
+            context.SaveChanges();
+            return;
+
 
         }
     }
