@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 using ServiceCenter.DataModels;
 
-namespace ServiceCenter.BL.DTO
+namespace ServiceCenter.BL.Common.DTO
 {
     [DataContract]
     public class OrderDTO
@@ -41,7 +36,7 @@ namespace ServiceCenter.BL.DTO
         public bool Urgently { get; set; }
 
 
-        internal virtual void CopyTo(OrderDataModel dataModel)
+        public virtual void CopyTo(OrderDataModel dataModel)
         {
             dataModel.Id = this.Id;
             dataModel.Device = this.Device;

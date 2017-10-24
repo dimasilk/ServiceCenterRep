@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ServiceCenter.BL.DTO;
+using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.BL.Interfaces;
 using ServiceCenter.BL.Tests.Common;
 using ServiceCenter.DataModels;

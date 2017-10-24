@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ServiceCenter.BL.DTO;
+using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.DataModels;
 
 namespace ServiceCenter.BL.Interfaces

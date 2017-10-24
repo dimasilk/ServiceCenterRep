@@ -72,6 +72,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ServiceCenter.BL.Common\ServiceCenter.BL.Common.csproj">
+      <Project>{A673D6D6-7787-4510-8565-B1711202BF4B}</Project>
+      <Name>ServiceCenter.BL.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceCenter.BL\ServiceCenter.BL.csproj">
       <Project>{6FFB9DF7-2D15-4BF1-869A-DF09CBBD3E4C}</Project>
       <Name>ServiceCenter.BL</Name>

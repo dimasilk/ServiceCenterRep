@@ -47,12 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\OrderDTO.cs" />
     <Compile Include="Interfaces\IOrderService.cs" />
     <Compile Include="OrderService\OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ServiceCenter.BL.Common\ServiceCenter.BL.Common.csproj">
+      <Project>{A673D6D6-7787-4510-8565-B1711202BF4B}</Project>
+      <Name>ServiceCenter.BL.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceCenter.DataModels\ServiceCenter.DataModels.csproj">
       <Project>{FCA6C960-C7C4-4420-BACF-FEAC786E04D1}</Project>
       <Name>ServiceCenter.DataModels</Name>
@@ -61,6 +64,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTO\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

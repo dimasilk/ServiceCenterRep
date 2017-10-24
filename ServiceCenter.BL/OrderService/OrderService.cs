@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ServiceCenter.BL.DTO;
+using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.BL.Interfaces;
 using ServiceCenter.DataModels;
 
@@ -12,7 +12,7 @@ namespace ServiceCenter.BL.OrderService
 {
     public class OrderService : IOrderService
     {
-        public IEnumerable<DTO.OrderDTO> GetAllOrders(ServiceCenterContext context)
+        public IEnumerable<OrderDTO> GetAllOrders(ServiceCenterContext context)
         {
             var res = context.Orders.ToList();
             if (res != null) return res.Select(x => new OrderDTO(x)).ToList();
@@ -20,7 +20,7 @@ namespace ServiceCenter.BL.OrderService
             return null;
         }
 
-        public IEnumerable<DTO.OrderDTO> GetOrdersByUserId(string userId, ServiceCenterContext context)
+        public IEnumerable<OrderDTO> GetOrdersByUserId(string userId, ServiceCenterContext context)
         {
             /*  using (var context = new ServiceCenterContext())
               {
@@ -30,7 +30,7 @@ namespace ServiceCenter.BL.OrderService
             throw new NotImplementedException();
         }
 
-        public DTO.OrderDTO GetOrderById(string orderId, ServiceCenterContext context)
+        public OrderDTO GetOrderById(string orderId, ServiceCenterContext context)
         {
 
             var res = context.Orders.Find(orderId);
@@ -58,7 +58,7 @@ namespace ServiceCenter.BL.OrderService
 
         }
 
-        public void UpdateOrder(DTO.OrderDTO orderModel, ServiceCenterContext context)
+        public void UpdateOrder(OrderDTO orderModel, ServiceCenterContext context)
         {
             OrderDataModel dataModel = new OrderDataModel();
             orderModel.CopyTo(dataModel);
@@ -68,7 +68,7 @@ namespace ServiceCenter.BL.OrderService
 
         }
 
-        public void AddOrder(DTO.OrderDTO orderModel, ServiceCenterContext context)
+        public void AddOrder(OrderDTO orderModel, ServiceCenterContext context)
         {
 
             OrderDataModel dataModel = new OrderDataModel();

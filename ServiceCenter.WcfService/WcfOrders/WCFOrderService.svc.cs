@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ServiceModel;
-using ServiceCenter.BL.DTO;
+using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.BL.Interfaces;
 using ServiceCenter.DataModels;
 
