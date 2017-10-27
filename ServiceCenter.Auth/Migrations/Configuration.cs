@@ -1,18 +1,16 @@
-namespace ServiceCenter.DataModels.Migrations
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+﻿using System.Data.Entity.Migrations;
+using ServiceCenter.Auth.Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ServiceCenter.DataModels.ServiceCenterContext>
+namespace ServiceCenter.Auth.Migrations
+{
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(ServiceCenter.DataModels.ServiceCenterContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

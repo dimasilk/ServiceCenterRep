@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Interfaces;
 using ServiceCenter.DataModels;
 using Unity;
@@ -37,6 +41,9 @@ namespace ServiceCenter.BL.Tests.Common
         {
             this.Container.RegisterType<IOrderService, OrderService.OrderService>();
             this.Container.RegisterType<ServiceCenterContext>();
+            this.Container.RegisterType<DbContext, ApplicationDbContext>();
+            this.Container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
+            this.Container.RegisterType<UserManager<ApplicationUser>>();
         }
     }
 }
