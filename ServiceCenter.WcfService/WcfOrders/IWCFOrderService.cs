@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using ServiceCenter.BL.Common.DTO;
-using ServiceCenter.BL.Interfaces;
 
 namespace ServiceCenter.WcfService.WcfOrders
 {

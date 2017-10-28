@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,8 +6,6 @@ using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Interfaces;
 using ServiceCenter.DataModels;
 using Unity;
-using Unity.Lifetime;
-
 
 
 namespace ServiceCenter.BL.Tests.Common
