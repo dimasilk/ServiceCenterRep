@@ -44,9 +44,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ServiceCenter.Auth\ServiceCenter.Auth.csproj">
+    <ProjectReference Include="..\ServiceCenter.Auth\ServiceCenter.DataModel.csproj">
       <Project>{0E04672B-8CAC-4A7C-88F2-8476FF317681}</Project>
-      <Name>ServiceCenter.Auth</Name>
+      <Name>ServiceCenter.DataModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

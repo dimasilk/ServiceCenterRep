@@ -1,27 +1,26 @@
-﻿using System.Data.Entity;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ServiceCenter.Auth.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class ApplicationUser : IdentityUser
+    public sealed class ApplicationUser : IdentityUser<Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
     {
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
+        public ApplicationUser()
         {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Add custom user claims here
-            return userIdentity;
+            Id = Guid.NewGuid();     
         }
+
+       
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
     {
         public ApplicationDbContext()
-            : base("name=ApplicationDbContext", throwIfV1Schema: false)
+            : base("name=ApplicationDbContext")
         {
             
         }
@@ -31,6 +30,30 @@ namespace ServiceCenter.Auth.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+    }
+
+    public class ApplicationUserRole : IdentityUserRole<Guid>
+    {
+    }
+
+    public class ApplicationUserLogin : IdentityUserLogin<Guid>
+    {
+    }
+
+    public class ApplicationUserClaim : IdentityUserClaim<Guid>
+    {
+    }
+
+    public class ApplicationRole : IdentityRole<Guid, ApplicationUserRole>
+    {
+    }
+    public class ApplicatonUserStore :
+  UserStore<ApplicationUser, ApplicationRole, Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
+    {
+        public ApplicatonUserStore(ApplicationDbContext context)
+         : base(context)
+        {
         }
     }
 }

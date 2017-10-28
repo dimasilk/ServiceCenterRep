@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -31,8 +32,8 @@ namespace ServiceCenter.BL.Tests.Common
         {
             this.Container.RegisterType<IOrderService, OrderService.OrderService>();
             this.Container.RegisterType<DbContext, ApplicationDbContext>();
-            this.Container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
-            this.Container.RegisterType<UserManager<ApplicationUser>>();
+            this.Container.RegisterType<IUserStore<ApplicationUser, Guid>, ApplicatonUserStore>();
+            this.Container.RegisterType<UserManager<ApplicationUser, Guid>>();
             this.Container.RegisterType<ApplicationDbContext>();
         }
     }

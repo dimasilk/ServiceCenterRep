@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
+using Microsoft.AspNet.Identity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Tests.Common;
@@ -12,7 +13,7 @@ namespace ServiceCenter.BL.Tests.UserTest
         [TestMethod]
         public void ShouldAddUser()
         {
-            var um = Container.Resolve<UserManager<ApplicationUser>>();
+            var um = Container.Resolve<UserManager<ApplicationUser, Guid>>();
             var user = new ApplicationUser
             {
                 Email = "testemail@yandex.ru",

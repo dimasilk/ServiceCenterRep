@@ -111,9 +111,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ServiceCenter.Auth\ServiceCenter.Auth.csproj">
-      <Project>{1717ebe1-92a1-4a20-8e14-a47ec6b99c13}</Project>
-      <Name>ServiceCenter.Auth</Name>
+    <ProjectReference Include="..\ServiceCenter.Auth\ServiceCenter.DataModel.csproj">
+      <Project>{0E04672B-8CAC-4A7C-88F2-8476FF317681}</Project>
+      <Name>ServiceCenter.DataModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServiceCenter.BL.Common\ServiceCenter.BL.Common.csproj">
       <Project>{A673D6D6-7787-4510-8565-B1711202BF4B}</Project>
