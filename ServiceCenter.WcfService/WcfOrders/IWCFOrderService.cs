@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using ServiceCenter.BL.Common.DTO;
 
@@ -11,11 +12,11 @@ namespace ServiceCenter.WcfService.WcfOrders
         [OperationContract]
         IEnumerable<OrderDTO> GetAllOrders();
         [OperationContract]
-        IEnumerable<OrderDTO> GetOrdersByUserId(string userId);
+        IEnumerable<OrderDTO> GetOrdersByUserId(Guid userId);
         [OperationContract]
-        OrderDTO GetOrderById(string orderId);
+        OrderDTO GetOrderById(Guid orderId);
         [OperationContract]
-        void DeleteOrder(string orderId);
+        void DeleteOrder(Guid orderId);
         [OperationContract]
         void UpdateOrder(OrderDTO orderModel);
         [OperationContract]

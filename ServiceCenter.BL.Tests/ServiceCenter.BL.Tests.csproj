@@ -123,10 +123,6 @@
       <Project>{6FFB9DF7-2D15-4BF1-869A-DF09CBBD3E4C}</Project>
       <Name>ServiceCenter.BL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceCenter.DataModels\ServiceCenter.DataModels.csproj">
-      <Project>{fca6c960-c7c4-4420-bacf-feac786e04d1}</Project>
-      <Name>ServiceCenter.DataModels</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Choose>

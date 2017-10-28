@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
+using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.BL.Interfaces;
-using ServiceCenter.DataModels;
+
 
 namespace ServiceCenter.WcfService.WcfOrders
 {
@@ -11,8 +13,8 @@ namespace ServiceCenter.WcfService.WcfOrders
     public class WcfOrderService : IWcfOrderService
     {
         private readonly IOrderService _orderService;
-        private readonly ServiceCenterContext _context;
-        public WcfOrderService(IOrderService orderService, ServiceCenterContext context)
+        private readonly ApplicationDbContext _context;
+        public WcfOrderService(IOrderService orderService, ApplicationDbContext context)
         {
             _orderService = orderService;
             _context = context;
@@ -24,19 +26,19 @@ namespace ServiceCenter.WcfService.WcfOrders
         }
 
         [OperationContract]
-        public IEnumerable<OrderDTO> GetOrdersByUserId(string userId)
+        public IEnumerable<OrderDTO> GetOrdersByUserId(Guid userId)
         {
             return _orderService.GetOrdersByUserId(userId);
         }
 
         [OperationContract]
-        public OrderDTO GetOrderById(string orderId)
+        public OrderDTO GetOrderById(Guid orderId)
         {
             return _orderService.GetOrderById(orderId);
         }
 
         [OperationContract]
-        public void DeleteOrder(string orderId)
+        public void DeleteOrder(Guid orderId)
         {
             _orderService.DeleteOrder(orderId);
         }

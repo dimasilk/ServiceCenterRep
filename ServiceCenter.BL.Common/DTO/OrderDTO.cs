@@ -1,5 +1,6 @@
-﻿using System.Runtime.Serialization;
-using ServiceCenter.DataModels;
+﻿using System;
+using System.Runtime.Serialization;
+using ServiceCenter.Auth.Models;
 
 namespace ServiceCenter.BL.Common.DTO
 {
@@ -7,7 +8,7 @@ namespace ServiceCenter.BL.Common.DTO
     public class OrderDTO
     {
         public OrderDTO() { }
-        public OrderDTO(OrderDataModel dataModel)
+        public OrderDTO(Order dataModel)
         {
             this.Id = dataModel.Id;
             this.Device = dataModel.Device;
@@ -18,7 +19,7 @@ namespace ServiceCenter.BL.Common.DTO
         }
 
         [DataMember]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [DataMember]
         public string Device { get; set; }
@@ -36,7 +37,7 @@ namespace ServiceCenter.BL.Common.DTO
         public bool Urgently { get; set; }
 
 
-        public virtual void CopyTo(OrderDataModel dataModel)
+        public virtual void CopyTo(Order dataModel)
         {
             dataModel.Id = this.Id;
             dataModel.Device = this.Device;

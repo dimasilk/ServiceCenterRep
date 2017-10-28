@@ -4,7 +4,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Interfaces;
-using ServiceCenter.DataModels;
 using Unity;
 
 
@@ -24,19 +23,17 @@ namespace ServiceCenter.BL.Tests.Common
         [TestCleanup]
         public virtual void CleanUp()
         {
-            if (this.Container != null)
-                this.Container.Dispose();
+            this.Container?.Dispose();
         }
-
 
 
         private void RegisterTypes()
         {
             this.Container.RegisterType<IOrderService, OrderService.OrderService>();
-            this.Container.RegisterType<ServiceCenterContext>();
             this.Container.RegisterType<DbContext, ApplicationDbContext>();
             this.Container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
             this.Container.RegisterType<UserManager<ApplicationUser>>();
+            this.Container.RegisterType<ApplicationDbContext>();
         }
     }
 }

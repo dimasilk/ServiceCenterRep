@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.BL.Interfaces;
-using ServiceCenter.DataModels;
+
 
 
 namespace ServiceCenter.BL.OrderService
 {
     public class OrderService : IOrderService
     {
-        private readonly ServiceCenterContext _context;
-        public OrderService(ServiceCenterContext context)
+        private readonly ApplicationDbContext _context;
+        public OrderService(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -23,7 +24,7 @@ namespace ServiceCenter.BL.OrderService
             return null;
         }
 
-        public IEnumerable<OrderDTO> GetOrdersByUserId(string userId)
+        public IEnumerable<OrderDTO> GetOrdersByUserId(Guid userId)
         {
             /*  using (var context = new ServiceCenterContext())
               {
@@ -33,7 +34,7 @@ namespace ServiceCenter.BL.OrderService
             throw new NotImplementedException();
         }
 
-        public OrderDTO GetOrderById(string orderId)
+        public OrderDTO GetOrderById(Guid orderId)
         {
 
             var res = _context.Orders.Find(orderId);
@@ -42,7 +43,7 @@ namespace ServiceCenter.BL.OrderService
             return null;
         }
 
-        public void DeleteOrder(string orderId)
+        public void DeleteOrder(Guid orderId)
         {
             var o = _context.Orders.FirstOrDefault(x => x.Id == orderId);
             if (o != null)
@@ -57,7 +58,7 @@ namespace ServiceCenter.BL.OrderService
 
         public void UpdateOrder(OrderDTO orderModel)
         {
-            OrderDataModel dataModel = new OrderDataModel();
+            Order dataModel = new Order();
             orderModel.CopyTo(dataModel);
             _context.Entry(dataModel).State = System.Data.Entity.EntityState.Modified;
             _context.SaveChanges();
@@ -65,16 +66,13 @@ namespace ServiceCenter.BL.OrderService
 
         }
 
-        public void AddOrder(OrderDTO orderModel)
+        public Guid AddOrder(OrderDTO orderModel)
         {
-
-            OrderDataModel dataModel = new OrderDataModel();
+            Order dataModel = new Order();
             orderModel.CopyTo(dataModel);
             _context.Orders.Add(dataModel);
             _context.SaveChanges();
-            return;
-
-
+            return dataModel.Id;
         }
     }
 }
