@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Interfaces;
