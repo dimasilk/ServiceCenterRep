@@ -9,7 +9,7 @@ using ServiceCenter.BL.Interfaces;
 namespace ServiceCenter.WcfService.WcfOrders
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)] 
-    [ServiceContract]
+  
     public class WcfOrderService : IWcfOrderService
     {
         private readonly IOrderService _orderService;
@@ -19,31 +19,33 @@ namespace ServiceCenter.WcfService.WcfOrders
             _orderService = orderService;
             _context = context;
         }
-        [OperationContract]
+
+        public WcfOrderService() { }
+       
         public IEnumerable<OrderDTO> GetAllOrders()
         {
             return _orderService.GetAllOrders();
         }
 
-        [OperationContract]
+        
         public IEnumerable<OrderDTO> GetOrdersByUserId(Guid userId)
         {
             return _orderService.GetOrdersByUserId(userId);
         }
 
-        [OperationContract]
+       
         public OrderDTO GetOrderById(Guid orderId)
         {
             return _orderService.GetOrderById(orderId);
         }
 
-        [OperationContract]
+       
         public void DeleteOrder(Guid orderId)
         {
             _orderService.DeleteOrder(orderId);
         }
 
-        [OperationContract]
+
         public void UpdateOrder(OrderDTO orderModel)
         {
             _orderService.UpdateOrder(orderModel);

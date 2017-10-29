@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCenter.DataModel", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCenter.UI.Shell", "ServiceCenter.UI.Shell\ServiceCenter.UI.Shell.csproj", "{0768C709-78CC-4323-A24A-67F5F547EBD9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCenter.UI.Infrastructure", "ServiceCenter.UI.Infrastructure\ServiceCenter.UI.Infrastructure.csproj", "{05F55C12-9292-4495-A2A6-D2CF1CE643F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{0768C709-78CC-4323-A24A-67F5F547EBD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0768C709-78CC-4323-A24A-67F5F547EBD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0768C709-78CC-4323-A24A-67F5F547EBD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05F55C12-9292-4495-A2A6-D2CF1CE643F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05F55C12-9292-4495-A2A6-D2CF1CE643F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05F55C12-9292-4495-A2A6-D2CF1CE643F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05F55C12-9292-4495-A2A6-D2CF1CE643F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
