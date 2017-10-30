@@ -1,1 +1,2 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="ServiceCenter.WcfService.WcfOrders.WcfOrderService" CodeBehind="WCFOrderService.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="ServiceCenter.WcfService.WcfOrders.WcfOrderService" CodeBehind="WCFOrderService.svc.cs" 
+Factory="ServiceCenter.WcfService.WcfServiceFactory"%>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Common.DTO;
@@ -16,12 +15,12 @@ namespace ServiceCenter.BL.OrderService
         {
             _context = context;
         }
-        public IEnumerable<OrderDTO> GetAllOrders()
+        public OrderDTO[] GetAllOrders()
         {
             return _context.Orders.Select(OrderMapper.SelectExpression).ToArray();
         }
 
-        public IEnumerable<OrderDTO> GetOrdersByUserId(Guid userId)
+        public OrderDTO[] GetOrdersByUserId(Guid userId)
         {
             /*  using (var context = new ServiceCenterContext())
               {

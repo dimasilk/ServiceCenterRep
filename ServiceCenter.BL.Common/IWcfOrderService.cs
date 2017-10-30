@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ServiceModel;
 using ServiceCenter.BL.Common.DTO;
 
-namespace ServiceCenter.WcfService.WcfOrders
+namespace ServiceCenter.BL.Common
 {
     [ServiceContract]
     public interface IWcfOrderService
     {
 
         [OperationContract]
-        IEnumerable<OrderDTO> GetAllOrders();
+        OrderDTO[] GetAllOrders();
         [OperationContract]
-        IEnumerable<OrderDTO> GetOrdersByUserId(Guid userId);
+        OrderDTO[] GetOrdersByUserId(Guid userId);
         [OperationContract]
         OrderDTO GetOrderById(Guid orderId);
         [OperationContract]

@@ -1,3 +1,6 @@
+using System;
+using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
 using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Interfaces;
@@ -10,10 +13,12 @@ namespace ServiceCenter.WcfService
     {
         protected override void ConfigureContainer(IUnityContainer container)
         {
-			// register all your components with the container here
-            container
-                .RegisterType<IOrderService, OrderService>().RegisterType<ApplicationDbContext>(new PerResolveLifetimeManager());
             //    .RegisterType<DataContext>(new HierarchicalLifetimeManager());
+            container.RegisterType<IOrderService, OrderService>();
+            container.RegisterType<DbContext, ApplicationDbContext>();
+            container.RegisterType<IUserStore<ApplicationUser, Guid>, ApplicatonUserStore>();
+            container.RegisterType<UserManager<ApplicationUser, Guid>>();
+            container.RegisterType<ApplicationDbContext>();
         }
     }    
 }
