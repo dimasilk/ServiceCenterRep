@@ -4,7 +4,7 @@ using Microsoft.Practices.Unity;
 
 namespace ServiceCenter.UI.OrderModule
 {
-    [Module(ModuleName = "OrderModule")]
+    [Module(ModuleName = nameof(OrderModule))]
     public class OrderModule : IModule
     {
         private readonly IUnityContainer _container;

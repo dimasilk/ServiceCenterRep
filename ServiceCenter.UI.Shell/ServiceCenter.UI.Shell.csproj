@@ -158,6 +158,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceCenter.UI.OrderModule\ServiceCenter.UI.OrderModule.csproj">
+      <Project>{d75cd22b-d332-42d4-b9eb-097a9745360c}</Project>
+      <Name>ServiceCenter.UI.OrderModule</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
