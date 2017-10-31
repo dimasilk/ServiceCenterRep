@@ -166,6 +166,10 @@
       <Project>{A673D6D6-7787-4510-8565-B1711202BF4B}</Project>
       <Name>ServiceCenter.BL.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServiceCenter.UI.Infrastructure\ServiceCenter.UI.Infrastructure.csproj">
+      <Project>{05f55c12-9292-4495-a2a6-d2cf1ce643f4}</Project>
+      <Name>ServiceCenter.UI.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

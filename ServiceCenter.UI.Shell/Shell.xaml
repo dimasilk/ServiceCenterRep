@@ -4,9 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ServiceCenter.UI.Shell"
+        xmlns:prism="http://www.codeplex.com/prism"
+        xmlns:constants="clr-namespace:ServiceCenter.UI.Infrastructure.Constants;assembly=ServiceCenter.UI.Infrastructure"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="557.586" Width="1036.724">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <ContentControl Grid.Column="0" Grid.Row="0" prism:RegionManager.RegionName="{x:Static constants:RegionNames.MenuRegion}"></ContentControl>
+        <ContentControl Grid.Column="0" Grid.Row="1" prism:RegionManager.RegionName="{x:Static constants:RegionNames.MainRegion}"></ContentControl>
+        <ContentControl Grid.Column="0" Grid.Row="2" prism:RegionManager.RegionName="{x:Static constants:RegionNames.StatusRegion}"></ContentControl>
         
     </Grid>
 </Window>
