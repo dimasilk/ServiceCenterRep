@@ -1,6 +1,8 @@
 ﻿using System;
+using System.ServiceModel;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
+using ServiceCenter.BL.Common;
 
 namespace ServiceCenter.UI.OrderModule
 {
@@ -14,7 +16,11 @@ namespace ServiceCenter.UI.OrderModule
         }
         public void Initialize()
         {
-            throw new NotImplementedException();
+            _container.RegisterInstance(new ChannelFactory<IWcfOrderService>("WSHTTP_IWcfOrderService"));
+            _container.RegisterType<IWcfOrderService, OrderServiceClient>();
+
+            //это в тестовых целях, если оно пройдет значит данные успешно пришли с сервера))))
+            //var data = _container.Resolve<IWcfOrderService>().GetAllOrders();
         }
     }
 }

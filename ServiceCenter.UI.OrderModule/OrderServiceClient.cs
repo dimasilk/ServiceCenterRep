@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.UI.Infrastructure;
@@ -35,6 +36,10 @@ namespace ServiceCenter.UI.OrderModule
         public OrderDTO[] GetOrdersByUserId(Guid userId)
         {
             return Channel.GetOrdersByUserId(userId);
+        }
+
+        public OrderServiceClient(ChannelFactory<IWcfOrderService> channelFactory) : base(channelFactory)
+        {
         }
     }
 }

@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Diagnostics;
 using System.ServiceModel;
-using Unity.Attributes;
 
 namespace ServiceCenter.UI.Infrastructure
 {
     public abstract class WcfClientBase<T> : IDisposable where T : class
     {
-        protected T Channel;
-        private ChannelFactory<T> _channelFactory;
-        [Dependency]
-        public ChannelFactory<T> ChannelFactory { set { _channelFactory = value; } }
-
-        protected WcfClientBase()
+        protected WcfClientBase(ChannelFactory<T> channelFactory)
         {
+            this._channelFactory = channelFactory;
             if (_channelFactory == null) throw new InvalidOperationException("Unable to create channel factory");
             Open();
-        }
+        } 
+        protected T Channel;
+        private readonly ChannelFactory<T> _channelFactory;
+       // [Dependency]
+       // public ChannelFactory<T> ChannelFactory { set { _channelFactory = value; } }
+
         public void Dispose()
         {
             CleanupChannel();

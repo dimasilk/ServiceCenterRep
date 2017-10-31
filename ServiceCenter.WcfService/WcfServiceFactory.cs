@@ -3,8 +3,10 @@ using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
 using ServiceCenter.Auth.Models;
+using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Interfaces;
 using ServiceCenter.BL.OrderService;
+using ServiceCenter.WcfService.WcfOrders;
 using Unity.Wcf;
 
 namespace ServiceCenter.WcfService
@@ -19,6 +21,8 @@ namespace ServiceCenter.WcfService
             container.RegisterType<IUserStore<ApplicationUser, Guid>, ApplicatonUserStore>();
             container.RegisterType<UserManager<ApplicationUser, Guid>>();
             container.RegisterType<ApplicationDbContext>();
+            container.RegisterType<IWcfOrderService, WcfOrderService>();
+           
         }
     }    
 }
