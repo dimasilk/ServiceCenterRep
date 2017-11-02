@@ -18,12 +18,13 @@ namespace ServiceCenter.UI.OrderModule
         }
         public void Initialize()
         {
-            _container.RegisterInstance(new ChannelFactory<IWcfOrderService>("WSHTTP_IWcfOrderService"));
+            _container.RegisterInstance(new ChannelFactory<IWcfOrderService>(nameof(IWcfOrderService)));
+            //_container.RegisterInstance(new ChannelFactory<IWcfOrderService>("WSHTTP_IWcfOrderService"));
             _container.RegisterType<IWcfOrderService, OrderServiceClient>();
             var rm = _container.Resolve<IRegionManager>();
             rm.RegisterViewWithRegion(RegionNames.MainRegion, typeof (OrderView));
             //это в тестовых целях, если оно пройдет значит данные успешно пришли с сервера))))
-            //var data = _container.Resolve<IWcfOrderService>().GetAllOrders();
+           var data = _container.Resolve<IWcfOrderService>().GetAllOrders();
         }
     }
 }
