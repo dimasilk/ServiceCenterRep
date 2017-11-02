@@ -8,10 +8,10 @@ namespace ServiceCenter.UI.OrderModule.View
     /// </summary>
     public partial class OrderView : UserControl
     {
-        public OrderView(OrderViewModel viewModel)
+        public OrderView(OrderCollectionViewModel orderCollectionViewModel)
         {
             InitializeComponent();
-            DataContext = viewModel;
+            DataContext = orderCollectionViewModel;
         }
     }
 }

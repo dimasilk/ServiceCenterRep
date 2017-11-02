@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ServiceCenter.UI.OrderModule.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Width="50" Height="50" Background="Red">
-            
+    <Grid Width="500" Height="500" Background="Red">
+        <ListBox x:Name="ContactsList" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding OrdersCollection}"/>
     </Grid>
 </UserControl>
