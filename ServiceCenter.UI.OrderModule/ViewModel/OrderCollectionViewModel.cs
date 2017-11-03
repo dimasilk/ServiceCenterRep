@@ -23,12 +23,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
         private void GetOrders()
         {
-            OrdersCollection.Clear();
-            var o = _orderServiceClient.GetAllOrders();
-            foreach (var element in o)
-            {
-                OrdersCollection.Add(new OrderItemViewModel(element));
-            }
+            OrdersCollection = new ObservableCollection<OrderItemViewModel>(_orderServiceClient.GetAllOrders().Select(x => new OrderItemViewModel(x)));
 
         }
 
