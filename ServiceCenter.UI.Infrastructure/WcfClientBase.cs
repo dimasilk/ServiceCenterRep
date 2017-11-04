@@ -66,8 +66,8 @@ namespace ServiceCenter.UI.Infrastructure
         private void Open()
         {
             if (Channel != null) return;
-            _channelFactory.Credentials.UserName.UserName = "123";
-            _channelFactory.Credentials.UserName.Password = "123";
+           // _channelFactory.Credentials.UserName.UserName = "123";
+           // _channelFactory.Credentials.UserName.Password = "123";
             Channel = _channelFactory.CreateChannel();
             ((IClientChannel)Channel).Open();
         }
