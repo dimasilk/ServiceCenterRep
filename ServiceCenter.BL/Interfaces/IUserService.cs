@@ -14,5 +14,8 @@ namespace ServiceCenter.BL.Interfaces
         void DeleteUser(ApplicationUser user);
         void UpdateUser(ApplicationUser user);
         Guid? AddUser(ApplicationUser user, string password);
+        bool Login(string userName, string password);
+        Task<ApplicationUser> GetUserByLogin(string login);
+
     }
 }

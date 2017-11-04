@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,17 @@ namespace ServiceCenter.BL.UserService
             var res = _userManager.Create(user, password);
             if (res.Succeeded) return user.Id;
             return null;
+        }
+
+        public bool Login(string userName, string password)
+        {
+            var user = GetUserByLogin(userName);
+            return user.Result.PasswordHash == password;
+        }
+
+        public Task<ApplicationUser> GetUserByLogin(string login)
+        {
+            return _userManager.FindByNameAsync(login);
         }
     }
 }

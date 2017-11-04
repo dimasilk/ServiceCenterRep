@@ -28,6 +28,8 @@ namespace ServiceCenter.BL.Tests.UserServiceTest
             service.AddUser(user, "P@ssw0rd");
             Assert.IsNotNull(service.GetUserById(user.Id).Result);
 
+            Assert.IsTrue(service.Login(user.UserName,user.PasswordHash));
+
             user.UserName = "UpdatedUsername";
             service.UpdateUser(user);
             Assert.AreEqual(user.UserName, service.GetUserById(user.Id).Result.UserName);
