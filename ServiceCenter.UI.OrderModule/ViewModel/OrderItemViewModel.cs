@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Practices.Prism.Mvvm;
+﻿using Microsoft.Practices.Prism.Mvvm;
 using ServiceCenter.BL.Common.DTO;
 
 namespace ServiceCenter.UI.OrderModule.ViewModel
