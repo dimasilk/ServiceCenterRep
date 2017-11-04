@@ -7,6 +7,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Width="500" Height="500" Background="Red">
-        <ListBox x:Name="ContactsList" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding OrdersCollection}"/>
+        <ListView x:Name="OrdersList" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path=OrdersCollection}">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Device" DisplayMemberBinding = "{Binding Path=Item.Device}"></GridViewColumn>
+                        <GridViewColumn Header="Manufacturer" DisplayMemberBinding = "{Binding Path=Item.Manufacturer}"></GridViewColumn>
+                        <GridViewColumn Header="DeviceModel" DisplayMemberBinding = "{Binding Path=Item.DeviceModel}"></GridViewColumn>
+                        <GridViewColumn Header="SerialNumber" DisplayMemberBinding = "{Binding Path=Item.SerialNumber}"></GridViewColumn>
+                        <GridViewColumn Header="Urgently" DisplayMemberBinding = "{Binding Path=Item.Urgently}"></GridViewColumn>
+                       
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>    
+        </ListView>
     </Grid>
 </UserControl>
