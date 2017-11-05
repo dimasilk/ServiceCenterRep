@@ -15,12 +15,12 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <ContentControl Grid.Column="0" Grid.Row="0" prism:RegionManager.RegionName="{x:Static constants:RegionNames.MenuRegion}"></ContentControl>
-        <ContentControl Grid.Column="0" Grid.Row="1" prism:RegionManager.RegionName="{x:Static constants:RegionNames.MainRegion}"></ContentControl>
-        <ContentControl Grid.Column="0" Grid.Row="2" prism:RegionManager.RegionName="{x:Static constants:RegionNames.StatusRegion}"></ContentControl>
+        <ContentControl Grid.Column="0" Grid.Row="0" prism:RegionManager.RegionName="{x:Static constants:RegionNames.MenuRegion}" Background="Red"/>
+        <ContentControl Grid.Column="0" Grid.Row="1" prism:RegionManager.RegionName="{x:Static constants:RegionNames.MainRegion}" Background="Aqua"></ContentControl>
+        <ContentControl Grid.Column="0" Grid.Row="2" prism:RegionManager.RegionName="{x:Static constants:RegionNames.StatusRegion}" Background="Green"></ContentControl>
         
     </Grid>
 </Window>

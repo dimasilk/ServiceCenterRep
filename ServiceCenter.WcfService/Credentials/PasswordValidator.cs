@@ -1,5 +1,4 @@
 ﻿using System.IdentityModel.Selectors;
-using System.IdentityModel.Tokens;
 
 namespace ServiceCenter.WcfService.Credentials
 {
