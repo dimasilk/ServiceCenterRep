@@ -2,6 +2,7 @@
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
+using ServiceCenter.UI.Infrastructure.DialogService;
 
 namespace ServiceCenter.UI.Shell
 {
@@ -11,6 +12,12 @@ namespace ServiceCenter.UI.Shell
         {
             Application.Current.MainWindow = this.Container.Resolve<Shell>();
             return Application.Current.MainWindow;
+        }
+
+        protected override void ConfigureContainer()
+        {
+            base.ConfigureContainer();
+            Container.RegisterType<IDialogService, DialogService>();
         }
 
         protected override IModuleCatalog CreateModuleCatalog()

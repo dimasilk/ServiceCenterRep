@@ -4,26 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.Practices.Unity;
 using ServiceCenter.UI.Infrastructure.Behaviors;
 
 namespace ServiceCenter.UI.Infrastructure.DialogService
 {
     public interface IDialogService
     {
-        bool? ShowDialog<T>(string title, out object result) where T : Window, new();
+        bool? ShowDialog<T>(string title, out object result) where T : Window;
     }
     public class DialogService : IDialogService
     {
-        public bool? ShowDialog<T>(string title, out object result) where T : Window, new()
+        private readonly IUnityContainer _container;
+
+        public DialogService(IUnityContainer container)
         {
-            var window = new T();
+            _container = container;
+        }
+
+        public bool? ShowDialog<T>(string title, out object result) where T : Window
+        {
+            var window = _container.Resolve<T>();
             if (!string.IsNullOrWhiteSpace(title))
             {
                 window.Title = title;
             }
             window.ShowInTaskbar = false;
             window.ResizeMode = ResizeMode.NoResize;
-            window.Owner = Application.Current.MainWindow;
+            //window.Owner = Application.Current.MainWindow;
             window.Closed += Window_Closed;
             var dialogResult = window.ShowDialog();
             result = DialogWindowBehavior.GetDialogResultData(window);

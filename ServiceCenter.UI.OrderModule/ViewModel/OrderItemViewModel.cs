@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Mvvm;
+﻿using System.Windows.Input;
+using Microsoft.Practices.Prism.Mvvm;
 using ServiceCenter.BL.Common.DTO;
 
 namespace ServiceCenter.UI.OrderModule.ViewModel
@@ -9,6 +10,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         {
             Item = orderDto;
         }
-       public OrderDTO Item { get; set; }
+        public OrderDTO Item { get; set; }
+
     }
 }

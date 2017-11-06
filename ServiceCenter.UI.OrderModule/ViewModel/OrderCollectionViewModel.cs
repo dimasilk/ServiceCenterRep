@@ -11,16 +11,20 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
     public class OrderCollectionViewModel : BindableBase
     {
-        public OrderCollectionViewModel(OrderServiceClient serviceClient, IEventAggregator eventAggregator)
+        private readonly OrderServiceClient _orderServiceClient;
+        private readonly IDialogService _dialogService;
+        public OrderCollectionViewModel(OrderServiceClient serviceClient, IEventAggregator eventAggregator, IDialogService dialogService)
         {
             OrdersCollection = new ObservableCollection<OrderItemViewModel>();
             _orderServiceClient = serviceClient;
+            _dialogService = dialogService;
             eventAggregator.GetEvent<DeleteOrderEvent>().Subscribe(DeleteOrder);
+            eventAggregator.GetEvent<AddOrderEvent>().Subscribe(AddOrder);
+            eventAggregator.GetEvent<EditOrderEvent>().Subscribe(EditOrder);
             GetOrders();
            
         }
-        public IDialogService DialogService { get; set; } = new DialogService();
-        private readonly OrderServiceClient _orderServiceClient;
+        
         public ObservableCollection<OrderItemViewModel> OrdersCollection { get; set; }
 
         private void GetOrders()
@@ -41,7 +45,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         private void AddOrder(object parametr)
         {
             object result;
-            var dialogResult = DialogService.ShowDialog<AddOrderWindow>("qwer", out result);
+            var dialogResult = _dialogService.ShowDialog<AddOrderWindow>("Add new order", out result);
             if (dialogResult.HasValue && dialogResult.Value)
             {
                 var order = result as OrderItemViewModel;
