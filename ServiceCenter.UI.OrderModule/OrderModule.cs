@@ -5,6 +5,7 @@ using Microsoft.Practices.Unity;
 using ServiceCenter.BL.Common;
 using ServiceCenter.UI.Infrastructure.Constants;
 using ServiceCenter.UI.OrderModule.View;
+using ServiceCenter.UI.OrderModule.ViewModel;
 
 namespace ServiceCenter.UI.OrderModule
 {
@@ -19,6 +20,8 @@ namespace ServiceCenter.UI.OrderModule
         public void Initialize()
         {
             _container.RegisterInstance(new ChannelFactory<IWcfOrderService>(nameof(IWcfOrderService)));
+            _container.RegisterType<OrderCollectionViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<OrderToolbarViewModel>(new ContainerControlledLifetimeManager());
             //_container.RegisterInstance(new ChannelFactory<IWcfOrderService>("WSHTTP_IWcfOrderService"));
             _container.RegisterType<IWcfOrderService, OrderServiceClient>();
             var rm = _container.Resolve<IRegionManager>();

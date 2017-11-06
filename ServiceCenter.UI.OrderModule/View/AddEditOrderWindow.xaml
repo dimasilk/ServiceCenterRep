@@ -1,11 +1,14 @@
-﻿<Window x:Class="ServiceCenter.UI.OrderModule.View.AddOrderWindow"
+﻿<Window x:Class="ServiceCenter.UI.OrderModule.View.AddEditOrderWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ServiceCenter.UI.OrderModule.View"
+             xmlns:behaviors="clr-namespace:ServiceCenter.UI.Infrastructure.Behaviors;assembly=ServiceCenter.UI.Infrastructure"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             behaviors:DialogWindowBehavior.DialogResult="{Binding DialogResult}" behaviors:DialogWindowBehavior.DialogResultData="{Binding DialogResultData}">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -24,7 +27,7 @@
         <CheckBox x:Name="CheckBoxUrgently" Grid.Column="0" Grid.Row="2" IsChecked="{Binding Item.SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Urgently</CheckBox>
 
 
-        <Button x:Name="OkClickButton" Content="ОК" Grid.Column="0" Grid.Row="3" Command="{Binding AddingCommand}"/>
+        <Button x:Name="OkClickButton" Content="ОК" Grid.Column="0" Grid.Row="3" Command="{Binding OkCommand}"/>
         <Button x:Name="CancelClickButton" Content="Отмена" Grid.Column="1" Grid.Row="3" Command="{Binding CancelCommand}"/>
     </Grid>
 </Window>

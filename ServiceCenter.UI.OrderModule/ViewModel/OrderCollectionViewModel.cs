@@ -2,6 +2,9 @@
 using System.Linq;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
+using Microsoft.Practices.Unity;
+using ServiceCenter.BL.Common;
+using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.UI.Infrastructure.DialogService;
 using ServiceCenter.UI.OrderModule.AggregatedEvent;
 using ServiceCenter.UI.OrderModule.View;
@@ -11,9 +14,11 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
     public class OrderCollectionViewModel : BindableBase
     {
-        private readonly OrderServiceClient _orderServiceClient;
+        private readonly IWcfOrderService _orderServiceClient;
         private readonly IDialogService _dialogService;
-        public OrderCollectionViewModel(OrderServiceClient serviceClient, IEventAggregator eventAggregator, IDialogService dialogService)
+        private ObservableCollection<OrderItemViewModel> _ordersCollection;
+
+        public OrderCollectionViewModel(IWcfOrderService serviceClient, IEventAggregator eventAggregator, IDialogService dialogService)
         {
             OrdersCollection = new ObservableCollection<OrderItemViewModel>();
             _orderServiceClient = serviceClient;
@@ -24,8 +29,12 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             GetOrders();
            
         }
-        
-        public ObservableCollection<OrderItemViewModel> OrdersCollection { get; set; }
+
+        public ObservableCollection<OrderItemViewModel> OrdersCollection
+        {
+            get { return _ordersCollection; }
+            set { SetProperty(ref _ordersCollection, value); }
+        }
 
         private void GetOrders()
         {
@@ -37,25 +46,33 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         private void DeleteOrder(object parametr)
         {
             if (SelectedItem == null) return;
-            
-            OrdersCollection.Remove(SelectedItem);
-            _orderServiceClient.DeleteOrder(SelectedItem.Item.Id);
+
+            var id = SelectedItem.Item.Id;
+            _orderServiceClient.DeleteOrder(id);
+            GetOrders();
         }
 
         private void AddOrder(object parametr)
         {
-            object result;
-            var dialogResult = _dialogService.ShowDialog<AddOrderWindow>("Add new order", out result);
-            if (dialogResult.HasValue && dialogResult.Value)
+            OrderDTO result;
+            var dialogResult = _dialogService.ShowDialog<AddEditOrderWindow, OrderDTO>("Add new order", out result);
+            if (dialogResult.HasValue && dialogResult.Value && result != null)
             {
-                var order = result as OrderItemViewModel;
-                if (order != null) OrdersCollection.Add(order);
+                _orderServiceClient.AddOrder(result);
+                GetOrders();
             }
         }
+    
 
         private void EditOrder(object parametr)
         {
-            
+            if (SelectedItem == null) return;
+            OrderDTO result;
+            var dialogResult = _dialogService.ShowDialog<AddEditOrderWindow, OrderDTO>("Add new order", out result, new ParameterOverride("item", SelectedItem.Item));
+            if (dialogResult.HasValue && dialogResult.Value && result != null)
+            {
+                _orderServiceClient.UpdateOrder(result);
+            }
         }
 
     }

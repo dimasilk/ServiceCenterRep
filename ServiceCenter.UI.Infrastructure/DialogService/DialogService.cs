@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Practices.Unity;
 using ServiceCenter.UI.Infrastructure.Behaviors;
@@ -11,7 +7,7 @@ namespace ServiceCenter.UI.Infrastructure.DialogService
 {
     public interface IDialogService
     {
-        bool? ShowDialog<T>(string title, out object result) where T : Window;
+        bool? ShowDialog<T, TResult>(string title, out TResult result, params ResolverOverride[] parametrs) where T : Window where TResult : class;
     }
     public class DialogService : IDialogService
     {
@@ -22,19 +18,18 @@ namespace ServiceCenter.UI.Infrastructure.DialogService
             _container = container;
         }
 
-        public bool? ShowDialog<T>(string title, out object result) where T : Window
+        public bool? ShowDialog<T, TResult>(string title, out TResult result, params ResolverOverride[] parametrs) where T : Window where TResult : class
         {
-            var window = _container.Resolve<T>();
+            var window = _container.Resolve<T>(parametrs);
             if (!string.IsNullOrWhiteSpace(title))
             {
                 window.Title = title;
             }
             window.ShowInTaskbar = false;
             window.ResizeMode = ResizeMode.NoResize;
-            //window.Owner = Application.Current.MainWindow;
             window.Closed += Window_Closed;
             var dialogResult = window.ShowDialog();
-            result = DialogWindowBehavior.GetDialogResultData(window);
+            result = DialogWindowBehavior.GetDialogResultData(window) as TResult;
             window.ClearValue(DialogWindowBehavior.DialogResultDataProperty);
 
             return dialogResult;
@@ -47,5 +42,6 @@ namespace ServiceCenter.UI.Infrastructure.DialogService
             var disposable = window.DataContext as IDisposable;
             disposable?.Dispose();
         }
+
     }
 }

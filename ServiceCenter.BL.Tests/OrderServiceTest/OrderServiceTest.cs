@@ -9,7 +9,7 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
     [TestClass]
     public class OrderServiceTest : BaseTestClass
     { 
-        private readonly OrderDTO orderDto =
+        private readonly OrderDTO _orderDto =
             new OrderDTO()
             {
                 Manufacturer = "123",
@@ -23,14 +23,14 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
         public void ShouldAddAndDeleteOrder()
         {
             var service = Container.Resolve<IOrderService>();
-            var guid = service.AddOrder(orderDto);
+            var guid = service.AddOrder(_orderDto);
             var order = service.GetOrderById(guid);
             Assert.IsNotNull(order);
-            Assert.AreEqual(order.SerialNumber, orderDto.SerialNumber);
-            Assert.AreEqual(order.Device, orderDto.Device);
-            Assert.AreEqual(order.DeviceModel, orderDto.DeviceModel);
-            Assert.AreEqual(order.Manufacturer, orderDto.Manufacturer);
-            Assert.AreEqual(order.Urgently, orderDto.Urgently);
+            Assert.AreEqual(order.SerialNumber, _orderDto.SerialNumber);
+            Assert.AreEqual(order.Device, _orderDto.Device);
+            Assert.AreEqual(order.DeviceModel, _orderDto.DeviceModel);
+            Assert.AreEqual(order.Manufacturer, _orderDto.Manufacturer);
+            Assert.AreEqual(order.Urgently, _orderDto.Urgently);
             service.DeleteOrder(guid);
             Assert.IsNull(service.GetOrderById(guid));
         }
