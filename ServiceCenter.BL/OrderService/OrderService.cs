@@ -17,7 +17,7 @@ namespace ServiceCenter.BL.OrderService
         }
         public OrderDTO[] GetAllOrders()
         {
-            System.Threading.Thread.Sleep(10000);
+            //System.Threading.Thread.Sleep(10000);
             return _context.Orders.Select(OrderMapper.SelectExpression).ToArray();
         }
 
