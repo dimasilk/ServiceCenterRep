@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.UI.Infrastructure;
@@ -8,7 +9,7 @@ namespace ServiceCenter.UI.OrderModule
 {
     public class OrderServiceClient : WcfClientBase<IWcfOrderService>, IWcfOrderService
     {
-        public OrderDTO[] GetAllOrders()
+        public Task<OrderDTO[]> GetAllOrders()
         {
             return Channel.GetAllOrders();
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using ServiceCenter.BL.Common.DTO;
 
 namespace ServiceCenter.BL.Common
@@ -9,7 +10,7 @@ namespace ServiceCenter.BL.Common
     {
 
         [OperationContract]
-        OrderDTO[] GetAllOrders();
+        Task<OrderDTO[]> GetAllOrders();
         [OperationContract]
         OrderDTO[] GetOrdersByUserId(Guid userId);
         [OperationContract]

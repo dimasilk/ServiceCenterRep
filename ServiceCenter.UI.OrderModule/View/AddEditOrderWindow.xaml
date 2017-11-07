@@ -24,7 +24,7 @@
         <TextBox x:Name="TextboxDeviceModel" Grid.Column="1" Grid.Row="0" Text="{Binding Item.DeviceModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="TextboxManufacturer" Grid.Column="0" Grid.Row="1" Text="{Binding Item.Manufacturer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="TextboxSerialNumber" Grid.Column="1" Grid.Row="1" Text="{Binding Item.SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <CheckBox x:Name="CheckBoxUrgently" Grid.Column="0" Grid.Row="2" IsChecked="{Binding Item.SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Urgently</CheckBox>
+        <CheckBox x:Name="CheckBoxUrgently" Grid.Column="0" Grid.Row="2" IsChecked="{Binding Item.Urgently, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Urgently</CheckBox>
 
 
         <Button x:Name="OkClickButton" Content="ОК" Grid.Column="0" Grid.Row="3" Command="{Binding OkCommand}"/>

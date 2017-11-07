@@ -38,7 +38,10 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
         private void GetOrders()
         {
-            OrdersCollection = new ObservableCollection<OrderItemViewModel>(_orderServiceClient.GetAllOrders().Select(x => new OrderItemViewModel(x)));
+           //// var a = _orderServiceClient.GetAllOrders().Result.Select(x => new OrderItemViewModel(x));
+          //  var b = _orderServiceClient.GetAllOrders().Result;
+            var c =  _orderServiceClient.GetAllOrders();
+            OrdersCollection = new ObservableCollection<OrderItemViewModel>(_orderServiceClient.GetAllOrders().Result.Select(x => new OrderItemViewModel(x)));
         }
 
         public OrderItemViewModel SelectedItem { get; set; }
@@ -72,6 +75,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             if (dialogResult.HasValue && dialogResult.Value && result != null)
             {
                 _orderServiceClient.UpdateOrder(result);
+                GetOrders();
             }
         }
 

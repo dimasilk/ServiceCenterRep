@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.BL.Interfaces;
@@ -17,9 +18,10 @@ namespace ServiceCenter.WcfService.WcfOrders
             _orderService = orderService;
         }
        
-        public OrderDTO[] GetAllOrders()
+        public async Task<OrderDTO[]> GetAllOrders()
         {
-            return _orderService.GetAllOrders();
+            var task = Task.Factory.StartNew(_orderService.GetAllOrders);
+            return await task.ConfigureAwait(false);
         }
 
         
