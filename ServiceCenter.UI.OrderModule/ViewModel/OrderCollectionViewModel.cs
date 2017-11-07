@@ -17,6 +17,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         private readonly IWcfOrderService _orderServiceClient;
         private readonly IDialogService _dialogService;
         private ObservableCollection<OrderItemViewModel> _ordersCollection;
+        private bool _isBusy;
 
         public OrderCollectionViewModel(IWcfOrderService serviceClient, IEventAggregator eventAggregator, IDialogService dialogService)
         {
@@ -30,21 +31,26 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
            
         }
 
+        public OrderItemViewModel SelectedItem { get; set; }
         public ObservableCollection<OrderItemViewModel> OrdersCollection
         {
             get { return _ordersCollection; }
             set { SetProperty(ref _ordersCollection, value); }
         }
 
-        private void GetOrders()
+        private async void GetOrders()
         {
-           //// var a = _orderServiceClient.GetAllOrders().Result.Select(x => new OrderItemViewModel(x));
-          //  var b = _orderServiceClient.GetAllOrders().Result;
-            var c =  _orderServiceClient.GetAllOrders();
-            OrdersCollection = new ObservableCollection<OrderItemViewModel>(_orderServiceClient.GetAllOrders().Result.Select(x => new OrderItemViewModel(x)));
+            _isBusy = true;
+           //async
+            var c = await _orderServiceClient.GetAllOrders();
+            OrdersCollection = new ObservableCollection<OrderItemViewModel>(c.Select(x => new OrderItemViewModel(x)));
+
+            //sync
+            //OrdersCollection = new ObservableCollection<OrderItemViewModel>(_orderServiceClient.GetAllOrders().Result.Select(x => new OrderItemViewModel(x)));
+            _isBusy = false;
         }
 
-        public OrderItemViewModel SelectedItem { get; set; }
+       
 
         private void DeleteOrder(object parametr)
         {
