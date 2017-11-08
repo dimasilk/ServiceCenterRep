@@ -15,15 +15,15 @@ namespace ServiceCenter.BL.UserService
         }
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser, Guid> _userManager;
-        public Task<ApplicationUser> GetUserById(Guid userId)
+        public async Task<ApplicationUser> GetUserById(Guid userId)
         {
-            return _userManager.FindByIdAsync(userId);
+            return await _userManager.FindByIdAsync(userId);
         }
 
 
-        public void DeleteUser(ApplicationUser user)
+        public async void DeleteUser(ApplicationUser user)
         {
-            _userManager.DeleteAsync(user);
+            await _userManager.DeleteAsync(user);
         }
 
         public void UpdateUser(ApplicationUser user)
@@ -44,9 +44,9 @@ namespace ServiceCenter.BL.UserService
             return user.Result.PasswordHash == password;
         }
 
-        public Task<ApplicationUser> GetUserByLogin(string login)
+        public async Task<ApplicationUser> GetUserByLogin(string login)
         {
-            return _userManager.FindByNameAsync(login);
+            return await _userManager.FindByNameAsync(login);
         }
     }
 }

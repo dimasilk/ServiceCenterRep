@@ -21,7 +21,9 @@ namespace ServiceCenter.BL.Tests.UserServiceTest
             service.AddUser(user, "P@ssw0rd");
             Assert.IsNotNull(service.GetUserById(user.Id).Result);
 
-            Assert.IsTrue(service.Login(user.UserName,user.PasswordHash));
+            Assert.IsTrue(service.Login(user.UserName, user.PasswordHash));
+            var a = service.GetUserByLogin(user.UserName).Result;
+            Assert.IsNotNull(service.GetUserByLogin(user.UserName).Result);
 
             user.UserName = "UpdatedUsername";
             service.UpdateUser(user);
