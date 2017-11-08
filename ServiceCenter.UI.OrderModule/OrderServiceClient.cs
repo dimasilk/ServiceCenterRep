@@ -24,6 +24,11 @@ namespace ServiceCenter.UI.OrderModule
             Channel.AddOrder(orderModel);
         }
 
+        public Task<OrderStatusDTO[]> GetOrderStatuses()
+        {
+            return Channel.GetOrderStatuses();
+        }
+
         public void DeleteOrder(Guid orderId)
         {
             Channel.DeleteOrder(orderId);

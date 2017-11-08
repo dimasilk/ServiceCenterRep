@@ -13,11 +13,14 @@ namespace ServiceCenter.WcfService.WcfOrders
     public class WcfOrderService : IWcfOrderService
     {
         private readonly IOrderService _orderService;
-        public WcfOrderService(IOrderService orderService)
+        private readonly IOrderStatusService _statusService;
+
+        public WcfOrderService(IOrderService orderService, IOrderStatusService statusService)
         {
             _orderService = orderService;
+            _statusService = statusService;
         }
-       
+
         public async Task<OrderDTO[]> GetAllOrders()
         {
             var task = Task.Factory.StartNew(_orderService.GetAllOrders);
@@ -52,6 +55,11 @@ namespace ServiceCenter.WcfService.WcfOrders
         {
             _orderService.AddOrder(orderModel);
         }
-        
+
+        public async Task<OrderStatusDTO[]> GetOrderStatuses()
+        {
+            var task = Task.Factory.StartNew(_statusService.GetAllStatuses);
+            return await task.ConfigureAwait(false);
+        }
     }
 }

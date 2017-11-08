@@ -22,7 +22,8 @@ namespace ServiceCenter.WcfService
             container.RegisterType<UserManager<ApplicationUser, Guid>>();
             container.RegisterType<ApplicationDbContext>();
             container.RegisterType<IWcfOrderService, WcfOrderService>();
-           
+            container.RegisterType<IOrderStatusService, OrderStatusService>();
+
         }
     }    
 }

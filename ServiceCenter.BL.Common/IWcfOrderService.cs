@@ -21,8 +21,10 @@ namespace ServiceCenter.BL.Common
         void UpdateOrder(OrderDTO orderModel);
         [OperationContract]
         void AddOrder(OrderDTO orderModel);
+        [OperationContract]
+        Task<OrderStatusDTO[]> GetOrderStatuses();
 
-      
+
     }
 
 

@@ -15,6 +15,11 @@ namespace ServiceCenter.BL.Mappings
             dataModel.SerialNumber = dto.SerialNumber;
             dataModel.Urgently = dto.Urgently;
             dataModel.DeviceModel = dto.DeviceModel;
+            dataModel.Status = new OrderStatus()
+            {
+                Id = dto.Status.Id,
+                StatusValue = dto.Status.StatusValue
+            };
         }
      
         public static readonly Expression<Func<Order, OrderDTO>> SelectExpression = u => new OrderDTO
@@ -24,7 +29,8 @@ namespace ServiceCenter.BL.Mappings
             DeviceModel = u.DeviceModel,
             Manufacturer = u.Manufacturer,
             SerialNumber = u.SerialNumber,
-            Urgently = u.Urgently
+            Urgently = u.Urgently,
+            //Status = u.
         };
     }
 }
