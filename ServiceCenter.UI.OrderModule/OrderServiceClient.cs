@@ -25,7 +25,7 @@ namespace ServiceCenter.UI.OrderModule
         }
 
         public Task<OrderStatusDTO[]> GetOrderStatuses()
-        {
+        {           
             return Channel.GetOrderStatuses();
         }
 
@@ -40,7 +40,7 @@ namespace ServiceCenter.UI.OrderModule
         }
 
         public OrderDTO[] GetOrdersByUserId(Guid userId)
-        {
+        {            
             return Channel.GetOrdersByUserId(userId);
         }
 
