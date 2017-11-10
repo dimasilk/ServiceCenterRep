@@ -8,7 +8,13 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
     public class AddEditOrderWindowViewModel : BaseDialogViewModel
     {
         public OrderDTO Item { get; set; }
-        public OrderStatusDTO[] Statuses { get; set; }
+
+        private OrderStatusDTO[] _statuses;
+        public OrderStatusDTO[] Statuses
+        {
+            get { return _statuses; }
+            set { SetProperty(ref _statuses, value); }
+        }
         public AddEditOrderWindowViewModel(OrderDTO item, IWcfOrderService serviceClient)
         {
             Item = item ?? new OrderDTO();
