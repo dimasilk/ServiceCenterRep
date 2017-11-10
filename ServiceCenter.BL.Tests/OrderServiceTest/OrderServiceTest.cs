@@ -8,7 +8,7 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
 {
     [TestClass]
     public class OrderServiceTest : BaseTestClass
-    { 
+    {
         private readonly OrderDTO _orderDto =
             new OrderDTO()
             {
@@ -16,7 +16,8 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
                 DeviceModel = "qwer",
                 SerialNumber = "1233435",
                 Urgently = true,
-                Device = "notebook"
+                Device = "notebook",
+                Status = new OrderStatusDTO() { StatusValue="test"}
             };
 
         [TestMethod]
@@ -25,7 +26,11 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
             var service = Container.Resolve<IOrderService>();
             var guid = service.AddOrder(_orderDto);
             var order = service.GetOrderById(guid);
+            var orders = service.GetAllOrders();
+            Assert.IsTrue(orders.Length > 0);
+
             Assert.IsNotNull(order);
+            Assert.IsNotNull(order.Status);
             Assert.AreEqual(order.SerialNumber, _orderDto.SerialNumber);
             Assert.AreEqual(order.Device, _orderDto.Device);
             Assert.AreEqual(order.DeviceModel, _orderDto.DeviceModel);

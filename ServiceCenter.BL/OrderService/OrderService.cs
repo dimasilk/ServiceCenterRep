@@ -4,6 +4,7 @@ using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.BL.Interfaces;
 using ServiceCenter.BL.Mappings;
+using LinqKit;
 
 
 namespace ServiceCenter.BL.OrderService
@@ -18,7 +19,7 @@ namespace ServiceCenter.BL.OrderService
         public OrderDTO[] GetAllOrders()
         {
             //System.Threading.Thread.Sleep(10000);
-            return _context.Orders.Select(OrderMapper.SelectExpression).ToArray();
+            return _context.Orders.AsExpandable().Select(OrderMapper.SelectExpression).ToArray();
         }
 
         public OrderDTO[] GetOrdersByUserId(Guid userId)
@@ -34,12 +35,12 @@ namespace ServiceCenter.BL.OrderService
         public OrderDTO GetOrderById(Guid orderId)
         {
 
-            return _context.Orders.Where(x => x.Id == orderId).Select(OrderMapper.SelectExpression).FirstOrDefault();
+            return _context.Orders.AsExpandable().Where(x => x.Id == orderId).Select(OrderMapper.SelectExpression).FirstOrDefault();
         }
 
         public void DeleteOrder(Guid orderId)
         {
-            var o = _context.Orders.FirstOrDefault(x => x.Id == orderId);
+            var o = _context.Orders.AsExpandable().FirstOrDefault(x => x.Id == orderId);
             if (o != null)
             {
                 _context.Orders.Remove(o);

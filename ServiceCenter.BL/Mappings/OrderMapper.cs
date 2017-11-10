@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Common.DTO;
+using LinqKit;
 
 namespace ServiceCenter.BL.Mappings
 {
@@ -15,13 +16,10 @@ namespace ServiceCenter.BL.Mappings
             dataModel.SerialNumber = dto.SerialNumber;
             dataModel.Urgently = dto.Urgently;
             dataModel.DeviceModel = dto.DeviceModel;
-            dataModel.Status = new OrderStatus()
-            {
-                Id = dto.Status.Id,
-                StatusValue = dto.Status.StatusValue
-            };
+            dataModel.Status = new OrderStatus();
+            dto.Status.CopyTo(dataModel.Status);
         }
-     
+
         public static readonly Expression<Func<Order, OrderDTO>> SelectExpression = u => new OrderDTO
         {
             Id = u.Id,
@@ -29,8 +27,9 @@ namespace ServiceCenter.BL.Mappings
             DeviceModel = u.DeviceModel,
             Manufacturer = u.Manufacturer,
             SerialNumber = u.SerialNumber,
-            Urgently = u.Urgently,
-            //Status = u.
+            Urgently = u.Urgently,           
+            Status = OrderStatusMapper.SelectExpression.Invoke(u.Status)
         };
     }
+
 }

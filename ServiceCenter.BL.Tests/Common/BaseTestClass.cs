@@ -35,6 +35,7 @@ namespace ServiceCenter.BL.Tests.Common
             this.Container.RegisterType<UserManager<ApplicationUser, Guid>>();
             this.Container.RegisterType<ApplicationDbContext>();
             this.Container.RegisterType<IUserService, UserService.UserService>();
+            this.Container.RegisterType<IOrderStatusService, OrderService.OrderStatusService>();
         }
     }
 }
