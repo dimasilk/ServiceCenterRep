@@ -24,11 +24,15 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
         public void ShouldAddAndDeleteOrder()
         {
             var service = Container.Resolve<IOrderService>();
+            var statusService = Container.Resolve<IOrderStatusService>();
             var guid = service.AddOrder(_orderDto);
             var order = service.GetOrderById(guid);
+            var status = statusService.GetStatusById(order.Status.Id);
             var orders = service.GetAllOrders();
-            Assert.IsTrue(orders.Length > 0);
 
+            var statuses = statusService.GetAllStatuses();
+
+            Assert.IsTrue(orders.Length > 0);
             Assert.IsNotNull(order);
             Assert.IsNotNull(order.Status);
             Assert.AreEqual(order.SerialNumber, _orderDto.SerialNumber);
@@ -37,6 +41,7 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
             Assert.AreEqual(order.Manufacturer, _orderDto.Manufacturer);
             Assert.AreEqual(order.Urgently, _orderDto.Urgently);
             service.DeleteOrder(guid);
+            statusService.DeleteOrderStatus(status);
             Assert.IsNull(service.GetOrderById(guid));
         }
 

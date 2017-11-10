@@ -13,5 +13,6 @@ namespace ServiceCenter.BL.Interfaces
         void DeleteOrderStatus(OrderStatusDTO orderStatus);
         void UpdateOrderStatus(OrderStatusDTO orderStatus);
         Guid AddOrderStatus(OrderStatusDTO orderStatus);
+        OrderStatusDTO GetStatusById(Guid statusId);
     }
 }

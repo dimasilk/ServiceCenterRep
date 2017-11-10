@@ -16,6 +16,7 @@
                         <GridViewColumn Header="DeviceModel" DisplayMemberBinding = "{Binding Path=Item.DeviceModel}"></GridViewColumn>
                         <GridViewColumn Header="SerialNumber" DisplayMemberBinding = "{Binding Path=Item.SerialNumber}"></GridViewColumn>
                         <GridViewColumn Header="Urgently" DisplayMemberBinding = "{Binding Path=Item.Urgently}"></GridViewColumn>
+                        <GridViewColumn Header="Status" DisplayMemberBinding = "{Binding Path=Item.Status.StatusValue}"></GridViewColumn>
                     </GridView.Columns>
                 </GridView>
             </ListView.View>

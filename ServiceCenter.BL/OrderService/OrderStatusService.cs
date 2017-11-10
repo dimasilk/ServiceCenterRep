@@ -5,6 +5,7 @@ using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.BL.Interfaces;
 using ServiceCenter.BL.Mappings;
 
+
 namespace ServiceCenter.BL.OrderService
 {
     public class OrderStatusService : IOrderStatusService
@@ -48,6 +49,11 @@ namespace ServiceCenter.BL.OrderService
             _context.OrderStatuses.Add(dataModel);
             _context.SaveChanges();
             return dataModel.Id;
+        }
+
+        public OrderStatusDTO GetStatusById(Guid statusId)
+        {
+             return _context.OrderStatuses.Where(x => x.Id == statusId).Select(OrderStatusMapper.SelectExpression).FirstOrDefault();
         }
     }
 }
