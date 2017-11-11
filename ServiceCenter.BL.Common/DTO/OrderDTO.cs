@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using ServiceCenter.BL.Common.Annotations;
 
 namespace ServiceCenter.BL.Common.DTO
 {
     [DataContract]
-    public class OrderDTO
+    public class OrderDTO : INotifyPropertyChanged
     {
         public OrderDTO() { }
         
@@ -28,5 +31,13 @@ namespace ServiceCenter.BL.Common.DTO
         [DataMember]
         public OrderStatusDTO Status { get; set; }
 
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        [NotifyPropertyChangedInvocator]
+        public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

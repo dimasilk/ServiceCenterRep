@@ -25,8 +25,8 @@
         <TextBox x:Name="TextboxManufacturer" Grid.Column="0" Grid.Row="1" Text="{Binding Item.Manufacturer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox x:Name="TextboxSerialNumber" Grid.Column="1" Grid.Row="1" Text="{Binding Item.SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <CheckBox x:Name="CheckBoxUrgently" Grid.Column="0" Grid.Row="2" IsChecked="{Binding Item.Urgently, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Urgently</CheckBox>
-        <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Path=Statuses, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            
+        <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="StatusValue" SelectedItem="{Binding Path=Item.Status, Mode=TwoWay}">
+
         </ComboBox>
 
 
