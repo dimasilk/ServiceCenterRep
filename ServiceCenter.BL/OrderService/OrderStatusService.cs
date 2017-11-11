@@ -25,9 +25,9 @@ namespace ServiceCenter.BL.OrderService
 
             if (orderStatus != null)
             {
-                OrderStatus status = new OrderStatus();
-                orderStatus.CopyTo(status);
-                _context.OrderStatuses.Remove(status);
+                var stat = _context.OrderStatuses.FirstOrDefault(x => x.Id == orderStatus.Id);
+                if (stat == null) return;
+                _context.OrderStatuses.Remove(stat);
                 _context.SaveChanges();
             }
             return;
