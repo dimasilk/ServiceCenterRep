@@ -1,6 +1,7 @@
 using System;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Common;
@@ -23,6 +24,8 @@ namespace ServiceCenter.WcfService
             container.RegisterType<ApplicationDbContext>();
             container.RegisterType<IWcfOrderService, WcfOrderService>();
             container.RegisterType<IOrderStatusService, OrderStatusService>();
+
+            ServiceLocator.SetLocatorProvider(() => new UnityServiceLocator(container));
 
         }
     }    

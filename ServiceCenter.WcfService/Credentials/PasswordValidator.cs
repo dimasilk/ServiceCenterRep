@@ -1,4 +1,9 @@
-﻿using System.IdentityModel.Selectors;
+﻿using System;
+using System.IdentityModel.Selectors;
+using System.IdentityModel.Tokens;
+using Microsoft.AspNet.Identity;
+using Microsoft.Practices.ServiceLocation;
+using ServiceCenter.Auth.Models;
 
 namespace ServiceCenter.WcfService.Credentials
 {
@@ -6,10 +11,13 @@ namespace ServiceCenter.WcfService.Credentials
     {
         public override void Validate(string userName, string password)
         {
-            //if (userName != password)
-            //{
-            //    throw new SecurityTokenValidationException();
-            //}
+            var um = ServiceLocator.Current.GetInstance<UserManager<ApplicationUser, Guid>>();
+
+            if (um == null) throw new SecurityTokenValidationException();
+            var user = um.FindByName(userName);
+            if (user == null) throw new SecurityTokenValidationException();
+            if (!um.CheckPassword(user, password)) throw new SecurityTokenValidationException();
+
         }
     }
 }

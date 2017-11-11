@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.UI.Infrastructure;
+using ServiceCenter.UI.Infrastructure.Interfaces;
 
 namespace ServiceCenter.UI.OrderModule
 {
@@ -44,7 +45,7 @@ namespace ServiceCenter.UI.OrderModule
             return Channel.GetOrdersByUserId(userId);
         }
 
-        public OrderServiceClient(ChannelFactory<IWcfOrderService> channelFactory) : base(channelFactory)
+        public OrderServiceClient(ChannelFactory<IWcfOrderService> channelFactory, ILoginService loginService) : base(channelFactory, loginService)
         {
         }
     }
