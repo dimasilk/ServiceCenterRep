@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows;
 using Microsoft.Practices.Unity;
 using ServiceCenter.UI.Infrastructure.Behaviors;
@@ -8,6 +9,7 @@ namespace ServiceCenter.UI.Infrastructure.DialogService
     public interface IDialogService
     {
         bool? ShowDialog<T, TResult>(string title, out TResult result, params ResolverOverride[] parametrs) where T : Window where TResult : class;
+        bool? ShowDialog<T>(string title, params ResolverOverride[] parametrs) where T : Window;
     }
     public class DialogService : IDialogService
     {
@@ -33,6 +35,12 @@ namespace ServiceCenter.UI.Infrastructure.DialogService
             window.ClearValue(DialogWindowBehavior.DialogResultDataProperty);
 
             return dialogResult;
+        }
+
+        public bool? ShowDialog<T>(string title, params ResolverOverride[] parametrs) where T : Window
+        {
+            object obj;
+            return ShowDialog<T, object>(title, out obj, parametrs);
         }
 
         private void Window_Closed(object sender, EventArgs e)

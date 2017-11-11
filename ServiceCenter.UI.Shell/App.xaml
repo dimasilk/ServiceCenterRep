@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:ServiceCenter.UI.Shell"
              StartupUri="Shell.xaml">
     <Application.Resources>
-         
+        <BitmapImage x:Key="LoginImage" UriSource="LoginImage.jpg"/>
     </Application.Resources>
 </Application>

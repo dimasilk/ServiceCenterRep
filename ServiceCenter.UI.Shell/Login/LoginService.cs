@@ -1,19 +1,18 @@
-﻿using System;
-using ServiceCenter.UI.Infrastructure.Interfaces;
+﻿using ServiceCenter.UI.Infrastructure.Interfaces;
 
 namespace ServiceCenter.UI.Shell.Login
 {
-    public class LoginService : ILoginService
+    public class LoginService : ILoginService, ILoginSetCredentialsService
     {
         public LoginService()
         {
             #if DEBUG
             _userName = "BLServiceUser";
-            _userPassword = "P@ssw0rd1";
+            _userPassword = "P@ssw0rd";
             #endif
         }
-        private readonly string _userName;
-        private readonly string _userPassword;
+        private string _userName;
+        private string _userPassword;
 
         public string GetUserName()
         {
@@ -23,6 +22,12 @@ namespace ServiceCenter.UI.Shell.Login
         public string GetUserPassword()
         {
             return _userPassword;
+        }
+
+        public void SetCredentials(string userName, string password)
+        {
+            _userName = userName;
+            _userPassword = password;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace ServiceCenter.UI.Infrastructure.ViewModel
         private bool? _dialogResult;
         public BaseDialogViewModel()
         { 
-             OkCommand = new DelegateCommand(OkClick);
+             OkCommand = new DelegateCommand<object>(OkClick);
              CancelCommand = new DelegateCommand(CancelClick);
         } 
         public ICommand OkCommand { get; set; }
@@ -33,7 +33,7 @@ namespace ServiceCenter.UI.Infrastructure.ViewModel
         }
        
 
-        public virtual void OkClick()
+        public virtual void OkClick(object o)
         {
             DialogResult = true;
         }

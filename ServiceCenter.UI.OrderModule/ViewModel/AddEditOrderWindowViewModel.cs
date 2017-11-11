@@ -25,10 +25,10 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
         private readonly IWcfOrderService _serviceClient;
 
-        public override void OkClick()
+        public override void OkClick(object o)
         {
             DialogResultData = Item;
-            base.OkClick();
+            base.OkClick(o);
         }
         private async void GetStatuses()
         {
