@@ -5,7 +5,14 @@
              xmlns:converters="clr-namespace:ServiceCenter.UI.Infrastructure.Converters;assembly=ServiceCenter.UI.Infrastructure"
              StartupUri="Shell.xaml">
     <Application.Resources>
-        <BitmapImage x:Key="LoginImage" UriSource="LoginImage.jpg"/>
-        <converters:InvertBooleanConverter x:Key="InvertBooleanConverter"/>
+        <ResourceDictionary>
+            <BitmapImage x:Key="LoginImage" UriSource="LoginImage.jpg"/>
+            <converters:InvertBooleanConverter x:Key="InvertBooleanConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Core.xaml"/>
+                <ResourceDictionary Source="Themes/Brushes.xaml"/>
+                <ResourceDictionary Source="Themes/Icons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
