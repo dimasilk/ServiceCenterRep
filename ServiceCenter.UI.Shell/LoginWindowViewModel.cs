@@ -30,6 +30,7 @@ namespace ServiceCenter.UI.Shell
             _credentialsService.SetCredentials(UserName, Password);
             try
             {
+                IsBusy = true;
                 var isLogged = await _wcfLoginService.IsLogged();
                 if (isLogged) base.OkClick(o);
                 else LoginFailed();
@@ -37,6 +38,10 @@ namespace ServiceCenter.UI.Shell
             catch
             {
                 LoginFailed();
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
         private void LoginFailed() { }

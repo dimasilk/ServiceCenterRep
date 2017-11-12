@@ -2,8 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ServiceCenter.UI.Shell"
+             xmlns:converters="clr-namespace:ServiceCenter.UI.Infrastructure.Converters;assembly=ServiceCenter.UI.Infrastructure"
              StartupUri="Shell.xaml">
     <Application.Resources>
         <BitmapImage x:Key="LoginImage" UriSource="LoginImage.jpg"/>
+        <converters:InvertBooleanConverter x:Key="InvertBooleanConverter"/>
     </Application.Resources>
 </Application>

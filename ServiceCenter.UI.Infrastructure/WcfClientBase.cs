@@ -8,11 +8,16 @@ namespace ServiceCenter.UI.Infrastructure
     public abstract class WcfClientBase<T> : IDisposable where T : class
     {
         private readonly ILoginService _loginService;
-        private readonly Lazy<ChannelFactory<T>> _lazyFactory;
-        private readonly Lazy<T> _lazyChannel;
+        private Lazy<ChannelFactory<T>> _lazyFactory;
+        private Lazy<T> _lazyChannel;
         protected WcfClientBase(ILoginService loginService)
         {
             _loginService = loginService;
+            Init();
+        }
+
+        private void Init()
+        {
             _lazyFactory = new Lazy<ChannelFactory<T>>(CreateChannelFactory);
             _lazyChannel = new Lazy<T>(CreateChannel);
         }
@@ -21,22 +26,23 @@ namespace ServiceCenter.UI.Infrastructure
        
         public void Dispose()
         {
-            CleanupChannel();
-            CleanupChannelFactory();
+            if (!_lazyChannel.IsValueCreated) return;
+            CleanupChannel((ICommunicationObject)_lazyChannel.Value);
+            if (!_lazyFactory.IsValueCreated) return;
+            CleanupChannelFactory(_lazyFactory.Value);
         }
 
-        private void CleanupChannelFactory()
+        private void CleanupChannelFactory(ChannelFactory<T> factory)
         {
-            if (!_lazyFactory.IsValueCreated) return;
             try
             {
-                _lazyFactory.Value.Close();
+                factory.Close();
             }
             catch
             {
                 try
                 {
-                    _lazyFactory.Value.Abort();
+                    factory.Abort();
                 }
                 catch (Exception ex)
                 {
@@ -45,20 +51,17 @@ namespace ServiceCenter.UI.Infrastructure
             }
         }
 
-        public void CleanupChannel()
+        public void CleanupChannel(ICommunicationObject channel)
         {
-            if (!_lazyChannel.IsValueCreated) return;
             try
             {
-                ICommunicationObject co = (ICommunicationObject)Channel;
-                co.Close();
+                channel.Close();
             }
             catch
             {
                 try
                 {
-                    ICommunicationObject co = (ICommunicationObject)Channel;
-                    co.Abort();
+                    channel.Abort();
                 }
                 catch (Exception ex)
                 {
@@ -70,8 +73,18 @@ namespace ServiceCenter.UI.Infrastructure
         private T CreateChannel()
         {
             var channel = _lazyFactory.Value.CreateChannel();
-            ((IClientChannel)channel).Open();
-            return channel;
+            try
+            {
+                ((IClientChannel)channel).Open();
+                return channel;
+            }
+            catch (Exception)
+            {
+                CleanupChannel((ICommunicationObject)channel);
+                CleanupChannelFactory(_lazyFactory.Value);
+                Init();
+                throw;
+            }
         }
 
         private ChannelFactory<T> CreateChannelFactory()

@@ -4,7 +4,7 @@ using Microsoft.Practices.Prism.Mvvm;
 
 namespace ServiceCenter.UI.Infrastructure.ViewModel
 {
-    public class BaseDialogViewModel : BindableBase
+    public abstract class BaseDialogViewModel : BaseViewModel
     {
         private object _dialogResultData;
         private bool? _dialogResult;
