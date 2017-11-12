@@ -9,7 +9,7 @@ namespace ServiceCenter.UI.Shell
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            this.ShutdownMode = ShutdownMode.OnMainWindowClose;
+            this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
             new ServiceCenterBootstrapper().Run();
         }
     }

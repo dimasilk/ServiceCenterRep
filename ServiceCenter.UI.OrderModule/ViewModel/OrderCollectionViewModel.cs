@@ -17,7 +17,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         private readonly IWcfOrderService _orderServiceClient;
         private readonly IDialogService _dialogService;
         private ObservableCollection<OrderItemViewModel> _ordersCollection;
-        private bool _isBusy;
+        //private bool _isBusy;
 
         public OrderCollectionViewModel(IWcfOrderService serviceClient, IEventAggregator eventAggregator, IDialogService dialogService)
         {
@@ -40,14 +40,14 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
         private async void GetOrders()
         {
-            _isBusy = true;
+            //_isBusy = true;
            //async
             var c = await _orderServiceClient.GetAllOrders();
             OrdersCollection = new ObservableCollection<OrderItemViewModel>(c.Select(x => new OrderItemViewModel(x)));
 
             //sync
             //OrdersCollection = new ObservableCollection<OrderItemViewModel>(_orderServiceClient.GetAllOrders().Result.Select(x => new OrderItemViewModel(x)));
-            _isBusy = false;
+           // _isBusy = false;
         }
 
        

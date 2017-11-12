@@ -8,6 +8,7 @@
         xmlns:constants="clr-namespace:ServiceCenter.UI.Infrastructure.Constants;assembly=ServiceCenter.UI.Infrastructure"
         mc:Ignorable="d"
         Title="MainWindow" Height="557.586" Width="1036.724">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

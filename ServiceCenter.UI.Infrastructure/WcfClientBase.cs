@@ -7,20 +7,18 @@ namespace ServiceCenter.UI.Infrastructure
 {
     public abstract class WcfClientBase<T> : IDisposable where T : class
     {
-        protected WcfClientBase(ChannelFactory<T> channelFactory, ILoginService loginService)
+        private readonly ILoginService _loginService;
+        private readonly Lazy<ChannelFactory<T>> _lazyFactory;
+        private readonly Lazy<T> _lazyChannel;
+        protected WcfClientBase(ILoginService loginService)
         {
-            this._channelFactory = channelFactory;
-            if (_channelFactory == null) throw new InvalidOperationException("Unable to create channel factory");
-            // ReSharper disable once PossibleNullReferenceException
-            _channelFactory.Credentials.UserName.UserName = loginService.GetUserName();
-            _channelFactory.Credentials.UserName.Password = loginService.GetUserPassword();
-            Open();
-        } 
-        protected T Channel;
-        private readonly ChannelFactory<T> _channelFactory;
-       // [Dependency]
-       // public ChannelFactory<T> ChannelFactory { set { _channelFactory = value; } }
+            _loginService = loginService;
+            _lazyFactory = new Lazy<ChannelFactory<T>>(CreateChannelFactory);
+            _lazyChannel = new Lazy<T>(CreateChannel);
+        }
 
+        protected T Channel => _lazyChannel.Value;
+       
         public void Dispose()
         {
             CleanupChannel();
@@ -29,15 +27,16 @@ namespace ServiceCenter.UI.Infrastructure
 
         private void CleanupChannelFactory()
         {
+            if (!_lazyFactory.IsValueCreated) return;
             try
             {
-                _channelFactory.Close();
+                _lazyFactory.Value.Close();
             }
             catch
             {
                 try
                 {
-                    _channelFactory.Abort();
+                    _lazyFactory.Value.Abort();
                 }
                 catch (Exception ex)
                 {
@@ -48,6 +47,7 @@ namespace ServiceCenter.UI.Infrastructure
 
         public void CleanupChannel()
         {
+            if (!_lazyChannel.IsValueCreated) return;
             try
             {
                 ICommunicationObject co = (ICommunicationObject)Channel;
@@ -67,11 +67,20 @@ namespace ServiceCenter.UI.Infrastructure
             }
         }
 
-        private void Open()
+        private T CreateChannel()
         {
-            if (Channel != null) return;
-            Channel = _channelFactory.CreateChannel();
-            ((IClientChannel)Channel).Open();
+            var channel = _lazyFactory.Value.CreateChannel();
+            ((IClientChannel)channel).Open();
+            return channel;
+        }
+
+        private ChannelFactory<T> CreateChannelFactory()
+        {
+            var c = new ChannelFactory<T>(typeof(T).Name);
+            // ReSharper disable once PossibleNullReferenceException
+            c.Credentials.UserName.UserName = _loginService.GetUserName();
+            c.Credentials.UserName.Password = _loginService.GetUserPassword();
+            return c;
         }
     }
 }

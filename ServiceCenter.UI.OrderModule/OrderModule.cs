@@ -19,11 +19,9 @@ namespace ServiceCenter.UI.OrderModule
         }
         public void Initialize()
         {
-            _container.RegisterInstance(new ChannelFactory<IWcfOrderService>(nameof(IWcfOrderService)));
             _container.RegisterType<OrderCollectionViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<OrderToolbarViewModel>(new ContainerControlledLifetimeManager());
-            //_container.RegisterInstance(new ChannelFactory<IWcfOrderService>("WSHTTP_IWcfOrderService"));
-            _container.RegisterType<IWcfOrderService, OrderServiceClient>();
+            _container.RegisterType<IWcfOrderService, OrderServiceClient>(new ContainerControlledLifetimeManager());
             var rm = _container.Resolve<IRegionManager>();
             rm.RegisterViewWithRegion(RegionNames.MainRegion, typeof (OrderView));
             rm.RegisterViewWithRegion(RegionNames.MenuRegion, typeof(OrderToolbarView));

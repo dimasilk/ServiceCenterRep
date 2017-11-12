@@ -17,6 +17,7 @@ namespace ServiceCenter.UI.Shell
         {
             Authentificate();
             Application.Current.MainWindow = this.Container.Resolve<Shell>();
+            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
             return Application.Current.MainWindow;
         }
 
@@ -36,8 +37,7 @@ namespace ServiceCenter.UI.Shell
             var loginService = Container.Resolve<LoginService>();
             Container.RegisterInstance<ILoginService>(loginService);
             Container.RegisterInstance<ILoginSetCredentialsService>(loginService);
-            Container.RegisterInstance(new ChannelFactory<IWcfLoginService>(nameof(IWcfLoginService)));
-            Container.RegisterType<IWcfLoginService, LoginServiceClient>();
+            Container.RegisterType<IWcfLoginService, LoginServiceClient>(new ContainerControlledLifetimeManager());
         }
 
         protected override IModuleCatalog CreateModuleCatalog()

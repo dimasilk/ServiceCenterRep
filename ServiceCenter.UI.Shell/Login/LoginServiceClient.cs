@@ -12,7 +12,7 @@ namespace ServiceCenter.UI.Shell.Login
 {
     public class LoginServiceClient : WcfClientBase<IWcfLoginService>, IWcfLoginService
     {
-        public LoginServiceClient(ChannelFactory<IWcfLoginService> channelFactory, ILoginService loginService) : base(channelFactory, loginService)
+        public LoginServiceClient(ILoginService loginService) : base(loginService)
         {
         }
 

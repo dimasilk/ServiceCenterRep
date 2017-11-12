@@ -45,7 +45,7 @@ namespace ServiceCenter.UI.OrderModule
             return Channel.GetOrdersByUserId(userId);
         }
 
-        public OrderServiceClient(ChannelFactory<IWcfOrderService> channelFactory, ILoginService loginService) : base(channelFactory, loginService)
+        public OrderServiceClient( ILoginService loginService) : base(loginService)
         {
         }
     }
