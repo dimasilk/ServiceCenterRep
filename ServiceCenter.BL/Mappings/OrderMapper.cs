@@ -16,8 +16,9 @@ namespace ServiceCenter.BL.Mappings
             dataModel.SerialNumber = dto.SerialNumber;
             dataModel.Urgently = dto.Urgently;
             dataModel.DeviceModel = dto.DeviceModel;
-            dataModel.Status = new OrderStatus();
-            dto.Status.CopyTo(dataModel.Status);
+            //dataModel.Status = new OrderStatus();
+            //dto.Status.CopyTo(dataModel.Status);
+            dataModel.StatusId = dto.Status.Id;
         }
 
         public static readonly Expression<Func<Order, OrderDTO>> SelectExpression = u => new OrderDTO
