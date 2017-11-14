@@ -8,7 +8,6 @@ namespace ServiceCenter.UI.Infrastructure.Interfaces
 {
     public interface IUserIdService
     {
-        void SetCreatorId(Guid? userId);
         Guid GetCreatorId();
     }
 }
