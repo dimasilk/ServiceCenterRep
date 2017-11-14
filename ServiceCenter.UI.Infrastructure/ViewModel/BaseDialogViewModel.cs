@@ -1,6 +1,5 @@
 ﻿using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Mvvm;
 
 namespace ServiceCenter.UI.Infrastructure.ViewModel
 {

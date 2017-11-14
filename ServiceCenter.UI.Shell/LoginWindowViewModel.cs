@@ -11,11 +11,13 @@ namespace ServiceCenter.UI.Shell
     {
         private readonly ILoginSetCredentialsService _credentialsService;
         private readonly IWcfLoginService _wcfLoginService;
+        private readonly IUserIdService _userIdService;
 
-        public LoginWindowViewModel(ILoginSetCredentialsService credentialsService, IWcfLoginService wcfLoginService)
+        public LoginWindowViewModel(ILoginSetCredentialsService credentialsService, IWcfLoginService wcfLoginService, IUserIdService userIdService)
         {
             _credentialsService = credentialsService;
             _wcfLoginService = wcfLoginService;
+            _userIdService = userIdService;
         }
 
         public string UserName { get; set; }
@@ -32,7 +34,9 @@ namespace ServiceCenter.UI.Shell
             {
                 IsBusy = true;
                 var isLogged = await _wcfLoginService.IsLogged();
-                if (isLogged) base.OkClick(o);
+                _userIdService.SetCreatorId(isLogged);
+                //var isLogged = _wcfLoginService.IsLogged();
+                if (isLogged != Guid.Empty) base.OkClick(o);
                 else LoginFailed();
             }
             catch

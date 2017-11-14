@@ -15,6 +15,8 @@ namespace ServiceCenter.Auth.Models
         public string SerialNumber { get; set; }
         public bool Urgently { get; set; }
 
+        public Guid IdUserCreated { get; set; }
+
         public Guid StatusId { get; set; }
         public OrderStatus Status { get; set; }
 

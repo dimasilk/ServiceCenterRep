@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using ServiceCenter.UI.Infrastructure.Interfaces;
 
 namespace ServiceCenter.UI.Shell
 {

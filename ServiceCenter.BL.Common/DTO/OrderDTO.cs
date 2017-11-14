@@ -28,6 +28,10 @@ namespace ServiceCenter.BL.Common.DTO
 
         [DataMember]
         public bool Urgently { get; set; }
+
+        [DataMember]
+        public Guid IdUserCreated { get; set; }
+
         [DataMember]
         public OrderStatusDTO Status { get; set; }
 

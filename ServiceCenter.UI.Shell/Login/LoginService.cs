@@ -1,8 +1,9 @@
-﻿using ServiceCenter.UI.Infrastructure.Interfaces;
+﻿using System;
+using ServiceCenter.UI.Infrastructure.Interfaces;
 
 namespace ServiceCenter.UI.Shell.Login
 {
-    public class LoginService : ILoginService, ILoginSetCredentialsService
+    public class LoginService : ILoginService, ILoginSetCredentialsService, IUserIdService
     {
         public LoginService()
         {
@@ -13,6 +14,7 @@ namespace ServiceCenter.UI.Shell.Login
         }
         private string _userName;
         private string _userPassword;
+        private Guid _creatorId;
 
         public string GetUserName()
         {
@@ -24,10 +26,20 @@ namespace ServiceCenter.UI.Shell.Login
             return _userPassword;
         }
 
+        public Guid GetCreatorId()
+        {
+            return _creatorId;
+        }
+
         public void SetCredentials(string userName, string password)
         {
             _userName = userName;
             _userPassword = password;
+        }
+
+        public void SetCreatorId(Guid? userId)
+        {
+            if (userId != Guid.Empty) _creatorId = (Guid)userId;
         }
     }
 }

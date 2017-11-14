@@ -7,6 +7,7 @@ using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Interfaces;
 using ServiceCenter.BL.OrderService;
+using ServiceCenter.BL.UserService;
 using ServiceCenter.WcfService.WcfLogin;
 using ServiceCenter.WcfService.WcfOrders;
 using Unity.Wcf;
@@ -26,6 +27,8 @@ namespace ServiceCenter.WcfService
             container.RegisterType<IWcfOrderService, WcfOrderService>();
             container.RegisterType<IOrderStatusService, OrderStatusService>();
             container.RegisterType<IWcfLoginService, WcfLoginService>();
+            container.RegisterType<IUserIdentityService, UserIdentityService>();
+            container.RegisterType<IUserService, UserService>();
 
             ServiceLocator.SetLocatorProvider(() => new UnityServiceLocator(container));
 

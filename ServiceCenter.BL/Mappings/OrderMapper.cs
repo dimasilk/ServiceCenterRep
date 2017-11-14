@@ -16,8 +16,7 @@ namespace ServiceCenter.BL.Mappings
             dataModel.SerialNumber = dto.SerialNumber;
             dataModel.Urgently = dto.Urgently;
             dataModel.DeviceModel = dto.DeviceModel;
-            //dataModel.Status = new OrderStatus();
-            //dto.Status.CopyTo(dataModel.Status);
+            dataModel.IdUserCreated = dto.IdUserCreated;
             dataModel.StatusId = dto.Status.Id;
         }
 
@@ -28,7 +27,8 @@ namespace ServiceCenter.BL.Mappings
             DeviceModel = u.DeviceModel,
             Manufacturer = u.Manufacturer,
             SerialNumber = u.SerialNumber,
-            Urgently = u.Urgently,           
+            Urgently = u.Urgently,      
+            IdUserCreated     = u.IdUserCreated,
             Status = OrderStatusMapper.SelectExpression.Invoke(u.Status)
         };
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ServiceModel;
 using System.Windows;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
@@ -37,6 +36,7 @@ namespace ServiceCenter.UI.Shell
             var loginService = Container.Resolve<LoginService>();
             Container.RegisterInstance<ILoginService>(loginService);
             Container.RegisterInstance<ILoginSetCredentialsService>(loginService);
+            Container.RegisterInstance<IUserIdService>(loginService);
             Container.RegisterType<IWcfLoginService, LoginServiceClient>(new ContainerControlledLifetimeManager());
         }
 

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
 using ServiceCenter.BL.Common;
 using ServiceCenter.UI.Infrastructure;
@@ -16,7 +12,7 @@ namespace ServiceCenter.UI.Shell.Login
         {
         }
 
-        public Task<bool> IsLogged()
+        public  Task<Guid?> IsLogged()
         {
             return Channel.IsLogged();
         }

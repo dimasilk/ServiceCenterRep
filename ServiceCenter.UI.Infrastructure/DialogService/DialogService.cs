@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Windows;
 using Microsoft.Practices.Unity;
 using ServiceCenter.UI.Infrastructure.Behaviors;

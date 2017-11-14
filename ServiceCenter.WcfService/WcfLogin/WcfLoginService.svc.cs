@@ -1,6 +1,8 @@
 ﻿
+using System;
 using System.Threading.Tasks;
 using ServiceCenter.BL.Common;
+using ServiceCenter.BL.Interfaces;
 
 namespace ServiceCenter.WcfService.WcfLogin
 {
@@ -8,9 +10,17 @@ namespace ServiceCenter.WcfService.WcfLogin
     // ПРИМЕЧАНИЕ. Чтобы запустить клиент проверки WCF для тестирования службы, выберите элементы WcfLoginService.svc или WcfLoginService.svc.cs в обозревателе решений и начните отладку.
     public class WcfLoginService : IWcfLoginService
     {
-        public Task<bool> IsLogged()
+        private readonly IUserIdentityService _identityService;
+        public WcfLoginService(IUserIdentityService identityService)
         {
-            return Task.FromResult(true);
+            _identityService = identityService;
+        }
+
+        public Task<Guid?> IsLogged()
+        {
+            //var a = _identityService.GetCurrentUserId();
+            //return a;
+            return Task.FromResult(_identityService.GetCurrentUserId());
         }
     }
 }
