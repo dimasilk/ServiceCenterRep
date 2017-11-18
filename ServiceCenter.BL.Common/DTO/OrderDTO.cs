@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
@@ -34,6 +35,8 @@ namespace ServiceCenter.BL.Common.DTO
 
         [DataMember]
         public OrderStatusDTO Status { get; set; }
+        [DataMember]
+        public IEnumerable<PricelistDTO> PricelistItems { get; set; } = new PricelistDTO[0];
 
 
         public event PropertyChangedEventHandler PropertyChanged;

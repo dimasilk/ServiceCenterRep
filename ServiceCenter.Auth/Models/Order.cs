@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,6 +20,12 @@ namespace ServiceCenter.Auth.Models
 
         public Guid StatusId { get; set; }
         public OrderStatus Status { get; set; }
+        public virtual ICollection<Pricelist> Pricelist { get; set; }
+
+        public Order()
+        {
+            Pricelist = new List<Pricelist>();
+        }
 
     }
 }

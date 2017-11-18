@@ -65,6 +65,7 @@
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Mappings\OrderMapper.cs" />
     <Compile Include="Mappings\OrderStatusMapper.cs" />
+    <Compile Include="Mappings\PriceListMapper.cs" />
     <Compile Include="OrderService\OrderService.cs" />
     <Compile Include="OrderService\OrderStatusService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

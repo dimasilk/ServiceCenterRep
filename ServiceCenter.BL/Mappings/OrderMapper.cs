@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Common.DTO;
@@ -18,6 +20,10 @@ namespace ServiceCenter.BL.Mappings
             dataModel.DeviceModel = dto.DeviceModel;
             dataModel.IdUserCreated = dto.IdUserCreated;
             dataModel.StatusId = dto.Status.Id;
+            foreach (var x in dto.PricelistItems)
+                x.CopyTo(dataModel.Pricelist.First(m => m.Id == x.Id));
+            
+            
         }
 
         public static readonly Expression<Func<Order, OrderDTO>> SelectExpression = u => new OrderDTO
@@ -29,7 +35,8 @@ namespace ServiceCenter.BL.Mappings
             SerialNumber = u.SerialNumber,
             Urgently = u.Urgently,      
             IdUserCreated     = u.IdUserCreated,
-            Status = OrderStatusMapper.SelectExpression.Invoke(u.Status)
+            Status = OrderStatusMapper.SelectExpression.Invoke(u.Status),
+            PricelistItems = u.Pricelist.Select(x => PriceListMapper.SelectExpression.Invoke(x))
         };
     }
 

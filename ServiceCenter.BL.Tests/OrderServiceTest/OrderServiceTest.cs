@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.BL.Interfaces;
 using ServiceCenter.BL.Tests.Common;
@@ -17,7 +18,7 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
                 SerialNumber = "1233435",
                 Urgently = true,
                 Device = "notebook",
-                Status = new OrderStatusDTO() { StatusValue="test"}
+                Status = new OrderStatusDTO() { Id = new Guid("13E73129-E7AB-43B8-9C18-D0EB480D5848"), StatusValue = "test"}
             };
 
         [TestMethod]

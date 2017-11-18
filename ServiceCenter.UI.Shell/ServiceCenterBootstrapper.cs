@@ -15,7 +15,9 @@ namespace ServiceCenter.UI.Shell
     {
         protected override DependencyObject CreateShell()
         {
+#if !DEBUG 
             Authentificate();
+#endif
             Application.Current.MainWindow = this.Container.Resolve<Shell>();
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
             return Application.Current.MainWindow;
