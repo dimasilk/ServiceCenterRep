@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ServiceCenter.UI.OrderModule.View"
+             xmlns:priceconverter="clr-namespace:ServiceCenter.UI.OrderModule.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Width="500" Height="500" Background="Red">
+        <Grid.Resources>
+            <priceconverter:PriceListConverter x:Key="myPriceListConverter"   />
+        </Grid.Resources>
         <ListView Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path=OrdersCollection}" SelectedItem="{Binding Path=SelectedItem, Mode=OneWayToSource}">
             <ListView.View>
                 <GridView>
@@ -17,9 +21,10 @@
                         <GridViewColumn Header="SerialNumber" DisplayMemberBinding = "{Binding Path=Item.SerialNumber}"></GridViewColumn>
                         <GridViewColumn Header="Urgently" DisplayMemberBinding = "{Binding Path=Item.Urgently}"></GridViewColumn>
                         <GridViewColumn Header="Status" DisplayMemberBinding = "{Binding Path=Item.Status.StatusValue}"></GridViewColumn>
+                        <GridViewColumn Header="Work" DisplayMemberBinding = "{Binding Path=Item.PricelistItems, Converter={StaticResource myPriceListConverter}}"/>
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
-          </ListView>
+        </ListView>
     </Grid>
 </UserControl>

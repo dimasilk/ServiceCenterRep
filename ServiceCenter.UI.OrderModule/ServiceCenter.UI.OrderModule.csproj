@@ -81,6 +81,7 @@
     <Compile Include="AggregatedEvent\AddOrderEvent.cs" />
     <Compile Include="AggregatedEvent\DeleteOrderEvent.cs" />
     <Compile Include="AggregatedEvent\EditOrderEvent.cs" />
+    <Compile Include="Converters\PriceListConverter.cs" />
     <Compile Include="OrderModule.cs" />
     <Compile Include="OrderServiceClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
