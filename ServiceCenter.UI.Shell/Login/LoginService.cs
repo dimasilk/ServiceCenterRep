@@ -1,5 +1,6 @@
 ﻿using System;
 using ServiceCenter.UI.Infrastructure.Interfaces;
+using ServiceCenter.UI.Shell.Interfaces;
 
 namespace ServiceCenter.UI.Shell.Login
 {

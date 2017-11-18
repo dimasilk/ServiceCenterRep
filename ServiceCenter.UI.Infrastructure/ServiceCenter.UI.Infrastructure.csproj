@@ -71,7 +71,6 @@
   <ItemGroup>
     <Compile Include="Converters\InvertBooleanConverter.cs" />
     <Compile Include="Interfaces\ILoginService.cs" />
-    <Compile Include="Interfaces\ILoginSetCredentialsService.cs" />
     <Compile Include="Interfaces\IUserIdService.cs" />
     <Compile Include="ViewModel\BaseDialogViewModel.cs" />
     <Compile Include="Behaviors\DialogWindowBehavior.cs" />

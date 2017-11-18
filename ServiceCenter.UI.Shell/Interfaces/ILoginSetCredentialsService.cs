@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ServiceCenter.UI.Infrastructure.Interfaces
+namespace ServiceCenter.UI.Shell.Interfaces
 {
     public interface ILoginSetCredentialsService
     {

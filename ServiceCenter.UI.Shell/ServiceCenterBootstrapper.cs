@@ -6,6 +6,7 @@ using Microsoft.Practices.Unity;
 using ServiceCenter.BL.Common;
 using ServiceCenter.UI.Infrastructure.DialogService;
 using ServiceCenter.UI.Infrastructure.Interfaces;
+using ServiceCenter.UI.Shell.Interfaces;
 using ServiceCenter.UI.Shell.Login;
 
 namespace ServiceCenter.UI.Shell

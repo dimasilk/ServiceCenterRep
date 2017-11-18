@@ -18,9 +18,10 @@ namespace ServiceCenter.WcfService.WcfLogin
 
         public Task<Guid?> IsLogged()
         {
-            //var a = _identityService.GetCurrentUserId();
-            //return a;
             return Task.FromResult(_identityService.GetCurrentUserId());
+
+            //var task = Task.Factory.StartNew(_identityService.GetCurrentUserId());
+            //return await task.ConfigureAwait(false);
         }
     }
 }
