@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using ServiceCenter.BL.Common.DTO;
 
@@ -15,7 +13,7 @@ namespace ServiceCenter.UI.OrderModule.Converters
         {
             string result = "";
             var collection = (IEnumerable<PricelistDTO>)value;
-            if(collection != null) result = String.Join(", ", collection);
+            if(collection != null) result = String.Join(", ", collection.Select(x => x.Name));
             return result;
         }
 

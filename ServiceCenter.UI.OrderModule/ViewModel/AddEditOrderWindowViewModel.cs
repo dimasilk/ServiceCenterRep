@@ -12,11 +12,16 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
     {
         public OrderDTO Item { get; set; }
 
-        private OrderStatusDTO[] _statuses;
+       
         public OrderStatusDTO[] Statuses
         {
             get { return _statuses; }
             set { SetProperty(ref _statuses, value); }
+        }
+        public PriceListTreeViewModel Prices
+        {
+            get { return _prices; }
+            set { SetProperty(ref _prices, value); }
         }
         public AddEditOrderWindowViewModel(OrderDTO item, IWcfOrderService serviceClient, IUserIdService userIdService)
         {
@@ -24,12 +29,16 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             _serviceClient = serviceClient;
             _userIdService = userIdService;
 
+            GetPrices();
             GetStatuses();
         }
 
         private readonly IWcfOrderService _serviceClient;
         private readonly IUserIdService _userIdService;
-        
+        private OrderStatusDTO[] _statuses;
+        private PriceListTreeViewModel _prices;
+
+
         public override void OkClick(object o)
         {
             DialogResultData = Item;
@@ -42,7 +51,11 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             if (Item.Status == null) return;
             Item.Status = Statuses.FirstOrDefault(x => x.Id == Item.Status.Id);
             Item.OnPropertyChanged(nameof(Item.Status));
-            
+        }
+
+        private async void GetPrices()
+        {
+            Prices = new PriceListTreeViewModel(await _serviceClient.GetFullPriceList());
         }
     }
 }

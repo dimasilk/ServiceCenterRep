@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Interfaces;
+using ServiceCenter.BL.OrderService;
 using Unity;
 
 
@@ -36,6 +37,7 @@ namespace ServiceCenter.BL.Tests.Common
             this.Container.RegisterType<ApplicationDbContext>();
             this.Container.RegisterType<IUserService, UserService.UserService>();
             this.Container.RegisterType<IOrderStatusService, OrderService.OrderStatusService>();
+            this.Container.RegisterType<IPriceListService, PriceListService>();
         }
     }
 }

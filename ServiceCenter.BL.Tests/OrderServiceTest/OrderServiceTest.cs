@@ -26,10 +26,12 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
         {
             var service = Container.Resolve<IOrderService>();
             var statusService = Container.Resolve<IOrderStatusService>();
+            var pricelistService = Container.Resolve<IPriceListService>();
             var guid = service.AddOrder(_orderDto);
             var order = service.GetOrderById(guid);
             var status = statusService.GetStatusById(order.Status.Id);
             var orders = service.GetAllOrders();
+            var x = pricelistService.GetFullPriceList();
 
             var statuses = statusService.GetAllStatuses();
 

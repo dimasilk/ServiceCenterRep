@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServiceCenter.BL.Common.DTO
 {
     [DataContract]
     public class PricelistDTO
     {
+        public PricelistDTO() { }
         [DataMember]
         public Guid Id { get; set; }
         [DataMember]
@@ -18,10 +15,6 @@ namespace ServiceCenter.BL.Common.DTO
         public string Name { get; set; }
         [DataMember]
         public double Price { get; set; }
-
-        public override string ToString()
-        {
-            return Name;
-        }
+        
     }
 }

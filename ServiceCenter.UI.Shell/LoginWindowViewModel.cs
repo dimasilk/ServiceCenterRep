@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Diagnostics.Eventing.Reader;
 using System.Windows.Controls;
 using ServiceCenter.BL.Common;
-using ServiceCenter.UI.Infrastructure.Interfaces;
 using ServiceCenter.UI.Infrastructure.ViewModel;
 using ServiceCenter.UI.Shell.Interfaces;
-using ServiceCenter.UI.Shell.Login;
 
 namespace ServiceCenter.UI.Shell
 {

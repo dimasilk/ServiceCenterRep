@@ -29,6 +29,11 @@ namespace ServiceCenter.UI.OrderModule
             return Channel.GetOrderStatuses();
         }
 
+        public Task<PricelistDTO[]> GetFullPriceList()
+        {
+            return Channel.GetFullPriceList();
+        }
+
         public void DeleteOrder(Guid orderId)
         {
             Channel.DeleteOrder(orderId);

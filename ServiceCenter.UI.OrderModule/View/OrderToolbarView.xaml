@@ -10,7 +10,7 @@
             <Setter Property="Orientation" Value="Horizontal"/>
             <Setter Property="Height" Value="20"/>
         </Style>
-        <Style TargetType="Button">
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Margin" Value="0,0,2,0"/>
         </Style>
     </UserControl.Resources>

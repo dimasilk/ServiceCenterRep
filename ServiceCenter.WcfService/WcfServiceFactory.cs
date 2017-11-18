@@ -29,6 +29,7 @@ namespace ServiceCenter.WcfService
             container.RegisterType<IWcfLoginService, WcfLoginService>();
             container.RegisterType<IUserIdentityService, UserIdentityService>();
             container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IPriceListService, PriceListService>();
 
             ServiceLocator.SetLocatorProvider(() => new UnityServiceLocator(container));
 

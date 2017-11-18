@@ -89,6 +89,8 @@
     <Compile Include="ViewModel\OrderCollectionViewModel.cs" />
     <Compile Include="ViewModel\OrderItemViewModel.cs" />
     <Compile Include="ViewModel\OrderToolbarViewModel.cs" />
+    <Compile Include="ViewModel\PriceListTreeViewModel.cs" />
+    <Compile Include="ViewModel\PriceListViewModel.cs" />
     <Compile Include="View\AddEditOrderWindow.xaml.cs">
       <DependentUpon>AddEditOrderWindow.xaml</DependentUpon>
     </Compile>

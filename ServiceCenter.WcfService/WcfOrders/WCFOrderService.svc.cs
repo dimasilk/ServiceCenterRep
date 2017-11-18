@@ -14,11 +14,13 @@ namespace ServiceCenter.WcfService.WcfOrders
     {
         private readonly IOrderService _orderService;
         private readonly IOrderStatusService _statusService;
+        private readonly IPriceListService _priceListService;
 
-        public WcfOrderService(IOrderService orderService, IOrderStatusService statusService)
+        public WcfOrderService(IOrderService orderService, IOrderStatusService statusService, IPriceListService priceListService)
         {
             _orderService = orderService;
             _statusService = statusService;
+            _priceListService = priceListService;
         }
 
         public async Task<OrderDTO[]> GetAllOrders()
@@ -27,7 +29,13 @@ namespace ServiceCenter.WcfService.WcfOrders
             return await task.ConfigureAwait(false);
         }
 
-        
+        public async Task<PricelistDTO[]> GetFullPriceList()
+        {
+            var task = Task.Factory.StartNew(_priceListService.GetFullPriceList);
+            return await task.ConfigureAwait(false);
+        }
+
+
         public OrderDTO[] GetOrdersByUserId(Guid userId)
         {
             return _orderService.GetOrdersByUserId(userId);
