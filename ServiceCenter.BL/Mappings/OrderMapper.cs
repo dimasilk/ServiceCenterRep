@@ -20,7 +20,7 @@ namespace ServiceCenter.BL.Mappings
             dataModel.IdUserCreated = dto.IdUserCreated;
             dataModel.StatusId = dto.Status.Id;
             foreach (var x in dto.PricelistItems)
-                x.CopyTo(dataModel.Pricelist.First(m => m.Id == x.Id));
+                x.CopyTo(dataModel.Pricelist.FirstOrDefault(m => m.Id == x.Id));
             
             
         }

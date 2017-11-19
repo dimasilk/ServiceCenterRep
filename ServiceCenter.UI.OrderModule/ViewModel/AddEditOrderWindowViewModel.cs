@@ -14,8 +14,9 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 {
     public class AddEditOrderWindowViewModel : BaseDialogViewModel
     {
-        public OrderDTO Item { get; set; }
+        public ICommand DoubleClickOnPriceItemCommand { get; set; }
 
+        public OrderDTO Item { get; set; }
 
         public ObservableCollection<PricelistDTO> SelectedPricelistItems
         {
@@ -49,7 +50,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         private ObservableCollection<PricelistDTO> _selectedPricelistItems;
         private OrderStatusDTO[] _statuses;
         private PriceListTreeViewModel _prices;
-        public ICommand DoubleClickOnPriceItemCommand { get; set; }
+        
 
 
         public override void OkClick(object o)
@@ -74,6 +75,9 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         public void DoubleClickOnPriceItem(PriceListViewModel priceListViewModel)
         {
             _selectedPricelistItems.Add(priceListViewModel.PricelistDto);
+            var temp = Item.PricelistItems.ToArray().ToList();
+            temp.Add(priceListViewModel.PricelistDto);
+            Item.PricelistItems = temp;
         }
     }
 }
