@@ -15,6 +15,10 @@ namespace ServiceCenter.BL.Common.DTO
         public string Name { get; set; }
         [DataMember]
         public double Price { get; set; }
-        
+
+        public override string ToString()
+        {
+            return Name + ", " + Price;
+        }
     }
 }

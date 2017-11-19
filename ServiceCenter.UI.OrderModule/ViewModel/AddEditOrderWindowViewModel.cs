@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
+using Microsoft.Practices.Prism.Commands;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.UI.Infrastructure.Interfaces;
@@ -12,7 +16,12 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
     {
         public OrderDTO Item { get; set; }
 
-       
+
+        public ObservableCollection<PricelistDTO> SelectedPricelistItems
+        {
+            get { return _selectedPricelistItems; }
+            set { SetProperty(ref _selectedPricelistItems, value); }
+        }
         public OrderStatusDTO[] Statuses
         {
             get { return _statuses; }
@@ -28,15 +37,19 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             Item = item ?? new OrderDTO();
             _serviceClient = serviceClient;
             _userIdService = userIdService;
+            DoubleClickOnPriceItemCommand = new DelegateCommand<PriceListViewModel>(DoubleClickOnPriceItem);
 
+            _selectedPricelistItems = new ObservableCollection<PricelistDTO>();
             GetPrices();
             GetStatuses();
         }
 
         private readonly IWcfOrderService _serviceClient;
         private readonly IUserIdService _userIdService;
+        private ObservableCollection<PricelistDTO> _selectedPricelistItems;
         private OrderStatusDTO[] _statuses;
         private PriceListTreeViewModel _prices;
+        public ICommand DoubleClickOnPriceItemCommand { get; set; }
 
 
         public override void OkClick(object o)
@@ -56,6 +69,11 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         private async void GetPrices()
         {
             Prices = new PriceListTreeViewModel(await _serviceClient.GetFullPriceList());
+        }
+
+        public void DoubleClickOnPriceItem(PriceListViewModel priceListViewModel)
+        {
+            _selectedPricelistItems.Add(priceListViewModel.PricelistDto);
         }
     }
 }

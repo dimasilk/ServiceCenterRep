@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              behaviors:DialogWindowBehavior.DialogResult="{Binding DialogResult}" behaviors:DialogWindowBehavior.DialogResultData="{Binding DialogResultData}">
+    
     <Window.Resources>
         <HierarchicalDataTemplate x:Key="PriceTemplate" ItemsSource="{Binding Path=Childs}">
             <Grid>
@@ -17,8 +18,13 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="{Binding PricelistDto.Name}" />
                 <TextBlock Grid.Column="1" Text="{Binding PricelistDto.Price}" />
+                    
             </Grid>
         </HierarchicalDataTemplate>
+        <Style TargetType="TreeViewItem" BasedOn="{StaticResource {x:Type TreeViewItem}}">
+            <Setter Property="behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommand" Value="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=DataContext.DoubleClickOnPriceItemCommand}"/>
+            <Setter Property="behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommandParameter" Value="{Binding}"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -38,10 +44,10 @@
         <TextBox x:Name="TextboxSerialNumber" Grid.Column="1" Grid.Row="1" Text="{Binding Item.SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <CheckBox x:Name="CheckBoxUrgently" Grid.Column="0" Grid.Row="2" IsChecked="{Binding Item.Urgently, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Urgently</CheckBox>
         <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="StatusValue" SelectedItem="{Binding Path=Item.Status, Mode=TwoWay}"/>
-        <ListBox Grid.Column="0" Grid.Row="3"/>
-        <TreeView Grid.Column="1" Grid.Row="3" ItemsSource="{Binding Path=Prices}" ItemTemplate="{StaticResource PriceTemplate}"/>
+        <ListBox Grid.Column="0" Grid.Row="3" ItemsSource="{Binding Path=SelectedPricelistItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TreeView Grid.Column="1" Grid.Row="3" ItemsSource="{Binding Path=Prices}" ItemTemplate="{StaticResource PriceTemplate}" />
 
-            <Button x:Name="OkClickButton" Content="ОК" Grid.Column="0" Grid.Row="4" Command="{Binding OkCommand}"/>
+        <Button x:Name="OkClickButton" Content="ОК" Grid.Column="0" Grid.Row="4" Command="{Binding OkCommand}"/>
         <Button x:Name="CancelClickButton" Content="Отмена" Grid.Column="1" Grid.Row="4" Command="{Binding CancelCommand}"/>
     </Grid>
 </Window>
