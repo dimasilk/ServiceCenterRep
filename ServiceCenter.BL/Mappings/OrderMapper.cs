@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Common.DTO;
 using LinqKit;
+using ServiceCenter.BL.Interfaces;
 
 namespace ServiceCenter.BL.Mappings
 {
@@ -19,10 +20,15 @@ namespace ServiceCenter.BL.Mappings
             dataModel.DeviceModel = dto.DeviceModel;
             dataModel.IdUserCreated = dto.IdUserCreated;
             dataModel.StatusId = dto.Status.Id;
+
             foreach (var x in dto.PricelistItems)
-                x.CopyTo(dataModel.Pricelist.FirstOrDefault(m => m.Id == x.Id));
-            
-            
+            {
+                //x.CopyTo(dataModel.Pricelist.FirstOrDefault(m => m.Id == x.Id));
+                Pricelist price = new Pricelist();
+                x.CopyTo(price);
+                dataModel.Pricelist.Add(price);
+            }
+
         }
 
         public static readonly Expression<Func<Order, OrderDTO>> SelectExpression = u => new OrderDTO

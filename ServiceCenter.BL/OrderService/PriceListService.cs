@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.BL.Interfaces;
@@ -10,6 +11,7 @@ namespace ServiceCenter.BL.OrderService
     public class PriceListService : IPriceListService
     {
         private readonly ApplicationDbContext _context;
+
         public PriceListService(ApplicationDbContext context)
         {
             _context = context;
@@ -19,6 +21,15 @@ namespace ServiceCenter.BL.OrderService
         {
             var a = _context.PricelistItems.ToArray();
             return _context.PricelistItems.AsExpandable().Select(PriceListMapper.SelectExpression).ToArray();
+        }
+
+        public PricelistDTO GetPriceListItemById(Guid itemId)
+        {
+            return
+                _context.PricelistItems.AsExpandable()
+                    .Where(x => x.Id == itemId)
+                    .Select(PriceListMapper.SelectExpression)
+                    .FirstOrDefault();
         }
     }
 }

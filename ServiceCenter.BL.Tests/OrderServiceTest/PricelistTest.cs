@@ -24,6 +24,7 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
             var user = userService.GetUserById(new Guid("9F09B602-6C46-47D6-9A36-4D0FBDE134C2"));
             var status = statusService.GetStatusById(new Guid("4276A1FD-CAC7-E711-9BD5-1C1B0DF74675"));
             var prices = service.GetFullPriceList();
+            var item = service.GetPriceListItemById(prices.FirstOrDefault().Id);
             var order = new OrderDTO()
             {
                 Device = "123",
@@ -32,6 +33,15 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
                 Status = status,
                 PricelistItems = prices
             };
+
+            var collection = (ICollection<PricelistDTO>)order.PricelistItems;
+            foreach (var x in collection)
+            {
+                var c = service.GetPriceListItemById(x.Id);
+                collection.Remove(x);
+                collection.Add(c);
+            }
+            order.PricelistItems = collection;
 
             orderService.AddOrder(order);
         }
