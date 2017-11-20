@@ -15,8 +15,9 @@ namespace ServiceCenter.Auth.Models
         public double? Price { get; set; }
         public Guid? ParentId { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; }
+        //public virtual ICollection<Order> Orders { get; set; }
         [ForeignKey("ParentId")]
         public virtual ICollection<Pricelist> Items { get; set; } 
+        public virtual ICollection<PricelistOrders> PricelistOrders { get; set; }
     }
 }

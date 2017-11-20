@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using ServiceCenter.Auth.Models;
@@ -20,13 +21,16 @@ namespace ServiceCenter.BL.Mappings
             dataModel.DeviceModel = dto.DeviceModel;
             dataModel.IdUserCreated = dto.IdUserCreated;
             dataModel.StatusId = dto.Status.Id;
-
+            
+            dataModel.PricelistOrders.Clear();
+            
             foreach (var x in dto.PricelistItems)
             {
-                //x.CopyTo(dataModel.Pricelist.FirstOrDefault(m => m.Id == x.Id));
-                Pricelist price = new Pricelist();
-                x.CopyTo(price);
-                dataModel.Pricelist.Add(price);
+                dataModel.PricelistOrders.Add(new PricelistOrders()
+                {
+                    Order = dataModel,
+                    Pricelist_Id = x.Id
+                });   
             }
 
         }
@@ -41,7 +45,7 @@ namespace ServiceCenter.BL.Mappings
             Urgently = u.Urgently,      
             IdUserCreated     = u.IdUserCreated,
             Status = OrderStatusMapper.SelectExpression.Invoke(u.Status),
-            PricelistItems = u.Pricelist.Select(x => PriceListMapper.SelectExpression.Invoke(x))
+            PricelistItems = u.PricelistOrders.Select(x => PriceListMapper.SelectExpression.Invoke(x.Pricelist)).ToList()
         };
     }
 

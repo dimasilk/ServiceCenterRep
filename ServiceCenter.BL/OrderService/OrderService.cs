@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.BL.Interfaces;
 using ServiceCenter.BL.Mappings;
 using LinqKit;
-
+using System.Data.Entity;
 
 namespace ServiceCenter.BL.OrderService
 {
@@ -53,9 +54,10 @@ namespace ServiceCenter.BL.OrderService
 
         public void UpdateOrder(OrderDTO orderModel)
         {
-            Order dataModel = new Order();
+            Order dataModel = _context.Orders.Include(x => x.PricelistOrders).FirstOrDefault(x => x.Id == orderModel.Id);
+            if (dataModel == null) return;
             orderModel.CopyTo(dataModel);
-            _context.Entry(dataModel).State = System.Data.Entity.EntityState.Modified;
+            //_context.Entry(dataModel).State = System.Data.Entity.EntityState.Modified;
             _context.SaveChanges();
             return;
 
@@ -69,5 +71,7 @@ namespace ServiceCenter.BL.OrderService
             _context.SaveChanges();
             return dataModel.Id;
         }
+
+        
     }
 }

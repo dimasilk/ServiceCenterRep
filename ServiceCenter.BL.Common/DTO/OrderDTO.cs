@@ -36,7 +36,7 @@ namespace ServiceCenter.BL.Common.DTO
         [DataMember]
         public OrderStatusDTO Status { get; set; }
         [DataMember]
-        public IEnumerable<PricelistDTO> PricelistItems { get; set; } = new PricelistDTO[0];
+        public ICollection<PricelistDTO> PricelistItems { get; set; } = new PricelistDTO[0];
 
 
         public event PropertyChangedEventHandler PropertyChanged;

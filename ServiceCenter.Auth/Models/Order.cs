@@ -20,11 +20,12 @@ namespace ServiceCenter.Auth.Models
 
         public Guid StatusId { get; set; }
         public OrderStatus Status { get; set; }
-        public virtual ICollection<Pricelist> Pricelist { get; set; }
+        //public virtual ICollection<Pricelist> Pricelist { get; set; }
+        public virtual ICollection<PricelistOrders> PricelistOrders { get; set; }
 
         public Order()
         {
-            Pricelist = new List<Pricelist>();
+            PricelistOrders = new List<PricelistOrders>();
         }
 
     }
