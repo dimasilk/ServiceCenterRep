@@ -25,6 +25,10 @@
             <Setter Property="behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommand" Value="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=DataContext.DoubleClickOnPriceItemCommand}"/>
             <Setter Property="behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommandParameter" Value="{Binding}"/>
         </Style>
+        <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+            <Setter Property="behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommand" Value="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=DataContext.DoubleClickOnSelectedPriceItemCommand}"/>
+            <Setter Property="behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommandParameter" Value="{Binding}"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -45,7 +49,15 @@
         <CheckBox x:Name="CheckBoxUrgently" Grid.Column="0" Grid.Row="2" IsChecked="{Binding Item.Urgently, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Urgently</CheckBox>
         <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="StatusValue" SelectedItem="{Binding Path=Item.Status, Mode=TwoWay}"/>
         <ListBox Grid.Column="0" Grid.Row="3" ItemsSource="{Binding Path=SelectedPricelistItems}">
-            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding Name}" />
+                <TextBlock Grid.Column="1" Text="{Binding Price}" />
+
+            </Grid>
         </ListBox>
         <TreeView Grid.Column="1" Grid.Row="3" ItemsSource="{Binding Path=Prices}" ItemTemplate="{StaticResource PriceTemplate}" />
 

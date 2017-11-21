@@ -2085,7 +2085,9 @@
                                              To="0"/>
                         </Storyboard>
                     </ControlTemplate.Resources>
-                    <Grid Background="{TemplateBinding Background}" Margin="1,1,1,1" SnapsToDevicePixels="True" x:Name="grid">
+                    <Grid behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommand = "{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommand)}"
+                                 behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommandParameter = "{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommandParameter)}"
+                        Background="{TemplateBinding Background}" Margin="1,1,1,1" SnapsToDevicePixels="True" x:Name="grid">
                         <Rectangle x:Name="bg" IsHitTestVisible="False" Fill="Transparent"/>
                         <Rectangle x:Name="selected_bg" IsHitTestVisible="False" Opacity="0">
                             <Rectangle.Fill>
