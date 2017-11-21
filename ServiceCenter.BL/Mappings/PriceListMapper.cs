@@ -20,7 +20,7 @@ namespace ServiceCenter.BL.Mappings
         {
             Id = u.Id,
             ParentId = u.ParentId,
-            Price = (double)u.Price,
+            Price = u.Price,
             Name = u.Name
         };
        

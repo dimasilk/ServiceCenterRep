@@ -14,7 +14,7 @@ namespace ServiceCenter.BL.Common.DTO
         [DataMember]
         public string Name { get; set; }
         [DataMember]
-        public double Price { get; set; }
+        public double? Price { get; set; }
 
         public override string ToString()
         {

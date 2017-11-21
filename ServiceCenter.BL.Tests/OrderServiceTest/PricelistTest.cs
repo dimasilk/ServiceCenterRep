@@ -21,7 +21,7 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
             var orderService = Container.Resolve<IOrderService>();
             var userService = Container.Resolve<IUserService>();
             var statusService = Container.Resolve<IOrderStatusService>();
-            var user = userService.GetUserById(new Guid("9F09B602-6C46-47D6-9A36-4D0FBDE134C2"));
+            var user = userService.GetUserById(new Guid("6D31CAB9-B1B8-4C40-9FD4-59FA484BF416"));
             var status = statusService.GetAllStatuses().FirstOrDefault();
             var prices = service.GetFullPriceList();
             var item = service.GetPriceListItemById(prices.FirstOrDefault().Id);
@@ -29,7 +29,7 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
             {
                 Device = "123",
                 DeviceModel = "456",
-                //IdUserCreated = user.Result.Id,
+                IdUserCreated = user.Result.Id,
                 Status = status,
                 PricelistItems = prices
             };
@@ -37,7 +37,13 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
             var collection = order.PricelistItems.Select(x => service.GetPriceListItemById(x.Id)).ToList();
             order.PricelistItems = collection;
 
-            orderService.AddOrder(order);
+            order.Id = orderService.AddOrder(order);
+            
+
+            order.PricelistItems = new List<PricelistDTO>();
+            order.PricelistItems.Add(service.GetFullPriceList().FirstOrDefault());
+            orderService.UpdateOrder(order);
+            orderService.DeleteOrder(order.Id);
         }
     }
 }
