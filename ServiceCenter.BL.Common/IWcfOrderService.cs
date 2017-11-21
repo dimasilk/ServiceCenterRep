@@ -25,6 +25,8 @@ namespace ServiceCenter.BL.Common
         Task<OrderStatusDTO[]> GetOrderStatuses();
         [OperationContract]
         Task<PricelistDTO[]> GetFullPriceList();
+        [OperationContract]
+        PricelistDTO[] GetPriceListItemsByOrderId(Guid orderId);
 
 
     }

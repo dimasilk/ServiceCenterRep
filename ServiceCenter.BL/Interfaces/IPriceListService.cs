@@ -7,5 +7,6 @@ namespace ServiceCenter.BL.Interfaces
     {
         PricelistDTO[] GetFullPriceList();
         PricelistDTO GetPriceListItemById(Guid itemId);
+        PricelistDTO[] GetPriceListItemsByOrder(Guid orderId);
     }
 }

@@ -70,6 +70,8 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         private async void GetPrices()
         {
             Prices = new PriceListTreeViewModel(await _serviceClient.GetFullPriceList());
+            SelectedPricelistItems =
+                new ObservableCollection<PricelistDTO>(_serviceClient.GetPriceListItemsByOrderId(Item.Id));
         }
 
         public void DoubleClickOnPriceItem(PriceListViewModel priceListViewModel)

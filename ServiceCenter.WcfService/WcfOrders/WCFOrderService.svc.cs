@@ -35,6 +35,11 @@ namespace ServiceCenter.WcfService.WcfOrders
             return await task.ConfigureAwait(false);
         }
 
+        public PricelistDTO[] GetPriceListItemsByOrderId(Guid orderId)
+        {
+            return _priceListService.GetPriceListItemsByOrder(orderId);
+        }
+
 
         public OrderDTO[] GetOrdersByUserId(Guid userId)
         {
