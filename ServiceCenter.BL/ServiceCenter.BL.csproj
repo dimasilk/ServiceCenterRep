@@ -59,11 +59,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IClientService.cs" />
+    <Compile Include="Interfaces\ICompanyService.cs" />
     <Compile Include="Interfaces\IOrderService.cs" />
     <Compile Include="Interfaces\IOrderStatusService.cs" />
     <Compile Include="Interfaces\IPriceListService.cs" />
     <Compile Include="Interfaces\IUserIdentityService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Mappings\ClientMapper.cs" />
+    <Compile Include="Mappings\CompanyMapper.cs" />
     <Compile Include="Mappings\OrderMapper.cs" />
     <Compile Include="Mappings\OrderStatusMapper.cs" />
     <Compile Include="Mappings\PriceListMapper.cs" />

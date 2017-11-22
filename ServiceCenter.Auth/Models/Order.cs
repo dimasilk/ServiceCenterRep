@@ -17,9 +17,15 @@ namespace ServiceCenter.Auth.Models
         public bool Urgently { get; set; }
 
         public Guid IdUserCreated { get; set; }
+        public DateTime DateRecieved { get; set; }
+        public DateTime DateOrderReady { get; set; }
 
         public Guid StatusId { get; set; }
         public OrderStatus Status { get; set; }
+        public Guid? ClientId { get; set; }
+        public Client Client { get; set; }
+        public Guid? CompanyId { get; set; }
+        public Company Company { get; set; }
         //public virtual ICollection<Pricelist> Pricelist { get; set; }
         public virtual ICollection<PricelistOrders> PricelistOrders { get; set; }
 
