@@ -32,6 +32,10 @@ namespace ServiceCenter.BL.Common.DTO
 
         [DataMember]
         public Guid IdUserCreated { get; set; }
+        [DataMember]
+        public DateTime? DateRecieved { get; set; }
+        [DataMember]
+        public DateTime? DateReady { get; set; }
 
         [DataMember]
         public OrderStatusDTO Status { get; set; }

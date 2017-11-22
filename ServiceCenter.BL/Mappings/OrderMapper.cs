@@ -21,6 +21,8 @@ namespace ServiceCenter.BL.Mappings
             dataModel.DeviceModel = dto.DeviceModel;
             dataModel.IdUserCreated = dto.IdUserCreated;
             dataModel.StatusId = dto.Status.Id;
+            dataModel.DateRecieved = dto.DateRecieved;
+            dataModel.DateOrderReady = dto.DateReady;
             
             dataModel.PricelistOrders.Clear();
             
