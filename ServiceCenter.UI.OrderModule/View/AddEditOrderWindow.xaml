@@ -10,7 +10,8 @@
              behaviors:DialogWindowBehavior.DialogResult="{Binding DialogResult}" behaviors:DialogWindowBehavior.DialogResultData="{Binding DialogResultData}">
     
     <Window.Resources>
-        <HierarchicalDataTemplate x:Key="PriceTemplate" ItemsSource="{Binding Path=Childs}">
+            
+            <HierarchicalDataTemplate x:Key="PriceTemplate" ItemsSource="{Binding Path=Childs}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -25,9 +26,13 @@
             <Setter Property="behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommand" Value="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=DataContext.DoubleClickOnPriceItemCommand}"/>
             <Setter Property="behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommandParameter" Value="{Binding}"/>
         </Style>
-        <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
-            <Setter Property="behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommand" Value="{Binding RelativeSource={RelativeSource AncestorType=TreeView}, Path=DataContext.DoubleClickOnSelectedPriceItemCommand}"/>
+        <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+            <Setter Property="behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommand" Value="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.DoubleClickOnSelectedPriceItemCommand}"/>
             <Setter Property="behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommandParameter" Value="{Binding}"/>
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -50,17 +55,14 @@
         <TextBox x:Name="TextboxSerialNumber" Grid.Column="1" Grid.Row="1" Text="{Binding Item.SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <CheckBox x:Name="CheckBoxUrgently" Grid.Column="0" Grid.Row="2" IsChecked="{Binding Item.Urgently, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Urgently</CheckBox>
         <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="StatusValue" SelectedItem="{Binding Path=Item.Status, Mode=TwoWay}"/>
-        <ListBox Grid.Column="0" Grid.Row="3" ItemsSource="{Binding Path=SelectedPricelistItems}">
-            <!--Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding Name}" />
-                <TextBlock Grid.Column="1" Text="{Binding Price}" />
-
-            </-->
-        </ListBox>
+        <DataGrid Grid.Column="0" Grid.Row="3" ItemsSource="{Binding Path=SelectedPricelistItems}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="None" 
+                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent" SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Name}"/>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Price}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+            
         <TreeView Grid.Column="1" Grid.Row="3" ItemsSource="{Binding Path=Prices}" ItemTemplate="{StaticResource PriceTemplate}" />
 
         <Label Grid.Column="0" Grid.Row="4">Device Recieved</Label>

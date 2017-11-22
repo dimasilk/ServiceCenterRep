@@ -40,7 +40,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             _serviceClient = serviceClient;
             _userIdService = userIdService;
             DoubleClickOnPriceItemCommand = new DelegateCommand<PriceListViewModel>(DoubleClickOnPriceItem);
-            DoubleClickOnSelectedPriceItemCommand = new DelegateCommand<PriceListViewModel>(DoubleClickOnSelectedPriceItem);
+            DoubleClickOnSelectedPriceItemCommand = new DelegateCommand<PricelistDTO>(DoubleClickOnSelectedPriceItem);
 
             _selectedPricelistItems = new ObservableCollection<PricelistDTO>();
             GetPrices();
@@ -78,17 +78,14 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
         public void DoubleClickOnPriceItem(PriceListViewModel priceListViewModel)
         {
+            if (_selectedPricelistItems.Select(x => x.Id).Contains(priceListViewModel.PricelistDto.Id)) return;
             _selectedPricelistItems.Add(priceListViewModel.PricelistDto);
-            var temp = Item.PricelistItems.ToArray().ToList();
-            temp.Add(priceListViewModel.PricelistDto);
-            Item.PricelistItems = temp;
+            Item.PricelistItems = _selectedPricelistItems.ToArray();
         }
-        public void DoubleClickOnSelectedPriceItem(PriceListViewModel priceListViewModel)
+        public void DoubleClickOnSelectedPriceItem(PricelistDTO pricelistDto)
         {
-            _selectedPricelistItems.Remove(priceListViewModel.PricelistDto);
-            var temp = Item.PricelistItems.ToArray().ToList();
-            temp.Remove(priceListViewModel.PricelistDto);
-            Item.PricelistItems = temp;
+            _selectedPricelistItems.Remove(pricelistDto);
+            Item.PricelistItems = _selectedPricelistItems.ToArray();
         }
     }
 }
