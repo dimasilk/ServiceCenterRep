@@ -10,7 +10,7 @@ namespace ServiceCenter.BL.Interfaces
     public interface IClientService
     {
         ClientDTO[] GetAllClients();
-        void DeleteClient(ClientDTO client);
+        void DeleteClient(Guid clientId);
         void UpdateClient(ClientDTO client);
         Guid AddClient(ClientDTO client);
         ClientDTO GetClientById(Guid clientId);

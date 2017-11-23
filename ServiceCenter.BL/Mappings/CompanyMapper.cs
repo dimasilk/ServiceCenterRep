@@ -16,8 +16,8 @@ namespace ServiceCenter.BL.Mappings
             dataModel.Id = dto.Id;
             dataModel.Adress = dto.Adress;
             dataModel.Info = dto.Info;
-            dataModel.Phone = dataModel.Phone;
-            dataModel.Name = dataModel.Name;
+            dataModel.Phone = dto.Phone;
+            dataModel.Name = dto.Name;
             //dataModel.Orders = 
 
         }

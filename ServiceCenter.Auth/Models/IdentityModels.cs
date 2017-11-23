@@ -27,6 +27,8 @@ namespace ServiceCenter.Auth.Models
         public virtual DbSet<OrderStatus> OrderStatuses { get; set; }
         public virtual DbSet<Pricelist> PricelistItems { get; set; }
         public virtual DbSet<PricelistOrders> PricelistOrders { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<Client> Customers { get; set; }
 
         public static ApplicationDbContext Create()
         {
