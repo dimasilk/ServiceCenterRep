@@ -98,7 +98,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Common\BaseTestClass.cs" />
-    <Compile Include="CompanyTest\CompanyTest.cs" />
+    <Compile Include="CustomersTest\CompanyTest.cs" />
+    <Compile Include="CustomersTest\CustomersTest.cs" />
     <Compile Include="OrderServiceTest\OrderServiceTest.cs" />
     <Compile Include="OrderServiceTest\PricelistTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

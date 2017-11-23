@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Common.DTO;
 using LinqKit;
-using ServiceCenter.BL.Interfaces;
 
 namespace ServiceCenter.BL.Mappings
 {

@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LinqKit;
+using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.BL.Interfaces;
-using ServiceCenter.Auth.Models;
 using ServiceCenter.BL.Mappings;
-using LinqKit;
 
-namespace ServiceCenter.BL.CompanyService
+namespace ServiceCenter.BL.CustomerService
 {
     public class CompanyService : ICompanyService
     {

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ServiceCenter.Auth.Models
 {
-    public class Client
+    public class Customer
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -16,7 +16,7 @@ namespace ServiceCenter.Auth.Models
 
         public virtual ICollection<Order> Orders { get; set; }
 
-        public Client()
+        public Customer()
         {
             Orders = new List<Order>();
         }

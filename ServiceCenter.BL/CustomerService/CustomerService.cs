@@ -1,44 +1,57 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LinqKit;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.BL.Interfaces;
 using ServiceCenter.Auth.Models;
+using ServiceCenter.BL.Mappings;
 
 namespace ServiceCenter.BL.CustomerService
 {
-    public class CustomerService : IClientService
+    public class CustomerService : ICustomerService
     {
         private readonly ApplicationDbContext _context;
         public CustomerService(ApplicationDbContext context)
         {
             _context = context;
         }
-        public Guid AddClient(ClientDTO client)
+        public Guid AddCustomer(CustomerDTO client)
         {
-            throw new NotImplementedException();
+            Customer dataModel = new Customer();
+            client.CopyTo(dataModel);
+            _context.Customers.Add(dataModel);
+            _context.SaveChanges();
+            return dataModel.Id;
         }
 
-        public void DeleteClient(Guid clientId)
+        public void DeleteCustomer(Guid clientId)
         {
-            throw new NotImplementedException();
+            var c = _context.Customers.AsExpandable().FirstOrDefault(x => x.Id == clientId);
+            if (c != null)
+            {
+                _context.Customers.Remove(c);
+                _context.SaveChanges();
+            }
+            return;
         }
 
-        public ClientDTO[] GetAllClients()
+        public CustomerDTO[] GetAllCustomers()
         {
-            throw new NotImplementedException();
+            return _context.Customers.AsExpandable().Select(CustomerMapper.SelectExpression).ToArray();
         }
 
-        public ClientDTO GetClientById(Guid clientId)
+        public CustomerDTO GetCustomerById(Guid clientId)
         {
-            throw new NotImplementedException();
+            return _context.Customers.Where(x => x.Id == clientId).Select(CustomerMapper.SelectExpression).FirstOrDefault();
         }
 
-        public void UpdateClient(ClientDTO client)
+        public void UpdateCustomer(CustomerDTO client)
         {
-            throw new NotImplementedException();
+            Customer dataModel = _context.Customers.FirstOrDefault(x => x.Id == client.Id);
+            if (dataModel == null) return;
+            client.CopyTo(dataModel);
+            _context.SaveChanges();
+            return;
         }
     }
 }

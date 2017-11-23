@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.BL.Interfaces;
 using ServiceCenter.BL.Tests.Common;
 using Unity;
 
-namespace ServiceCenter.BL.Tests.OrderServiceTest
+namespace ServiceCenter.BL.Tests.CustomersTest
 {
     [TestClass]
     public class CompanyTest : BaseTestClass
@@ -25,7 +24,7 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
             var service = Container.Resolve<ICompanyService>();
             
             var id = service.AddCompany(_companyDTO);
-            Assert.IsTrue(id.GetType() == typeof(Guid));
+            Assert.IsTrue(id != null);
             var company = service.GetCompanyById(id);
             Assert.AreEqual(company.Info, _companyDTO.Info);
             Assert.AreEqual(company.Name, _companyDTO.Name);

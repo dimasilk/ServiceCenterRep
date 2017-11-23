@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
-using ServiceCenter.BL.Common.Annotations;
 
 namespace ServiceCenter.BL.Common.DTO
 {
     [DataContract]
-    public class ClientDTO
+    public class CustomerDTO
     {
         [DataMember]
         public Guid Id { get; set; }

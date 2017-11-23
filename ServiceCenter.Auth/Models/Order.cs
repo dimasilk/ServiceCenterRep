@@ -23,7 +23,7 @@ namespace ServiceCenter.Auth.Models
         public Guid StatusId { get; set; }
         public OrderStatus Status { get; set; }
         public Guid? ClientId { get; set; }
-        public Client Client { get; set; }
+        public Customer Client { get; set; }
         public Guid? CompanyId { get; set; }
         public Company Company { get; set; }
         //public virtual ICollection<Pricelist> Pricelist { get; set; }
