@@ -48,6 +48,13 @@ namespace ServiceCenter.BL.Tests.OrderServiceTest
             Assert.IsNull(service.GetOrderById(guid));
         }
 
+        [TestMethod]
+        public void OrdersWithCustomerTest()
+        {
+            var service = Container.Resolve<IOrderService>();
+            var orders = service.GetAllOrders();
+        }
+
 
 
     }

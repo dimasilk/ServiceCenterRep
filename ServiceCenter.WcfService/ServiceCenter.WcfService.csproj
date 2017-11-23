@@ -96,12 +96,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Unity.Wcf.README.txt" />
+    <Content Include="WcfCustomers\WcfCustomerService.svc" />
     <Content Include="WcfLogin\WcfLoginService.svc" />
     <Content Include="WcfOrders\WCFOrderService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Credentials\PasswordValidator.cs" />
+    <Compile Include="WcfCustomers\WcfCustomerService.svc.cs">
+      <DependentUpon>WcfCustomerService.svc</DependentUpon>
+    </Compile>
     <Compile Include="WcfLogin\WcfLoginService.svc.cs">
       <DependentUpon>WcfLoginService.svc</DependentUpon>
     </Compile>

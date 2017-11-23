@@ -21,7 +21,7 @@ namespace ServiceCenter.BL.Mappings
             dataModel.StatusId = dto.Status.Id;
             dataModel.DateRecieved = dto.DateRecieved;
             dataModel.DateOrderReady = dto.DateReady;
-            
+            dataModel.ClientId = dto.Customer.Id;
             dataModel.PricelistOrders.Clear();
             
             foreach (var x in dto.PricelistItems)
@@ -42,10 +42,14 @@ namespace ServiceCenter.BL.Mappings
             DeviceModel = u.DeviceModel,
             Manufacturer = u.Manufacturer,
             SerialNumber = u.SerialNumber,
-            Urgently = u.Urgently,      
-            IdUserCreated     = u.IdUserCreated,
+            Urgently = u.Urgently,
+            IdUserCreated = u.IdUserCreated,
             Status = OrderStatusMapper.SelectExpression.Invoke(u.Status),
-            PricelistItems = u.PricelistOrders.Select(x => PriceListMapper.SelectExpression.Invoke(x.Pricelist)).ToList()
+            PricelistItems =
+                u.PricelistOrders.Select(x => PriceListMapper.SelectExpression.Invoke(x.Pricelist)).ToList(),
+            Customer = u.Client != null ? CustomerMapper.SelectExpression.Invoke(u.Client) : null,
+            Company = u.Company != null ? CompanyMapper.SelectExpression.Invoke(u.Company) : null
+
         };
     }
 

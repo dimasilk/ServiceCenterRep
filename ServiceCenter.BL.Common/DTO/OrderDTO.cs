@@ -40,6 +40,10 @@ namespace ServiceCenter.BL.Common.DTO
         [DataMember]
         public OrderStatusDTO Status { get; set; }
         [DataMember]
+        public CustomerDTO Customer { get; set; }
+        [DataMember]
+        public CompanyDTO Company { get; set; }
+        [DataMember]
         public ICollection<PricelistDTO> PricelistItems { get; set; } = new PricelistDTO[0];
 
 
