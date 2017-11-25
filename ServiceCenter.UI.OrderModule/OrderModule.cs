@@ -21,8 +21,10 @@ namespace ServiceCenter.UI.OrderModule
             _container.RegisterType<OrderCollectionViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<OrderToolbarViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IWcfOrderService, OrderServiceClient>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<object, OrderView>(TabNames.OrdersTab);
             var rm = _container.Resolve<IRegionManager>();
-            rm.RegisterViewWithRegion(RegionNames.MainRegion, typeof (OrderView));
+            //rm.RegisterViewWithRegion(RegionNames.MainRegion, typeof (OrderView));
+
             rm.RegisterViewWithRegion(RegionNames.MenuRegion, typeof(OrderToolbarView));
 
             //в тестовых целях, если оно пройдет значит данные успешно пришли с сервера))))

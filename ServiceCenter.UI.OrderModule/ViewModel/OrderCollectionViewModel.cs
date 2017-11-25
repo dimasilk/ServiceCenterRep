@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
+using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
@@ -14,12 +15,12 @@ using ServiceCenter.UI.OrderModule.View;
 namespace ServiceCenter.UI.OrderModule.ViewModel
 {
 
-    public class OrderCollectionViewModel : BindableBase, ITabView
+    public class OrderCollectionViewModel : BindableBase, INavigationAware
     {
         private readonly IWcfOrderService _orderServiceClient;
         private readonly IDialogService _dialogService;
         private ObservableCollection<OrderItemViewModel> _ordersCollection;
-        public string Title => TabNames.OrdersTab;
+       
         //private bool _isBusy;
 
         public OrderCollectionViewModel(IWcfOrderService serviceClient, IEventAggregator eventAggregator, IDialogService dialogService)
@@ -88,5 +89,19 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             }
         }
 
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return false;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            
+        }
     }
 }

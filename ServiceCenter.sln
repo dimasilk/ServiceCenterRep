@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCenter.UI.OrderModul
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCenter.UI.CustomerModule", "ServiceCenter.UI.CustomerModule\ServiceCenter.UI.CustomerModule.csproj", "{DC5C3439-CF49-4C1F-8B86-6EDB1EDB5E58}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCenter.UI.NavigationModule", "ServiceCenter.UI.NavigationModule\ServiceCenter.UI.NavigationModule.csproj", "{3A75DE38-2352-4F31-B7B5-F1F6DF734547}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{DC5C3439-CF49-4C1F-8B86-6EDB1EDB5E58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC5C3439-CF49-4C1F-8B86-6EDB1EDB5E58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC5C3439-CF49-4C1F-8B86-6EDB1EDB5E58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A75DE38-2352-4F31-B7B5-F1F6DF734547}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A75DE38-2352-4F31-B7B5-F1F6DF734547}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A75DE38-2352-4F31-B7B5-F1F6DF734547}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A75DE38-2352-4F31-B7B5-F1F6DF734547}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,6 @@
 ﻿
 
 using System;
-using System.Diagnostics.Contracts;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using ServiceCenter.BL.Common.DTO;
