@@ -5,18 +5,21 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
+using ServiceCenter.UI.Infrastructure.Constants;
 using ServiceCenter.UI.Infrastructure.DialogService;
+using ServiceCenter.UI.Infrastructure.Interfaces;
 using ServiceCenter.UI.OrderModule.AggregatedEvent;
 using ServiceCenter.UI.OrderModule.View;
 
 namespace ServiceCenter.UI.OrderModule.ViewModel
 {
 
-    public class OrderCollectionViewModel : BindableBase
+    public class OrderCollectionViewModel : BindableBase, ITabView
     {
         private readonly IWcfOrderService _orderServiceClient;
         private readonly IDialogService _dialogService;
         private ObservableCollection<OrderItemViewModel> _ordersCollection;
+        public string Title => TabNames.OrdersTab;
         //private bool _isBusy;
 
         public OrderCollectionViewModel(IWcfOrderService serviceClient, IEventAggregator eventAggregator, IDialogService dialogService)

@@ -70,8 +70,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\MouseDoubleClickCommandBehaviour.cs" />
+    <Compile Include="Constants\TabNames.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
     <Compile Include="Interfaces\ILoginService.cs" />
+    <Compile Include="Interfaces\ITabView.cs" />
     <Compile Include="Interfaces\IUserIdService.cs" />
     <Compile Include="ViewModel\BaseDialogViewModel.cs" />
     <Compile Include="Behaviors\DialogWindowBehavior.cs" />

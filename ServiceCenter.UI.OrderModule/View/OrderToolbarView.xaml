@@ -8,15 +8,32 @@
     <UserControl.Resources>
         <Style TargetType="StackPanel">
             <Setter Property="Orientation" Value="Horizontal"/>
-            <Setter Property="Height" Value="20"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Margin" Value="3"/>
         </Style>
         <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="Margin" Value="0,0,2,0"/>
+            <Setter Property="Margin" Value="0,0,4,0"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="BorderBrush" Value="{StaticResource FillPath}"/>
+        </Style>
+        <Style TargetType="Path">
+            <Setter Property="Fill" Value="{StaticResource FillPath}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Stretch" Value="Uniform"/>
+            <Setter Property="Margin" Value="10"></Setter>
         </Style>
     </UserControl.Resources>
     <StackPanel>
-        <Button Content="Add" Command="{Binding AddClick}"/>
-        <Button Content="Edit" Command="{Binding EditClick}"/>
-        <Button Content="Delete" Command="{Binding DeleteClick}"/>
+        <Button Command="{Binding AddClick}" ToolTip="Add">
+            <Path Data="{StaticResource addStyle0}"/>
+        </Button>
+        <Button Command="{Binding EditClick}" ToolTip="Edit">
+            <Path Data="{StaticResource editStyle0}"/>
+        </Button>
+        <Button Command="{Binding DeleteClick}" ToolTip="Delete">
+            <Path Data="{StaticResource deleteStyle0}"/>
+        </Button>
     </StackPanel>
 </UserControl>
