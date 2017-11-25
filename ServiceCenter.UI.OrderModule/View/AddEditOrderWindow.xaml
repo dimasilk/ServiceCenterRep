@@ -7,7 +7,8 @@
              xmlns:behaviors="clr-namespace:ServiceCenter.UI.Infrastructure.Behaviors;assembly=ServiceCenter.UI.Infrastructure"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             behaviors:DialogWindowBehavior.DialogResult="{Binding DialogResult}" behaviors:DialogWindowBehavior.DialogResultData="{Binding DialogResultData}">
+             behaviors:DialogWindowBehavior.DialogResult="{Binding DialogResult}" behaviors:DialogWindowBehavior.DialogResultData="{Binding DialogResultData}"
+             Background="{StaticResource ControlBackgroundNormal}">
     
     <Window.Resources>
             
@@ -34,43 +35,134 @@
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         </Style>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="4,0,0,0"/>
+        </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="4,0,4,0"/>
+            <Setter Property="Height" Value="36"/>
+        </Style>
+        <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="4,0,4,0"/>
+        </Style>
+        <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="4,0,4,0"/>
+            <Setter Property="Height" Value="36"/>
+        </Style>
+        <Style TargetType="DatePicker" BasedOn="{StaticResource {x:Type DatePicker}}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="4,0,4,0"/>
+            <Setter Property="Height" Value="36"/>
+        </Style>
+        <Style TargetType="GroupBox" BasedOn="{StaticResource {x:Type GroupBox}}">
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Margin" Value="4"></Setter>
+            <Setter Property="Width" Value="60"></Setter>
+            <Setter Property="Height" Value="40"></Setter>
+            <Setter Property="TextBlock.FontSize" Value="16"></Setter>
+            <Setter Property="TextBlock.Foreground" Value="{StaticResource FillPath}"></Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="TextboxDevice" Grid.Column="0" Grid.Row="0" Text="{Binding Item.Device, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="TextboxDeviceModel" Grid.Column="1" Grid.Row="0" Text="{Binding Item.DeviceModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="TextboxManufacturer" Grid.Column="0" Grid.Row="1" Text="{Binding Item.Manufacturer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="TextboxSerialNumber" Grid.Column="1" Grid.Row="1" Text="{Binding Item.SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <CheckBox x:Name="CheckBoxUrgently" Grid.Column="0" Grid.Row="2" IsChecked="{Binding Item.Urgently, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">Urgently</CheckBox>
-        <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="StatusValue" SelectedItem="{Binding Path=Item.Status, Mode=TwoWay}"/>
-        <DataGrid Grid.Column="0" Grid.Row="3" ItemsSource="{Binding Path=SelectedPricelistItems}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="None" 
+        <GroupBox Grid.Column="0" Grid.Row="0" Header="Device info">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Device:"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Model:"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Manufacturer:"/>
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="SerialNumber"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Item.Device, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Item.DeviceModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Item.Manufacturer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Item.SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Column="1" Grid.Row="0" Header="Order info">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Status:"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Urgently:"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Order recieved:"/>
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Order ready"/>
+                <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="StatusValue" SelectedItem="{Binding Path=Item.Status, Mode=TwoWay}"/>
+                <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding Item.Urgently, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DatePicker Grid.Column="1" Grid.Row="2" SelectedDate="{Binding Item.DateRecieved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DatePicker Grid.Column="1" Grid.Row="3" SelectedDate="{Binding Item.DateReady, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+        </GroupBox>
+        
+        <GroupBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Header="Selected services (double click for add service)">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path=SelectedPricelistItems}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="None" 
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent" SelectionUnit="FullRow">
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Binding="{Binding Name}"/>
                 <DataGridTextColumn IsReadOnly="True" Binding="{Binding Price}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-            
-        <TreeView Grid.Column="1" Grid.Row="3" ItemsSource="{Binding Path=Prices}" ItemTemplate="{StaticResource PriceTemplate}" />
 
-        <Label Grid.Column="0" Grid.Row="4">Device Recieved</Label>
-        <Label Grid.Column="1" Grid.Row="4">Device will be ready</Label>
-        <DatePicker Grid.Column="0" Grid.Row="5" SelectedDate="{Binding Item.DateRecieved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <DatePicker Grid.Column="1" Grid.Row="5" SelectedDate="{Binding Item.DateReady, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button x:Name="OkClickButton" Content="ОК" Grid.Column="0" Grid.Row="6" Command="{Binding OkCommand}"/>
-        <Button x:Name="CancelClickButton" Content="Отмена" Grid.Column="1" Grid.Row="6" Command="{Binding CancelCommand}"/>
+                <TreeView Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=Prices}" ItemTemplate="{StaticResource PriceTemplate}" />
+            </Grid>
+        </GroupBox>
+
+
+        <Grid Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right">
+            <Grid.RowDefinitions >
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Grid.Row="0"  x:Name="OkClickButton" Content="ОК" Command="{Binding OkCommand}"/>
+            <Button Grid.Column="1" Grid.Row="0"  x:Name="CancelClickButton" Content="Cancel" Command="{Binding CancelCommand}"/>
+        </Grid>
     </Grid>
 </Window>
 
