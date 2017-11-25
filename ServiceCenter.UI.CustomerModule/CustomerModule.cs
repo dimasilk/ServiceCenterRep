@@ -1,9 +1,9 @@
-﻿using Microsoft.Practices.Prism.Modularity;
+﻿using System;
+using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using ServiceCenter.BL.Common;
 using ServiceCenter.UI.Infrastructure.Constants;
-using ServiceCenter.UI.OrderModule.View;
 
 namespace ServiceCenter.UI.CustomerModule
 {
@@ -19,8 +19,10 @@ namespace ServiceCenter.UI.CustomerModule
         {
             _container.RegisterType<IWcfCustomerService, CustomerServiceClient>(new ContainerControlledLifetimeManager());
             var rm = _container.Resolve<IRegionManager>();
-            //rm.RegisterViewWithRegion(RegionNames.MainRegion, typeof(OrderView));
-            rm.RegisterViewWithRegion(RegionNames.MenuRegion, typeof(OrderToolbarView));
+
+            //var q = _container.Resolve<IWcfCustomerService>();
+            //var a = q.GetCustomerById(new Guid("71F93D6B-73D0-E711-9BD6-1C1B0DF74675"));
+
         }
     }
 }

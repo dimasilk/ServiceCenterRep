@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("ServiceCenter.UI.CustomerModule")]
+[assembly: AssemblyTitle("CustomerModule")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ServiceCenter.UI.CustomerModule")]
+[assembly: AssemblyProduct("CustomerModule")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("dc5c3439-cf49-4c1f-8b86-6edb1edb5e58")]
+[assembly: Guid("3be3b771-d12e-4298-9fde-f24c0770e0c1")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //

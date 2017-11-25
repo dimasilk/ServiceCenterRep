@@ -6,34 +6,39 @@ using System.Threading.Tasks;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.UI.Infrastructure;
+using ServiceCenter.UI.Infrastructure.Interfaces;
 
 namespace ServiceCenter.UI.CustomerModule
 {
-    public class CustomerServiceClient : IWcfCustomerService
+    public class CustomerServiceClient : WcfClientBase<IWcfCustomerService>, IWcfCustomerService
     {
         public Task<CustomerDTO[]> GetAllCustomers()
         {
-            throw new NotImplementedException();
+            return Channel.GetAllCustomers();
         }
 
         public void DeleteCustomer(Guid clientId)
         {
-            throw new NotImplementedException();
+            Channel.DeleteCustomer(clientId);
         }
 
         public void UpdateCustomer(CustomerDTO client)
         {
-            throw new NotImplementedException();
+            Channel.UpdateCustomer(client);
         }
 
         public Guid AddCustomer(CustomerDTO client)
         {
-            throw new NotImplementedException();
+            return Channel.AddCustomer(client);
         }
 
         public CustomerDTO GetCustomerById(Guid clientId)
         {
-            throw new NotImplementedException();
+            return Channel.GetCustomerById(clientId);
+        }
+
+        public CustomerServiceClient(ILoginService loginService) : base(loginService)
+        {
         }
     }
 }
