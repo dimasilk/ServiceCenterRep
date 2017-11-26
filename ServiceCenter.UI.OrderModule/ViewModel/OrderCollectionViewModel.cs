@@ -15,7 +15,7 @@ using ServiceCenter.UI.OrderModule.View;
 namespace ServiceCenter.UI.OrderModule.ViewModel
 {
 
-    public class OrderCollectionViewModel : BindableBase, INavigationAware
+    public class OrderCollectionViewModel : BindableBase
     {
         private readonly IWcfOrderService _orderServiceClient;
         private readonly IDialogService _dialogService;
@@ -87,21 +87,6 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
                 _orderServiceClient.UpdateOrder(result);
                 GetOrders();
             }
-        }
-
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            
-        }
-
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return false;
-        }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-            
         }
     }
 }
