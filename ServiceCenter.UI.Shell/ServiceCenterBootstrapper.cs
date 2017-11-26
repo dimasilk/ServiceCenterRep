@@ -18,9 +18,11 @@ namespace ServiceCenter.UI.Shell
 #if !DEBUG 
             Authentificate();
 #endif
-            Application.Current.MainWindow = this.Container.Resolve<Shell>();
+            var shell = this.Container.Resolve<Shell>();
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-            return Application.Current.MainWindow;
+            Application.Current.MainWindow = shell;
+            shell.Show();
+            return shell;
         }
 
         private void Authentificate()

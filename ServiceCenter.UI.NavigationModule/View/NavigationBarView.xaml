@@ -6,6 +6,16 @@
              xmlns:local="clr-namespace:ServiceCenter.UI.NavigationModule.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
+            <Setter Property="Height" Value="40"></Setter>
+            <Setter Property="Width" Value="80"></Setter>
+            <Setter Property="Margin" Value="2"></Setter>
+           <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            
+        </Style>
+    </UserControl.Resources>
     <ItemsControl ItemsSource="{Binding ItemSource}">
        <ItemsControl.ItemsPanel>
            <ItemsPanelTemplate>

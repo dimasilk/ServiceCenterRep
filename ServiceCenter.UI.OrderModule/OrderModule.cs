@@ -18,7 +18,7 @@ namespace ServiceCenter.UI.OrderModule
         }
         public void Initialize()
         {
-            _container.RegisterType<OrderCollectionViewModel>(new ContainerControlledLifetimeManager());
+           // _container.RegisterType<OrderCollectionViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<OrderToolbarViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IWcfOrderService, OrderServiceClient>(new ContainerControlledLifetimeManager());
             _container.RegisterType<object, OrderView>(TabNames.OrdersTab);
@@ -27,8 +27,6 @@ namespace ServiceCenter.UI.OrderModule
 
             rm.RegisterViewWithRegion(RegionNames.MenuRegion, typeof(OrderToolbarView));
 
-            //в тестовых целях, если оно пройдет значит данные успешно пришли с сервера))))
-            //var data = _container.Resolve<IWcfOrderService>().GetAllOrders();
         }
     }
 }
