@@ -2,13 +2,10 @@
 using System.Linq;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
-using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
-using ServiceCenter.UI.Infrastructure.Constants;
 using ServiceCenter.UI.Infrastructure.DialogService;
-using ServiceCenter.UI.Infrastructure.Interfaces;
 using ServiceCenter.UI.OrderModule.AggregatedEvent;
 using ServiceCenter.UI.OrderModule.View;
 
