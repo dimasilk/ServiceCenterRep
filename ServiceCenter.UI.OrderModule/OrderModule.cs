@@ -1,10 +1,8 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
-using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using ServiceCenter.BL.Common;
 using ServiceCenter.UI.Infrastructure.Constants;
 using ServiceCenter.UI.OrderModule.View;
-using ServiceCenter.UI.OrderModule.ViewModel;
 
 namespace ServiceCenter.UI.OrderModule
 {

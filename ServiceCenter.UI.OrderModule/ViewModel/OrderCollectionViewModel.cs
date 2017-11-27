@@ -7,12 +7,13 @@ using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.UI.Infrastructure.AggregatedEvent;
 using ServiceCenter.UI.Infrastructure.DialogService;
+using ServiceCenter.UI.Infrastructure.ViewModel;
 using ServiceCenter.UI.OrderModule.View;
 
 namespace ServiceCenter.UI.OrderModule.ViewModel
 {
 
-    public class OrderCollectionViewModel : BindableBase
+    public class OrderCollectionViewModel : BaseNavigationAwareViewModel
     {
         private readonly IWcfOrderService _orderServiceClient;
         private readonly IDialogService _dialogService;
@@ -20,14 +21,12 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
        
         //private bool _isBusy;
 
-        public OrderCollectionViewModel(IWcfOrderService serviceClient, IEventAggregator eventAggregator, IDialogService dialogService)
+        public OrderCollectionViewModel(IWcfOrderService serviceClient, IEventAggregator eventAggregator, IDialogService dialogService) : base(eventAggregator)
         {
             OrdersCollection = new ObservableCollection<OrderItemViewModel>();
             _orderServiceClient = serviceClient;
             _dialogService = dialogService;
-            eventAggregator.GetEvent<DeleteOrderEvent>().Subscribe(DeleteOrder);
-            eventAggregator.GetEvent<AddOrderEvent>().Subscribe(AddOrder);
-            eventAggregator.GetEvent<EditOrderEvent>().Subscribe(EditOrder);
+            
             GetOrders();
            
         }
@@ -53,7 +52,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
        
 
-        private void DeleteOrder(object parametr)
+        protected override void DeleteOrder(object parametr)
         {
             if (SelectedItem == null) return;
 
@@ -62,7 +61,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             GetOrders();
         }
 
-        private void AddOrder(object parametr)
+        protected override void AddOrder(object parametr)
         {
             OrderDTO result;
             var dialogResult = _dialogService.ShowDialog<AddEditOrderWindow, OrderDTO>("Add new order", out result);
@@ -74,7 +73,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         }
     
 
-        private void EditOrder(object parametr)
+        protected override void EditOrder(object parametr)
         {
             if (SelectedItem == null) return;
             OrderDTO result;

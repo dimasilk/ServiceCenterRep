@@ -6,7 +6,6 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
-using ServiceCenter.UI.Infrastructure.AggregatedEvent;
 using ServiceCenter.UI.Infrastructure.Interfaces;
 using ServiceCenter.UI.Infrastructure.ViewModel;
 

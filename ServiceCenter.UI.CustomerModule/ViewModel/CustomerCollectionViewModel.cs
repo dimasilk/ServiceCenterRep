@@ -4,20 +4,19 @@ using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 using ServiceCenter.BL.Common;
 using ServiceCenter.UI.Infrastructure.DialogService;
+using ServiceCenter.UI.Infrastructure.ViewModel;
 
 namespace ServiceCenter.UI.CustomerModule.ViewModel
 {
-    public class CustomerCollectionViewModel : BindableBase
+    public class CustomerCollectionViewModel : BaseNavigationAwareViewModel
     {
         private readonly IWcfCustomerService _serviceClient;
-        private readonly IEventAggregator _eventAggregator;
         private readonly IDialogService _dialogService;
         private ObservableCollection<CustomerItemViewModel> _customersCollection;
 
-        public CustomerCollectionViewModel(IWcfCustomerService serviceClient, IEventAggregator eventAggregator, IDialogService dialogService)
+        public CustomerCollectionViewModel(IWcfCustomerService serviceClient, IEventAggregator eventAggregator, IDialogService dialogService) : base (eventAggregator)
         {
             _serviceClient = serviceClient;
-            _eventAggregator = eventAggregator;
             _dialogService = dialogService;
 
             GetCustomers();
