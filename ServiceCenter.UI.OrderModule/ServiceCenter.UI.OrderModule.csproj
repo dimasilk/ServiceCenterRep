@@ -80,6 +80,8 @@
   <ItemGroup>
     <Compile Include="AggregatedEvent\AddOrderEvent.cs" />
     <Compile Include="AggregatedEvent\DeleteOrderEvent.cs" />
+    <Compile Include="AggregatedEvent\EditCompanyEvent.cs" />
+    <Compile Include="AggregatedEvent\EditCustomerEvent.cs" />
     <Compile Include="AggregatedEvent\EditOrderEvent.cs" />
     <Compile Include="Converters\PriceListConverter.cs" />
     <Compile Include="OrderModule.cs" />

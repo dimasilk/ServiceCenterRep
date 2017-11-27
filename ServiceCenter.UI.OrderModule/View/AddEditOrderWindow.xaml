@@ -79,6 +79,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -99,7 +100,7 @@
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Device:"/>
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Model:"/>
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Manufacturer:"/>
-                <TextBlock Grid.Column="0" Grid.Row="3" Text="SerialNumber"/>
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="SerialNumber:"/>
                 <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Item.Device, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Item.DeviceModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Item.Manufacturer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -122,7 +123,7 @@
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Status:"/>
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Urgently:"/>
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Order recieved:"/>
-                <TextBlock Grid.Column="0" Grid.Row="3" Text="Order ready"/>
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Order ready:"/>
                 <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="StatusValue" SelectedItem="{Binding Path=Item.Status, Mode=TwoWay}"/>
                 <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding Item.Urgently, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DatePicker Grid.Column="1" Grid.Row="2" SelectedDate="{Binding Item.DateRecieved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -150,9 +151,59 @@
                 <TreeView Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=Prices}" ItemTemplate="{StaticResource PriceTemplate}" />
             </Grid>
         </GroupBox>
+        
+        <GroupBox Grid.Column="0" Grid.Row="2" Header="Customer Info">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Full name:"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Phone:"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Info:"/>
+                <TextBox IsEnabled="False"  Grid.Column="1" Grid.Row="0" Text="{Binding Item.Customer.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox IsEnabled="False"  Grid.Column="1" Grid.Row="1" Text="{Binding Item.Customer.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox IsEnabled="False"  Grid.Column="1" Grid.Row="2" Text="{Binding Item.Customer.Info, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Grid.Column="2" Grid.Row="0" ToolTip="Edit customer" Command="{Binding EditCustomerCommand}" CommandParameter="{Binding Item.Customer}">
+                    <Path Data="{StaticResource editStyle0}"/>
+                </Button>
+                    
+            </Grid>
+           
+    </GroupBox>
 
+        <GroupBox Grid.Column="1" Grid.Row="2" Header="Company Info">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Full name:"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Phone:"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Info:"/>
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Order ready"/>
+                <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="0" Text="{Binding Item.Company.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="1" Text="{Binding Item.Company.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="2" Text="{Binding Item.Company.Info, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="3" Text="{Binding Item.Company.Adress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+        </GroupBox>
 
-        <Grid Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right">
+        <Grid Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right">
             <Grid.RowDefinitions >
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>

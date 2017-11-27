@@ -3,10 +3,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.PubSubEvents;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.UI.Infrastructure.Interfaces;
 using ServiceCenter.UI.Infrastructure.ViewModel;
+using ServiceCenter.UI.OrderModule.AggregatedEvent;
 
 
 namespace ServiceCenter.UI.OrderModule.ViewModel
@@ -15,6 +17,9 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
     {
         public ICommand DoubleClickOnPriceItemCommand { get; set; }
         public ICommand DoubleClickOnSelectedPriceItemCommand { get; set; }
+        public ICommand EditCustomerCommand { get; set; }
+        public ICommand EditCompanyCommand { get; set; }
+
 
         public OrderDTO Item { get; set; }
 
@@ -33,13 +38,16 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             get { return _prices; }
             set { SetProperty(ref _prices, value); }
         }
-        public AddEditOrderWindowViewModel(OrderDTO item, IWcfOrderService serviceClient, IUserIdService userIdService)
+        public AddEditOrderWindowViewModel(OrderDTO item, IWcfOrderService serviceClient, IUserIdService userIdService, IEventAggregator eventAggregator)
         {
             Item = item ?? new OrderDTO();
             _serviceClient = serviceClient;
             _userIdService = userIdService;
+            _eventAggregator = eventAggregator;
             DoubleClickOnPriceItemCommand = new DelegateCommand<PriceListViewModel>(DoubleClickOnPriceItem);
             DoubleClickOnSelectedPriceItemCommand = new DelegateCommand<PricelistDTO>(DoubleClickOnSelectedPriceItem);
+            EditCustomerCommand = new DelegateCommand<CustomerDTO>(EditCustomer);
+            EditCompanyCommand = new DelegateCommand<CompanyDTO>(EditCompany);
 
             _selectedPricelistItems = new ObservableCollection<PricelistDTO>();
             GetPrices();
@@ -48,6 +56,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
         private readonly IWcfOrderService _serviceClient;
         private readonly IUserIdService _userIdService;
+        private readonly IEventAggregator _eventAggregator;
         private ObservableCollection<PricelistDTO> _selectedPricelistItems;
         private OrderStatusDTO[] _statuses;
         private PriceListTreeViewModel _prices;
@@ -85,6 +94,16 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         {
             _selectedPricelistItems.Remove(pricelistDto);
             Item.PricelistItems = _selectedPricelistItems.ToArray();
+        }
+
+        public void EditCustomer(CustomerDTO customerDto)
+        {
+            _eventAggregator.GetEvent<EditCustomerEvent>().Publish(null);
+        }
+
+        public void EditCompany(CompanyDTO companyDto)
+        {
+            _eventAggregator.GetEvent<EditCompanyEvent>().Publish(null);
         }
     }
 }

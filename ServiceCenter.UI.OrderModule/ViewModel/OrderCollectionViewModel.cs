@@ -81,7 +81,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         {
             if (SelectedItem == null) return;
             OrderDTO result;
-            var dialogResult = _dialogService.ShowDialog<AddEditOrderWindow, OrderDTO>("Add new order", out result, new ParameterOverride("item", SelectedItem.Item));
+            var dialogResult = _dialogService.ShowDialog<AddEditOrderWindow, OrderDTO>("Edit order", out result, new ParameterOverride("item", SelectedItem.Item));
             if (dialogResult.HasValue && dialogResult.Value && result != null)
             {
                 _orderServiceClient.UpdateOrder(result);
