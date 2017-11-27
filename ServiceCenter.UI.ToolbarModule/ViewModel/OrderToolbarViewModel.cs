@@ -2,9 +2,9 @@
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
-using ServiceCenter.UI.OrderModule.AggregatedEvent;
+using ServiceCenter.UI.Infrastructure.AggregatedEvent;
 
-namespace ServiceCenter.UI.OrderModule.ViewModel
+namespace ServiceCenter.UI.ToolbarModule.ViewModel
 {
     public class OrderToolbarViewModel : BindableBase
     {

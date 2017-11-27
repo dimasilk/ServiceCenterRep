@@ -5,8 +5,8 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
+using ServiceCenter.UI.Infrastructure.AggregatedEvent;
 using ServiceCenter.UI.Infrastructure.DialogService;
-using ServiceCenter.UI.OrderModule.AggregatedEvent;
 using ServiceCenter.UI.OrderModule.View;
 
 namespace ServiceCenter.UI.OrderModule.ViewModel

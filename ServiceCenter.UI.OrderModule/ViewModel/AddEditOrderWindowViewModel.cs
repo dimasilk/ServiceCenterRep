@@ -6,9 +6,9 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
+using ServiceCenter.UI.Infrastructure.AggregatedEvent;
 using ServiceCenter.UI.Infrastructure.Interfaces;
 using ServiceCenter.UI.Infrastructure.ViewModel;
-using ServiceCenter.UI.OrderModule.AggregatedEvent;
 
 
 namespace ServiceCenter.UI.OrderModule.ViewModel
@@ -98,12 +98,12 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
         public void EditCustomer(CustomerDTO customerDto)
         {
-            _eventAggregator.GetEvent<EditCustomerEvent>().Publish(null);
+           
         }
 
         public void EditCompany(CompanyDTO companyDto)
         {
-            _eventAggregator.GetEvent<EditCompanyEvent>().Publish(null);
+            
         }
     }
 }

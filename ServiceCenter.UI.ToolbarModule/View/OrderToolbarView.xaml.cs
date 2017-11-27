@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
-using ServiceCenter.UI.OrderModule.ViewModel;
+using ServiceCenter.UI.ToolbarModule.ViewModel;
 
-namespace ServiceCenter.UI.OrderModule.View
+namespace ServiceCenter.UI.ToolbarModule.View
 {
     /// <summary>
     /// Логика взаимодействия для OrderToolbarView.xaml
