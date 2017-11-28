@@ -21,7 +21,7 @@ namespace ServiceCenter.BL.Mappings
             dataModel.StatusId = dto.Status.Id;
             dataModel.DateRecieved = dto.DateRecieved;
             dataModel.DateOrderReady = dto.DateReady;
-            dataModel.ClientId = dto.Customer.Id;
+            if (dto.Customer != null) dataModel.ClientId = dto.Customer.Id;
             dataModel.PricelistOrders.Clear();
             
             foreach (var x in dto.PricelistItems)

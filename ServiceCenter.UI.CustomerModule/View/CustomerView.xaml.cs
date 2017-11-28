@@ -1,15 +1,18 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using ServiceCenter.UI.CustomerModule.ViewModel;
 
 namespace ServiceCenter.UI.CustomerModule.View
 {
     /// <summary>
     /// Логика взаимодействия для CustomerView.xaml
     /// </summary>
-    public partial class CustomerView : UserControl
+    public partial class CustomerView : Window
     {
-        public CustomerView()
+        public CustomerView(AddEditCustomerWindowViewModel windowViewModel)
         {
             InitializeComponent();
+            DataContext = windowViewModel;
         }
     }
 }

@@ -107,6 +107,7 @@
     <Compile Include="CustomerModule.cs" />
     <Compile Include="CustomerServiceClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\AddEditCustomerWindowViewModel.cs" />
     <Compile Include="ViewModel\CustomerCollectionViewModel.cs" />
     <Compile Include="ViewModel\CustomerItemViewModel.cs" />
     <Compile Include="View\CustomerCollectionView.xaml.cs">
