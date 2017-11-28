@@ -2,7 +2,7 @@
 
 namespace ServiceCenter.UI.Infrastructure.AggregatedEvent
 {
-    public class AddOrderEvent : PubSubEvent<object>
+    public class DeleteEntityEvent : PubSubEvent<object>
     {
     }
 }

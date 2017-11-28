@@ -23,17 +23,17 @@ namespace ServiceCenter.UI.ToolbarModule.ViewModel
 
         public void AddClickMethod()
         {
-            _eventAggregator.GetEvent<AddOrderEvent>().Publish(null);
+            _eventAggregator.GetEvent<AddEntityEvent>().Publish(null);
         }
 
         public void EditClickMethod()
         {
-            _eventAggregator.GetEvent<EditOrderEvent>().Publish(null);
+            _eventAggregator.GetEvent<EditEntityEvent>().Publish(null);
         }
 
         public void DeleteClickMethod()
         {
-            _eventAggregator.GetEvent<DeleteOrderEvent>().Publish(null);
+            _eventAggregator.GetEvent<DeleteEntityEvent>().Publish(null);
         }
     }
 }

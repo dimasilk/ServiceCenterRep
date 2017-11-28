@@ -52,7 +52,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
        
 
-        protected override void DeleteOrder(object parametr)
+        protected override void DeleteEntity(object parametr)
         {
             if (SelectedItem == null) return;
 
@@ -61,7 +61,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             GetOrders();
         }
 
-        protected override void AddOrder(object parametr)
+        protected override void AddEntity(object parametr)
         {
             OrderDTO result;
             var dialogResult = _dialogService.ShowDialog<AddEditOrderWindow, OrderDTO>("Add new order", out result);
@@ -73,7 +73,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         }
     
 
-        protected override void EditOrder(object parametr)
+        protected override void EditEntity(object parametr)
         {
             if (SelectedItem == null) return;
             OrderDTO result;
