@@ -106,16 +106,17 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         public void EditCustomer(CustomerDTO customerDto)
         {
             CustomerDTO result;
-            Guid id = new Guid();
             var dialogResult = Item.Customer == null ? _dialogService.ShowDialog<CustomerView, CustomerDTO>("Edit Customer", out result) : _dialogService.ShowDialog<CustomerView, CustomerDTO>("Edit Customer", out result, new ParameterOverride("item", Item.Customer));
             if (!dialogResult.HasValue || !dialogResult.Value || result == null) return;
             if (Item.Customer != null)
                 _customerService.UpdateCustomer(result);
             else
             {
-                id = _customerService.AddCustomer(result);
+                var id = _customerService.AddCustomer(result);
+                Item.Customer = _customerService.GetCustomerById(id);
+                Item.OnPropertyChanged(nameof(Item.Customer));
             }
-            Item.Customer = _customerService.GetCustomerById(id);
+            
         }
 
         public void EditCompany(CompanyDTO companyDto)

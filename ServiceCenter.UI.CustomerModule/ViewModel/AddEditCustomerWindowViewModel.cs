@@ -13,10 +13,10 @@ namespace ServiceCenter.UI.CustomerModule.ViewModel
     {
         private readonly IWcfCustomerService _customerService;
 
-        public AddEditCustomerWindowViewModel(CustomerDTO customerDto, IWcfCustomerService customerService)
+        public AddEditCustomerWindowViewModel(CustomerDTO item, IWcfCustomerService customerService)
         {
             _customerService = customerService;
-            Item = customerDto ?? new CustomerDTO();
+            Item = item ?? new CustomerDTO();
         }
         public CustomerDTO Item { get; set; }
 
