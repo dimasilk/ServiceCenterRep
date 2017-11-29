@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Unity.Wcf.README.txt" />
+    <Content Include="WcfCompanies\WcfCompanyService.svc" />
     <Content Include="WcfCustomers\WcfCustomerService.svc" />
     <Content Include="WcfLogin\WcfLoginService.svc" />
     <Content Include="WcfOrders\WCFOrderService.svc" />
@@ -103,6 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Credentials\PasswordValidator.cs" />
+    <Compile Include="WcfCompanies\WcfCompanyService.svc.cs">
+      <DependentUpon>WcfCompanyService.svc</DependentUpon>
+    </Compile>
     <Compile Include="WcfCustomers\WcfCustomerService.svc.cs">
       <DependentUpon>WcfCustomerService.svc</DependentUpon>
     </Compile>

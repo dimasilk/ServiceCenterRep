@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCenter.UI.Navigation
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCenter.UI.ToolbarModule", "ServiceCenter.UI.ToolbarModule\ServiceCenter.UI.ToolbarModule.csproj", "{B1B13B2A-5FE7-4C11-9677-27B5F2A8C32F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCenter.UI.CompanyModule", "ServiceCenter.UI.CompanyModule\ServiceCenter.UI.CompanyModule.csproj", "{273848CE-177E-4978-926B-C8ADB276644F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{B1B13B2A-5FE7-4C11-9677-27B5F2A8C32F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1B13B2A-5FE7-4C11-9677-27B5F2A8C32F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1B13B2A-5FE7-4C11-9677-27B5F2A8C32F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{273848CE-177E-4978-926B-C8ADB276644F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{273848CE-177E-4978-926B-C8ADB276644F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{273848CE-177E-4978-926B-C8ADB276644F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{273848CE-177E-4978-926B-C8ADB276644F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
