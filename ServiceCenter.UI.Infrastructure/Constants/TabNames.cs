@@ -9,5 +9,7 @@ namespace ServiceCenter.UI.Infrastructure.Constants
         public const string OrdersTab = "Orders";
         [ModuleInfo("CustomerModule")]
         public const string CustomersTab = "Customers";
+        [ModuleInfo("CompanyModule")]
+        public const string CompaniesTab = "Companies";
     }
 }

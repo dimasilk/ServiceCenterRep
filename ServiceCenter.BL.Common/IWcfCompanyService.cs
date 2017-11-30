@@ -16,7 +16,7 @@ namespace ServiceCenter.BL.Common
         [OperationContract]
         void DeleteCompany(Guid companyId);
         [OperationContract]
-        void UpdateCustomer(CompanyDTO company);
+        void UpdateCompany(CompanyDTO company);
         [OperationContract]
         Guid AddCompany(CompanyDTO company);
         [OperationContract]

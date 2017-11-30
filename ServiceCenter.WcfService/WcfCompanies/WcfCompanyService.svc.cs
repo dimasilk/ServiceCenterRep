@@ -32,7 +32,7 @@ namespace ServiceCenter.WcfService.WcfCompanies
             _companyService.DeleteCompany(companyId);
         }
 
-        public void UpdateCustomer(CompanyDTO company)
+        public void UpdateCompany(CompanyDTO company)
         {
             _companyService.UpdateCompany(company);
         }

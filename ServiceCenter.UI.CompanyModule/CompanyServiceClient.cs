@@ -22,9 +22,9 @@ namespace ServiceCenter.UI.CompanyModule
             Channel.DeleteCompany(companyId);
         }
 
-        public void UpdateCustomer(CompanyDTO company)
+        public void UpdateCompany(CompanyDTO company)
         {
-            Channel.UpdateCustomer(company);
+            Channel.UpdateCompany(company);
         }
 
         public Guid AddCompany(CompanyDTO company)

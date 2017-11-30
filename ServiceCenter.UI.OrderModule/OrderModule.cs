@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 using ServiceCenter.BL.Common;
+using ServiceCenter.UI.CompanyModule;
 using ServiceCenter.UI.CustomerModule;
 using ServiceCenter.UI.Infrastructure.Constants;
 using ServiceCenter.UI.OrderModule.View;
@@ -20,6 +21,7 @@ namespace ServiceCenter.UI.OrderModule
            // _container.RegisterType<OrderCollectionViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IWcfOrderService, OrderServiceClient>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IWcfCustomerService, CustomerServiceClient>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IWcfCompanyService, CompanyServiceClient>(new ContainerControlledLifetimeManager());
             _container.RegisterType<object, OrderView>(TabNames.OrdersTab);
         }
     }

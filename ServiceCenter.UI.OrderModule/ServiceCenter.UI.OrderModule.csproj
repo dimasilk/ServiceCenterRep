@@ -99,6 +99,10 @@
       <Project>{A673D6D6-7787-4510-8565-B1711202BF4B}</Project>
       <Name>ServiceCenter.BL.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServiceCenter.UI.CompanyModule\ServiceCenter.UI.CompanyModule.csproj">
+      <Project>{273848CE-177E-4978-926B-C8ADB276644F}</Project>
+      <Name>ServiceCenter.UI.CompanyModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceCenter.UI.CustomerModule\ServiceCenter.UI.CustomerModule.csproj">
       <Project>{DC5C3439-CF49-4C1F-8B86-6EDB1EDB5E58}</Project>
       <Name>ServiceCenter.UI.CustomerModule</Name>

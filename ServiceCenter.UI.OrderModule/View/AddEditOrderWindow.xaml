@@ -187,7 +187,7 @@
     </GroupBox>
 
         <GroupBox Grid.Column="1" Grid.Row="2" Header="Company Info">
-            <Grid >
+            <Grid  DataContext="{Binding  Item.Company}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -203,10 +203,13 @@
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Phone:"/>
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Info:"/>
                 <TextBlock Grid.Column="0" Grid.Row="3" Text="Order ready"/>
-                <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="0" Text="{Binding Item.Company.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="1" Text="{Binding Item.Company.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="2" Text="{Binding Item.Company.Info, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="3" Text="{Binding Item.Company.Adress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="0" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="1" Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="2" Text="{Binding Info, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="3" Text="{Binding Adress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Grid.Column="2" Grid.Row="0" ToolTip="Edit customer" Command="{Binding RelativeSource={RelativeSource AncestorType=GroupBox}, Path = DataContext.EditCompanyCommand}" CommandParameter="{Binding}">
+                    <Path Data="{StaticResource editStyle0}"/>
+                </Button>
             </Grid>
         </GroupBox>
 

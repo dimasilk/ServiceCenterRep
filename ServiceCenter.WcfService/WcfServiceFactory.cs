@@ -9,6 +9,7 @@ using ServiceCenter.BL.Interfaces;
 using ServiceCenter.BL.OrderService;
 using ServiceCenter.BL.UserService;
 using ServiceCenter.BL.CustomerService;
+using ServiceCenter.WcfService.WcfCompanies;
 using ServiceCenter.WcfService.WcfCustomers;
 using ServiceCenter.WcfService.WcfLogin;
 using ServiceCenter.WcfService.WcfOrders;
@@ -35,6 +36,7 @@ namespace ServiceCenter.WcfService
             container.RegisterType<ICompanyService, CompanyService>();
             container.RegisterType<ICustomerService, CustomerService>();
             container.RegisterType<IWcfCustomerService, WcfCustomerService>();
+            container.RegisterType<IWcfCompanyService, WcfCompanyService>();
 
             ServiceLocator.SetLocatorProvider(() => new UnityServiceLocator(container));
 
