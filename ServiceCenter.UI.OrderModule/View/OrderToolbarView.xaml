@@ -55,5 +55,15 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </CheckBox>
+            <TextBlock Text="SerialNumber:"/>
+            <TextBox Text="{Binding Path=ViewModel.Filter.SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger  EventName="TextChanged">
+                    <i:InvokeCommandAction Command="{Binding Path=ViewModel.FilterChangedCommand, Mode=OneWay}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+            
+        
     </StackPanel>
 </UserControl>

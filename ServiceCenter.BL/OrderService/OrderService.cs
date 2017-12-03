@@ -28,6 +28,8 @@ namespace ServiceCenter.BL.OrderService
             if (filter.Status != null) query = query.Where(x => x.StatusId == filter.Status.Id);
             if (filter.Urgently) query = query.Where(x => x.Urgently);
             if (filter.Customer != null) query = query.Where(x => x.ClientId == filter.Customer.Id);
+            if (!string.IsNullOrEmpty(filter.SerialNumber))
+                query = query.Where(x => x.SerialNumber.Contains(filter.SerialNumber));
             return query.Select(OrderMapper.SelectExpression).ToArray();
         }
 
