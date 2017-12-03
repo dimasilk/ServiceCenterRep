@@ -38,21 +38,19 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
         private async void GetOrders()
         {
-            //_isBusy = true;
+            IsBusy = true;
            //async
             var c = await _orderServiceClient.GetAllOrders();
             OrdersCollection = new ObservableCollection<OrderItemViewModel>(c.Select(x => new OrderItemViewModel(x)));
 
-            //sync
-            //OrdersCollection = new ObservableCollection<OrderItemViewModel>(_orderServiceClient.GetAllOrders().Result.Select(x => new OrderItemViewModel(x)));
-           // _isBusy = false;
+            IsBusy = false;
         }
 
        
 
         protected override void DeleteEntity(object parametr)
         {
-            if (SelectedItem == null) return;
+            if (SelectedItem == null || IsBusy) return;
 
             var id = SelectedItem.Item.Id;
             _orderServiceClient.DeleteOrder(id);
@@ -61,6 +59,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
         protected override void AddEntity(object parametr)
         {
+            if (IsBusy) return;
             OrderDTO result;
             var dialogResult = _dialogService.ShowDialog<AddEditOrderWindow, OrderDTO>("Add new order", out result);
             if (dialogResult.HasValue && dialogResult.Value && result != null)
@@ -73,7 +72,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
         protected override void EditEntity(object parametr)
         {
-            if (SelectedItem == null) return;
+            if (SelectedItem == null || IsBusy) return;
             OrderDTO result;
             var dialogResult = _dialogService.ShowDialog<AddEditOrderWindow, OrderDTO>("Edit order", out result, new ParameterOverride("item", SelectedItem.Item));
             if (dialogResult.HasValue && dialogResult.Value && result != null)

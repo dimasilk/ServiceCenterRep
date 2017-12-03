@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using ServiceCenter.UI.Infrastructure.Interfaces;
 
 namespace ServiceCenter.UI.Infrastructure
@@ -23,7 +24,12 @@ namespace ServiceCenter.UI.Infrastructure
         }
 
         protected T Channel => _lazyChannel.Value;
-       
+
+        protected Task<T> AsyncChannel
+        {
+            get { return _lazyChannel.IsValueCreated ? Task.FromResult(Channel) : Task<T>.Factory.StartNew(() => Channel); }
+        }
+
         public void Dispose()
         {
             if (!_lazyChannel.IsValueCreated) return;

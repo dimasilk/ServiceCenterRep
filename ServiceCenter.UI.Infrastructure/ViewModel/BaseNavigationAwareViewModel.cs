@@ -5,7 +5,7 @@ using ServiceCenter.UI.Infrastructure.AggregatedEvent;
 
 namespace ServiceCenter.UI.Infrastructure.ViewModel
 {
-    public abstract class BaseNavigationAwareViewModel : BindableBase, INavigationAware
+    public abstract class BaseNavigationAwareViewModel : BaseViewModel, INavigationAware
     {
         private readonly DeleteEntityEvent _delete;
         private readonly EditEntityEvent _edit;

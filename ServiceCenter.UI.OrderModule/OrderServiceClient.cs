@@ -11,7 +11,9 @@ namespace ServiceCenter.UI.OrderModule
     {
         public Task<OrderDTO[]> GetAllOrders()
         {
-            return Channel.GetAllOrders();
+            //return Channel.GetAllOrders();
+            
+            return AsyncChannel.ContinueWith(x => x.Result.GetAllOrders()).Unwrap();
         }
 
         public void UpdateOrder(OrderDTO orderModel)
