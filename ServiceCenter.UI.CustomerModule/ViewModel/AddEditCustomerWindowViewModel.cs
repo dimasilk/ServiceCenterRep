@@ -22,6 +22,7 @@ namespace ServiceCenter.UI.CustomerModule.ViewModel
             _customerService = customerService;
             Item = item ?? new CustomerDTO();
             SearchCustomerCommand = new DelegateCommand(Search);
+            DoubleClickOnCustomerCommand = new DelegateCommand<CustomerItemViewModel>(DoubleClickOnCustomer);
         }
         public CustomerDTO Item { get; set; }
 
@@ -31,6 +32,7 @@ namespace ServiceCenter.UI.CustomerModule.ViewModel
             set { SetProperty(ref _customersFilteredCollection, value); }
         }
         public ICommand SearchCustomerCommand { get; set; }
+        public ICommand DoubleClickOnCustomerCommand { get; set; }
 
 
         public override void OkClick(object o)
@@ -40,11 +42,19 @@ namespace ServiceCenter.UI.CustomerModule.ViewModel
             base.OkClick(o);
         }
 
-        public void Search()
+        public async void Search()
         {
-            var c = _customerService.GetAllCustomers().Result;
+            if (Item.Id != Guid.Empty) return;
+            CustomerFilterDTO filter = new CustomerFilterDTO {FullName = Item.FullName, Info = Item.Info, Phone = Item.Phone};
+            var c = await _customerService.GetCustomersByFilter(filter);
             CustomerFilteredCollection =
                 new ObservableCollection<CustomerItemViewModel>(c.Select(x => new CustomerItemViewModel(x)));
+        }
+
+        public void DoubleClickOnCustomer(CustomerItemViewModel itemViewModel)
+        {
+            Item = itemViewModel.Item;
+            OkClick(Item);
         }
     }
 }

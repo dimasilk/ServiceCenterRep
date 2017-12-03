@@ -6,6 +6,7 @@ namespace ServiceCenter.BL.Interfaces
     public interface ICustomerService
     {
         CustomerDTO[] GetAllCustomers();
+        CustomerDTO[] GetCustomersByFilter(CustomerFilterDTO filter);
         void DeleteCustomer(Guid clientId);
         void UpdateCustomer(CustomerDTO client);
         Guid AddCustomer(CustomerDTO client);

@@ -14,6 +14,11 @@ namespace ServiceCenter.UI.CustomerModule
             return Channel.GetAllCustomers();
         }
 
+        public Task<CustomerDTO[]> GetCustomersByFilter(CustomerFilterDTO filter)
+        {
+            return Channel.GetCustomersByFilter(filter);
+        }
+
         public void DeleteCustomer(Guid clientId)
         {
             Channel.DeleteCustomer(clientId);

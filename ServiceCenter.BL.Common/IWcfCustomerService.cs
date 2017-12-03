@@ -13,6 +13,8 @@ namespace ServiceCenter.BL.Common
         [OperationContract]
         Task<CustomerDTO[]> GetAllCustomers();
         [OperationContract]
+        Task<CustomerDTO[]> GetCustomersByFilter(CustomerFilterDTO filter);
+        [OperationContract]
         void DeleteCustomer(Guid clientId);
         [OperationContract]
         void UpdateCustomer(CustomerDTO client);

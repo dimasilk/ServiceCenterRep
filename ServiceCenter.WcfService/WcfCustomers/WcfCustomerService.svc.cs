@@ -27,6 +27,12 @@ namespace ServiceCenter.WcfService.WcfCustomers
             return await task.ConfigureAwait(false);
         }
 
+        public async Task<CustomerDTO[]> GetCustomersByFilter(CustomerFilterDTO filter)
+        {
+            var task = Task.Factory.StartNew(() => _customerService.GetCustomersByFilter(filter));
+            return await task.ConfigureAwait(false);
+        }
+
         public void DeleteCustomer(Guid clientId)
         {
             _customerService.DeleteCustomer(clientId);
