@@ -78,9 +78,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToolbarModule.cs" />
-    <Compile Include="ViewModel\OrderToolbarViewModel.cs" />
-    <Compile Include="View\OrderToolbarView.xaml.cs">
-      <DependentUpon>OrderToolbarView.xaml</DependentUpon>
+    <Compile Include="ViewModel\CommonToolbarViewModel.cs" />
+    <Compile Include="View\CommonToolbarView.xaml.cs">
+      <DependentUpon>CommonToolbarView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -88,7 +88,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Page Include="View\OrderToolbarView.xaml">
+    <Page Include="View\CommonToolbarView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

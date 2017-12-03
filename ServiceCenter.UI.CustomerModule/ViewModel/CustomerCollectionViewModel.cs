@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Prism.PubSubEvents;
+using Microsoft.Practices.Prism.Regions;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.UI.CustomerModule.View;
@@ -17,7 +18,7 @@ namespace ServiceCenter.UI.CustomerModule.ViewModel
         private ObservableCollection<CustomerItemViewModel> _customersCollection;
 
         public CustomerCollectionViewModel(IWcfCustomerService serviceClient, IEventAggregator eventAggregator,
-            IDialogService dialogService) : base(eventAggregator)
+            IDialogService dialogService, IRegionManager regionManager) : base(eventAggregator, regionManager)
         {
             _serviceClient = serviceClient;
             _dialogService = dialogService;

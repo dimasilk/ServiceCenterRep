@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ServiceCenter.UI.ToolbarModule.View.OrderToolbarView"
+﻿<UserControl x:Class="ServiceCenter.UI.ToolbarModule.View.CommonToolbarView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

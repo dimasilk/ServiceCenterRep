@@ -12,6 +12,8 @@ namespace ServiceCenter.BL.Common
         [OperationContract]
         Task<OrderDTO[]> GetAllOrders();
         [OperationContract]
+        Task<OrderDTO[]> GetOrdersByFilter(OrderFilterDTO filter);
+        [OperationContract]
         OrderDTO[] GetOrdersByUserId(Guid userId);
         [OperationContract]
         OrderDTO GetOrderById(Guid orderId);

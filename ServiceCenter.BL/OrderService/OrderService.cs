@@ -22,6 +22,15 @@ namespace ServiceCenter.BL.OrderService
             return _context.Orders.AsExpandable().Select(OrderMapper.SelectExpression).ToArray();
         }
 
+        public OrderDTO[] GetOrdersByFilter(OrderFilterDTO filter)
+        {
+            var query = _context.Orders.AsExpandable();
+            if (filter.Status != null) query = query.Where(x => x.StatusId == filter.Status.Id);
+            if (filter.Urgently) query = query.Where(x => x.Urgently);
+            if (filter.Customer != null) query = query.Where(x => x.ClientId == filter.Customer.Id);
+            return query.Select(OrderMapper.SelectExpression).ToArray();
+        }
+
         public OrderDTO[] GetOrdersByUserId(Guid userId)
         {
             /*  using (var context = new ServiceCenterContext())

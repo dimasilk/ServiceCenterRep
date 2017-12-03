@@ -6,11 +6,11 @@ using ServiceCenter.UI.Infrastructure.AggregatedEvent;
 
 namespace ServiceCenter.UI.ToolbarModule.ViewModel
 {
-    public class OrderToolbarViewModel : BindableBase
+    public class CommonToolbarViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
 
-        public OrderToolbarViewModel(IEventAggregator eventAggregator)
+        public CommonToolbarViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             DeleteClick = new DelegateCommand(DeleteClickMethod);

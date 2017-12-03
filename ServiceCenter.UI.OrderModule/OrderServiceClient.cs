@@ -16,6 +16,11 @@ namespace ServiceCenter.UI.OrderModule
             return AsyncChannel.ContinueWith(x => x.Result.GetAllOrders()).Unwrap();
         }
 
+        public Task<OrderDTO[]> GetOrdersByFilter(OrderFilterDTO filter)
+        {
+            return AsyncChannel.ContinueWith(x => x.Result.GetOrdersByFilter(filter)).Unwrap();
+        }
+
         public void UpdateOrder(OrderDTO orderModel)
         {
             Channel.UpdateOrder(orderModel);
@@ -28,7 +33,8 @@ namespace ServiceCenter.UI.OrderModule
 
         public Task<OrderStatusDTO[]> GetOrderStatuses()
         {           
-            return Channel.GetOrderStatuses();
+           // return Channel.GetOrderStatuses();
+            return AsyncChannel.ContinueWith(x => x.Result.GetOrderStatuses()).Unwrap();
         }
 
         public Task<PricelistDTO[]> GetFullPriceList()

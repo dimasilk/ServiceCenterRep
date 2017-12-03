@@ -29,6 +29,12 @@ namespace ServiceCenter.WcfService.WcfOrders
             return await task.ConfigureAwait(false);
         }
 
+        public async Task<OrderDTO[]> GetOrdersByFilter(OrderFilterDTO filter)
+        {
+            var task = Task.Factory.StartNew(() => _orderService.GetOrdersByFilter(filter));
+            return await task.ConfigureAwait(false);
+        }
+
         public async Task<PricelistDTO[]> GetFullPriceList()
         {
             var task = Task.Factory.StartNew(_priceListService.GetFullPriceList);

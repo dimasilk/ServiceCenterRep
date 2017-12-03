@@ -68,6 +68,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -85,10 +86,14 @@
     <Compile Include="ViewModel\AddEditOrderWindowViewModel.cs" />
     <Compile Include="ViewModel\OrderCollectionViewModel.cs" />
     <Compile Include="ViewModel\OrderItemViewModel.cs" />
+    <Compile Include="ViewModel\OrderToolbarViewModel.cs" />
     <Compile Include="ViewModel\PriceListTreeViewModel.cs" />
     <Compile Include="ViewModel\PriceListViewModel.cs" />
     <Compile Include="View\AddEditOrderWindow.xaml.cs">
       <DependentUpon>AddEditOrderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OrderToolbarView.xaml.cs">
+      <DependentUpon>OrderToolbarView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OrderView.xaml.cs">
       <DependentUpon>OrderView.xaml</DependentUpon>
@@ -118,6 +123,10 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="View\AddEditOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OrderToolbarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

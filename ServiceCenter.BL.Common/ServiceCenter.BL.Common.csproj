@@ -44,6 +44,7 @@
     <Compile Include="DTO\CustomerDTO.cs" />
     <Compile Include="DTO\CompanyDTO.cs" />
     <Compile Include="DTO\OrderDTO.cs" />
+    <Compile Include="DTO\OrderFilterDTO.cs" />
     <Compile Include="DTO\OrderStatusDTO.cs" />
     <Compile Include="DTO\PricelistDTO.cs" />
     <Compile Include="IWcfCompanyService.cs" />

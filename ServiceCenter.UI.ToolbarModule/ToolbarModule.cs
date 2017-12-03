@@ -20,8 +20,8 @@ namespace ServiceCenter.UI.ToolbarModule
 
         public void Initialize()
         {
-            _container.RegisterType<OrderToolbarViewModel>(new ContainerControlledLifetimeManager());
-            _regionManager.RegisterViewWithRegion(RegionNames.MenuRegion, typeof(OrderToolbarView));
+            _container.RegisterType<CommonToolbarViewModel>(new ContainerControlledLifetimeManager());
+            _regionManager.RegisterViewWithRegion(RegionNames.MenuRegion, typeof(CommonToolbarView));
         }
     }
 }

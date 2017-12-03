@@ -6,9 +6,9 @@ namespace ServiceCenter.UI.ToolbarModule.View
     /// <summary>
     /// Логика взаимодействия для OrderToolbarView.xaml
     /// </summary>
-    public partial class OrderToolbarView : UserControl
+    public partial class CommonToolbarView : UserControl
     {
-        public OrderToolbarView(OrderToolbarViewModel toolbarViewModel)
+        public CommonToolbarView(CommonToolbarViewModel toolbarViewModel)
         {
             InitializeComponent();
             DataContext = toolbarViewModel;
