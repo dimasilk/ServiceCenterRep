@@ -23,6 +23,12 @@
                         <GridViewColumn Header="Urgently" DisplayMemberBinding = "{Binding Path=Item.Urgently}"></GridViewColumn>
                         <GridViewColumn Header="Status" DisplayMemberBinding = "{Binding Path=Item.Status.StatusValue}"></GridViewColumn>
                         <GridViewColumn Header="Work" DisplayMemberBinding = "{Binding Path=Item.PricelistItems, Converter={StaticResource myPriceListConverter}}"/>
+                        <GridViewColumn Header="Order amount" DisplayMemberBinding = "{Binding Path=Item.OrderAmount}"></GridViewColumn>
+                        <GridViewColumn Header="Price coefficient" DisplayMemberBinding = "{Binding Path=Item.PriceCoefficient}"></GridViewColumn>
+                        <GridViewColumn Header="Customer" DisplayMemberBinding = "{Binding Path=Item.Customer.FullName}"></GridViewColumn>
+                        <GridViewColumn Header="Customer phone" DisplayMemberBinding = "{Binding Path=Item.Customer.Phone}"></GridViewColumn>
+                        <GridViewColumn Header="Company" DisplayMemberBinding = "{Binding Path=Item.Company.Name}"></GridViewColumn>
+                        <GridViewColumn Header="Company phone" DisplayMemberBinding = "{Binding Path=Item.Company.Phone}"></GridViewColumn>
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
