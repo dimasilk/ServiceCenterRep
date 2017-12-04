@@ -23,6 +23,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         public ICommand DoubleClickOnSelectedPriceItemCommand { get; set; }
         public ICommand EditCustomerCommand { get; set; }
         public ICommand EditCompanyCommand { get; set; }
+        public ICommand PriceParameterChangedCommand { get; set; }
 
 
         public OrderDTO Item { get; set; }
@@ -42,8 +43,25 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             get { return _prices; }
             set { SetProperty(ref _prices, value); }
         }
+        public double OrderSum {
+            get { return _orderSum; }
+            set { SetProperty(ref _orderSum, value); }
+        }
+        public double Coeff
+        {
+            get { return _coeff; }
+            set { SetProperty(ref _coeff, value); }
+        }
+        public double OrderAmount
+        {
+            get { return _orderAmount; }
+            set { SetProperty(ref _orderAmount, value); }
+        }
         public AddEditOrderWindowViewModel(OrderDTO item, IWcfOrderService serviceClient, IUserIdService userIdService, IEventAggregator eventAggregator, IDialogService dialogService, IWcfCustomerService customerService, IWcfCompanyService companyService)
         {
+            Coeff = 1;
+            OrderAmount = 0;
+            OrderSum = 0;
             Item = item ?? new OrderDTO();
             _serviceClient = serviceClient;
             _userIdService = userIdService;
@@ -55,6 +73,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             DoubleClickOnSelectedPriceItemCommand = new DelegateCommand<PricelistDTO>(DoubleClickOnSelectedPriceItem);
             EditCustomerCommand = new DelegateCommand<CustomerDTO>(EditCustomer);
             EditCompanyCommand = new DelegateCommand<CompanyDTO>(EditCompany);
+            PriceParameterChangedCommand = new DelegateCommand(PriceParameterChanged);
 
             _selectedPricelistItems = new ObservableCollection<PricelistDTO>();
             GetPrices();
@@ -70,6 +89,9 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         private ObservableCollection<PricelistDTO> _selectedPricelistItems;
         private OrderStatusDTO[] _statuses;
         private PriceListTreeViewModel _prices;
+        private double _coeff;
+        private double _orderSum;
+        private double _orderAmount;
         
 
 
@@ -99,11 +121,16 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             if (_selectedPricelistItems.Select(x => x.Id).Contains(priceListViewModel.PricelistDto.Id)) return;
             _selectedPricelistItems.Add(priceListViewModel.PricelistDto);
             Item.PricelistItems = _selectedPricelistItems.ToArray();
+            if (priceListViewModel.PricelistDto.Price != null)
+                OrderSum += (double) priceListViewModel.PricelistDto.Price;
+            CountOrderAmount();
         }
         public void DoubleClickOnSelectedPriceItem(PricelistDTO pricelistDto)
         {
             _selectedPricelistItems.Remove(pricelistDto);
             Item.PricelistItems = _selectedPricelistItems.ToArray();
+            if (pricelistDto.Price != null) OrderSum -= (double) pricelistDto.Price;
+            CountOrderAmount();
         }
 
         public void EditCustomer(CustomerDTO customerDto)
@@ -135,6 +162,18 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
                 Item.Company = _companyService.GetCompanyById(id);
                 Item.OnPropertyChanged(nameof(Item.Company));
             }
+        }
+
+        public void PriceParameterChanged()
+        {
+            CountOrderAmount();
+        }
+
+        private void CountOrderAmount()
+        {
+            OrderAmount = OrderSum * Coeff;
+            Item.OrderAmount = OrderAmount;
+            Item.PriceCoefficient = Coeff;
         }
     }
 }

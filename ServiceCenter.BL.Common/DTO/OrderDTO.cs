@@ -44,6 +44,10 @@ namespace ServiceCenter.BL.Common.DTO
         [DataMember]
         public CompanyDTO Company { get; set; }
         [DataMember]
+        public double? OrderAmount { get; set; }
+        [DataMember]
+        public double? PriceCoefficient { get; set; }
+        [DataMember]
         public ICollection<PricelistDTO> PricelistItems { get; set; } = new PricelistDTO[0];
 
 
