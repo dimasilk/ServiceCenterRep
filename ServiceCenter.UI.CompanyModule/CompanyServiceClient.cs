@@ -17,6 +17,11 @@ namespace ServiceCenter.UI.CompanyModule
             return Channel.GetAllCompanies();
         }
 
+        public Task<CompanyDTO[]> GetCompaniesByFilter(CompanyFilterDTO filter)
+        {
+            return Channel.GetCompaniesByFilter(filter);
+        }
+
         public void DeleteCompany(Guid companyId)
         {
             Channel.DeleteCompany(companyId);

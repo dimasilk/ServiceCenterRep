@@ -14,6 +14,8 @@ namespace ServiceCenter.BL.Common
         [OperationContract]
         Task<CompanyDTO[]> GetAllCompanies();
         [OperationContract]
+        Task<CompanyDTO[]> GetCompaniesByFilter(CompanyFilterDTO filter);
+        [OperationContract]
         void DeleteCompany(Guid companyId);
         [OperationContract]
         void UpdateCompany(CompanyDTO company);

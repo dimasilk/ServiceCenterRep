@@ -24,6 +24,17 @@ namespace ServiceCenter.BL.CustomerService
             return dataModel.Id;
         }
 
+        public CompanyDTO[] GetCompaniesByFilter(CompanyFilterDTO filter)
+        {
+            var query = _context.Companies.AsExpandable();
+            if (!string.IsNullOrEmpty(filter.Name)) query = query.Where(x => x.Name.Contains(filter.Name));
+            if (!string.IsNullOrEmpty(filter.Info)) query = query.Where(x => x.Info.Contains(filter.Info));
+            if (!string.IsNullOrEmpty(filter.Phone)) query = query.Where(x => x.Phone.Contains(filter.Phone));
+            if (!string.IsNullOrEmpty(filter.Adress)) query = query.Where(x => x.Adress.Contains(filter.Adress));
+
+            return query.Select(CompanyMapper.SelectExpression).ToArray();
+        }
+
         public void DeleteCompany(Guid companyId)
         {
             var c = _context.Companies.AsExpandable().FirstOrDefault(x => x.Id == companyId);

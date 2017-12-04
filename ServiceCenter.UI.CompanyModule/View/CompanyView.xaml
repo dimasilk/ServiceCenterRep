@@ -4,13 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:behaviors="clr-namespace:ServiceCenter.UI.Infrastructure.Behaviors;assembly=ServiceCenter.UI.Infrastructure"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 
              behaviors:DialogWindowBehavior.DialogResult="{Binding DialogResult}" behaviors:DialogWindowBehavior.DialogResultData="{Binding DialogResultData}"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+
+    <Window.Resources>
+        <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+            <Setter Property="behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommand" Value="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.DoubleClickOnCompanyCommand}"/>
+            <Setter Property="behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommandParameter" Value="{Binding}"/>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -32,12 +42,56 @@
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Company adress:"/>
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Company info:"/>
                 <TextBlock Grid.Column="0" Grid.Row="3" Text="Contact phone:"/>
-                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Adress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Info, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger  EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding RelativeSource = {RelativeSource AncestorType=GroupBox}, Path = DataContext.SearchCompanyCommand, Mode=OneWay}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Adress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger  EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding RelativeSource = {RelativeSource AncestorType=GroupBox}, Path = DataContext.SearchCompanyCommand, Mode=OneWay}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Info, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger  EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding RelativeSource = {RelativeSource AncestorType=GroupBox}, Path = DataContext.SearchCompanyCommand, Mode=OneWay}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger  EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding RelativeSource = {RelativeSource AncestorType=GroupBox}, Path = DataContext.SearchCompanyCommand, Mode=OneWay}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
             </Grid>
         </GroupBox>
+
+        <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path=CompanyFilteredCollection}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="None" 
+                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent" SelectionUnit="FullRow">
+                <DataGrid.Columns>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Item.Name}"/>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Item.Phone}"/>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Item.Adress}"/>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Item.Info}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
 
         <Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">
             <Grid.RowDefinitions >

@@ -24,6 +24,7 @@ namespace ServiceCenter.BL.Mappings
             dataModel.OrderAmount = dto.OrderAmount;
             dataModel.PriceCoefficient = dto.PriceCoefficient;
             if (dto.Customer != null) dataModel.ClientId = dto.Customer.Id;
+            if (dto.Company != null) dataModel.CompanyId = dto.Company.Id;
             dataModel.PricelistOrders.Clear();
             
             foreach (var x in dto.PricelistItems)

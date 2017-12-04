@@ -6,6 +6,7 @@ namespace ServiceCenter.BL.Interfaces
     public interface ICompanyService
     {
         CompanyDTO[] GetAllCompanies();
+        CompanyDTO[] GetCompaniesByFilter(CompanyFilterDTO filter);
         void DeleteCompany(Guid companyId);
         void UpdateCompany(CompanyDTO company);
         Guid AddCompany(CompanyDTO company);

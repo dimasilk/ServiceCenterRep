@@ -27,6 +27,12 @@ namespace ServiceCenter.WcfService.WcfCompanies
             return await task.ConfigureAwait(false);
         }
 
+        public async Task<CompanyDTO[]> GetCompaniesByFilter(CompanyFilterDTO filter)
+        {
+            var task = Task.Factory.StartNew(() => _companyService.GetCompaniesByFilter(filter));
+            return await task.ConfigureAwait(false);
+        }
+
         public void DeleteCompany(Guid companyId)
         {
             _companyService.DeleteCompany(companyId);
