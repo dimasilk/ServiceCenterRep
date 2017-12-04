@@ -59,10 +59,15 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         }
         public AddEditOrderWindowViewModel(OrderDTO item, IWcfOrderService serviceClient, IUserIdService userIdService, IEventAggregator eventAggregator, IDialogService dialogService, IWcfCustomerService customerService, IWcfCompanyService companyService)
         {
-            Coeff = 1;
-            OrderAmount = 0;
-            OrderSum = 0;
             Item = item ?? new OrderDTO();
+
+            if (Item.PricelistItems.Count != 0) CountOrderSum();
+            if (Item.PriceCoefficient != null)
+                Coeff = (double)Item.PriceCoefficient;
+            else
+                Coeff = 1;
+            if (Item.OrderAmount != null) OrderAmount = (double)Item.OrderAmount;
+
             _serviceClient = serviceClient;
             _userIdService = userIdService;
             _eventAggregator = eventAggregator;
@@ -174,6 +179,16 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             OrderAmount = OrderSum * Coeff;
             Item.OrderAmount = OrderAmount;
             Item.PriceCoefficient = Coeff;
+        }
+
+        private void CountOrderSum()
+        {
+            double x = 0;
+            foreach (var element in Item.PricelistItems)
+            {
+                if (element.Price != null) x += (double) element.Price;
+            }
+            OrderSum = x;
         }
     }
 }
