@@ -26,6 +26,8 @@ namespace ServiceCenter.Auth.Models
         public Customer Client { get; set; }
         public Guid? CompanyId { get; set; }
         public Company Company { get; set; }
+        public double? OrderAmount { get; set; }
+        public  double? PriceCoefficient { get; set; }
         //public virtual ICollection<Pricelist> Pricelist { get; set; }
         public virtual ICollection<PricelistOrders> PricelistOrders { get; set; }
 

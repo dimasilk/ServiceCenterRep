@@ -21,6 +21,8 @@ namespace ServiceCenter.BL.Mappings
             dataModel.StatusId = dto.Status.Id;
             dataModel.DateRecieved = dto.DateRecieved;
             dataModel.DateOrderReady = dto.DateReady;
+            dataModel.OrderAmount = dto.OrderAmount;
+            dataModel.PriceCoefficient = dto.PriceCoefficient;
             if (dto.Customer != null) dataModel.ClientId = dto.Customer.Id;
             dataModel.PricelistOrders.Clear();
             
@@ -44,6 +46,8 @@ namespace ServiceCenter.BL.Mappings
             SerialNumber = u.SerialNumber,
             Urgently = u.Urgently,
             IdUserCreated = u.IdUserCreated,
+            OrderAmount = u.OrderAmount,
+            PriceCoefficient = u.PriceCoefficient,
             Status = OrderStatusMapper.SelectExpression.Invoke(u.Status),
             PricelistItems =
                 u.PricelistOrders.Select(x => PriceListMapper.SelectExpression.Invoke(x.Pricelist)).ToList(),
