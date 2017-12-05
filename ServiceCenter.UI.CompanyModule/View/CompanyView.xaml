@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:behaviors="clr-namespace:ServiceCenter.UI.Infrastructure.Behaviors;assembly=ServiceCenter.UI.Infrastructure"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+
 
              behaviors:DialogWindowBehavior.DialogResult="{Binding DialogResult}" behaviors:DialogWindowBehavior.DialogResultData="{Binding DialogResultData}"
              mc:Ignorable="d" 
@@ -14,6 +16,18 @@
         <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
             <Setter Property="behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommand" Value="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.DoubleClickOnCompanyCommand}"/>
             <Setter Property="behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommandParameter" Value="{Binding}"/>
+        </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="4,0,4,0"/>
+            <Setter Property="Height" Value="36"/>
+        </Style>
+        <Style TargetType="xctk:MaskedTextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="4,0,4,0"/>
+            <Setter Property="Height" Value="36"/>
         </Style>
     </Window.Resources>
 
@@ -63,13 +77,13 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBox>
-                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <xctk:MaskedTextBox Grid.Column="1" Grid.Row="3" Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Mask="+375 (00) 000-00-00">
                     <i:Interaction.Triggers>
                         <i:EventTrigger  EventName="TextChanged">
                             <i:InvokeCommandAction Command="{Binding RelativeSource = {RelativeSource AncestorType=GroupBox}, Path = DataContext.SearchCompanyCommand, Mode=OneWay}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </TextBox>
+                </xctk:MaskedTextBox>
             </Grid>
         </GroupBox>
 
