@@ -9,7 +9,6 @@ using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.UI.CompanyModule.View;
 using ServiceCenter.UI.CustomerModule.View;
-using ServiceCenter.UI.CustomerModule.ViewModel;
 using ServiceCenter.UI.Infrastructure.DialogService;
 using ServiceCenter.UI.Infrastructure.Interfaces;
 using ServiceCenter.UI.Infrastructure.ViewModel;
@@ -27,6 +26,11 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
 
         public OrderDTO Item { get; set; }
+        public bool IsOkButtonEnabled
+        {
+            get { return _isOkButtonEnabled; }
+            set { SetProperty(ref _isOkButtonEnabled, value); }
+        }
 
         public ObservableCollection<PricelistDTO> SelectedPricelistItems
         {
@@ -97,11 +101,17 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         private double _coeff;
         private double _orderSum;
         private double _orderAmount;
-        
+        private bool _isOkButtonEnabled = true;
 
 
         public override void OkClick(object o)
         {
+            if (Item.Customer == null && Item.Company == null)
+            {
+                IsOkButtonEnabled = false;
+                return;
+            }
+            
             DialogResultData = Item;
             if (Item.IdUserCreated == Guid.Empty) Item.IdUserCreated = _userIdService.GetCreatorId();
             base.OkClick(o);
@@ -151,7 +161,8 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
                 Item.Customer = _customerService.GetCustomerById(id);
                 Item.OnPropertyChanged(nameof(Item.Customer));
             }
-            
+            IsOkButtonEnabled = true;
+
         }
 
         public void EditCompany(CompanyDTO companyDto)
@@ -167,6 +178,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
                 Item.Company = _companyService.GetCompanyById(id);
                 Item.OnPropertyChanged(nameof(Item.Company));
             }
+            IsOkButtonEnabled = true;
         }
 
         public void PriceParameterChanged()
@@ -190,5 +202,6 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             }
             OrderSum = x;
         }
+        
     }
 }

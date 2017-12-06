@@ -4,6 +4,7 @@ using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
 using ServiceCenter.BL.Common;
+using ServiceCenter.UI.Infrastructure.Behaviors;
 using ServiceCenter.UI.Infrastructure.DialogService;
 using ServiceCenter.UI.Infrastructure.Interfaces;
 using ServiceCenter.UI.Shell.Interfaces;
@@ -22,6 +23,7 @@ namespace ServiceCenter.UI.Shell
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
             Application.Current.MainWindow = shell;
             shell.Show();
+            OverrideMetadataBehavior.Override();
             return shell;
         }
 

@@ -88,11 +88,15 @@
     <Compile Include="Attributes\ShowOnStartupAttribute.cs" />
     <Compile Include="Behaviors\LoaderBehavior.cs" />
     <Compile Include="Behaviors\MouseDoubleClickCommandBehaviour.cs" />
+    <Compile Include="Behaviors\OverrideMetadataBehavior.cs" />
     <Compile Include="Constants\TabNames.cs" />
+    <Compile Include="Converters\BooleanOrConverter.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
     <Compile Include="Interfaces\ILoginService.cs" />
     <Compile Include="Interfaces\ITabView.cs" />
     <Compile Include="Interfaces\IUserIdService.cs" />
+    <Compile Include="Validation\PhoneValidationRule.cs" />
+    <Compile Include="Validation\ValidationRuleWithDataContext.cs" />
     <Compile Include="ViewModel\BaseDialogViewModel.cs" />
     <Compile Include="Behaviors\DialogWindowBehavior.cs" />
     <Compile Include="Constants\RegionNames.cs" />

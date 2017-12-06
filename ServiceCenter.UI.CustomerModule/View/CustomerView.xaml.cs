@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using ServiceCenter.UI.CustomerModule.ViewModel;
 
 namespace ServiceCenter.UI.CustomerModule.View

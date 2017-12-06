@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ServiceCenter.BL.Common.DTO;
+﻿using ServiceCenter.BL.Common.DTO;
 
 namespace ServiceCenter.UI.CompanyModule.ViewModel
 {

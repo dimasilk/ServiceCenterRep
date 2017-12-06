@@ -239,7 +239,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Grid.Row="0"  x:Name="OkClickButton" Content="ОК" Command="{Binding OkCommand}"/>
+            <Button Grid.Column="0" Grid.Row="0"  x:Name="OkClickButton" Content="ОК" Command="{Binding OkCommand}" IsEnabled="{Binding IsOkButtonEnabled}"/>
             <Button Grid.Column="1" Grid.Row="0"  x:Name="CancelClickButton" Content="Cancel" Command="{Binding CancelCommand}"/>
         </Grid>
     </Grid>

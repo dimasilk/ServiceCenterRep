@@ -6,6 +6,7 @@
              xmlns:behaviors="clr-namespace:ServiceCenter.UI.Infrastructure.Behaviors;assembly=ServiceCenter.UI.Infrastructure"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+            xmlns:myns="clr-namespace:ServiceCenter.UI.Infrastructure.Validation;assembly=ServiceCenter.UI.Infrastructure"
 
              behaviors:DialogWindowBehavior.DialogResult="{Binding DialogResult}" behaviors:DialogWindowBehavior.DialogResultData="{Binding DialogResultData}"
              mc:Ignorable="d" 
@@ -65,12 +66,22 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </TextBox>
-                <xctk:MaskedTextBox Grid.Column="1" Grid.Row="2" Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Mask="+375 (00) 000-00-00">
+                <xctk:MaskedTextBox Name="PhoneBox" Grid.Column="1" Grid.Row="2"  Mask="+375 (00) 000-00-00" Validation.ErrorTemplate="{StaticResource TextBoxValidationTemplate}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger  EventName="TextChanged">
                             <i:InvokeCommandAction Command="{Binding RelativeSource = {RelativeSource AncestorType=GroupBox}, Path = DataContext.SearchCustomerCommand, Mode=OneWay}"/>
                         </i:EventTrigger>
-                    </i:Interaction.Triggers>
+                    </i:Interaction.Triggers> 
+                    <xctk:MaskedTextBox.Text>
+                        <Binding Path="Phone" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"  NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <myns:PhoneValidationRule ValidatesOnTargetUpdated="True"/>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </xctk:MaskedTextBox.Text>
+                    
+
                 </xctk:MaskedTextBox>
             </Grid>
         </GroupBox>
@@ -103,7 +114,13 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Grid.Row="0"  x:Name="OkClickButton" Content="ОК" Command="{Binding OkCommand}"/>
+            <Button Grid.Column="0" Grid.Row="0"  x:Name="OkClickButton" Content="ОК" Command="{Binding OkCommand}">
+                <Button.IsEnabled>
+                    <MultiBinding Converter="{StaticResource BooleanOrConverter}" ConverterParameter="not">
+                        <Binding ElementName="PhoneBox" Path="(Validation.HasError)"></Binding>
+                    </MultiBinding>
+                </Button.IsEnabled>
+            </Button>
             <Button Grid.Column="1" Grid.Row="0"  x:Name="CancelClickButton" Content="Cancel" Command="{Binding CancelCommand}"/>
         </Grid>
     </Grid>

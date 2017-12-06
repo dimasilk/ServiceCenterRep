@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using System.Windows.Controls;
-using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using ServiceCenter.UI.Infrastructure.AggregatedEvent;
