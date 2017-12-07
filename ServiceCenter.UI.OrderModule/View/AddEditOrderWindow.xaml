@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:ServiceCenter.UI.OrderModule.View"
              xmlns:behaviors="clr-namespace:ServiceCenter.UI.Infrastructure.Behaviors;assembly=ServiceCenter.UI.Infrastructure"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:validation="clr-namespace:ServiceCenter.UI.Infrastructure.Validation;assembly=ServiceCenter.UI.Infrastructure"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="300"
              behaviors:DialogWindowBehavior.DialogResult="{Binding DialogResult}" behaviors:DialogWindowBehavior.DialogResultData="{Binding DialogResultData}"
@@ -108,15 +109,52 @@
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Device:"/>
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Model:"/>
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Manufacturer:"/>
-                <TextBlock Grid.Column="0" Grid.Row="3" Text="SerialNumber:"/>
-                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Item.Device, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Item.DeviceModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Item.Manufacturer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Item.SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Serial number:"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Name="DeviceBox" Validation.ErrorTemplate="{StaticResource TextBoxValidationTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Item.Device" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <validation:RequiredFieldValidationRule Field="Device" ValidatesOnTargetUpdated="True"/>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Grid.Column="1" Grid.Row="1" Name="DeviceModelBox" Validation.ErrorTemplate="{StaticResource TextBoxValidationTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Item.DeviceModel" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <validation:RequiredFieldValidationRule Field="Model" ValidatesOnTargetUpdated="True"/>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Grid.Column="1" Grid.Row="2" Name="ManufacturerBox" Validation.ErrorTemplate="{StaticResource TextBoxValidationTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Item.Manufacturer" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <validation:RequiredFieldValidationRule Field="Manufacturer" ValidatesOnTargetUpdated="True"/>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Grid.Column="1" Grid.Row="3" Name="SerialNumberBox" Validation.ErrorTemplate="{StaticResource TextBoxValidationTemplate}">
+                    <TextBox.Text>
+                        <Binding Path="Item.SerialNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <validation:RequiredFieldValidationRule Field="Serial number" ValidatesOnTargetUpdated="True"/>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Column="1" Grid.Row="0" Header="Order info">
+       
+            <GroupBox Grid.Column="1" Grid.Row="0" Header="Order info">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -151,11 +189,11 @@
                 </Grid.ColumnDefinitions>
                 <DataGrid Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path=SelectedPricelistItems}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="None" 
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent" SelectionUnit="FullRow">
-            <DataGrid.Columns>
-                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Name}"/>
-                <DataGridTextColumn IsReadOnly="True" Binding="{Binding Price}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+                    <DataGrid.Columns>
+                         <DataGridTextColumn IsReadOnly="True" Binding="{Binding Name}"/>
+                         <DataGridTextColumn IsReadOnly="True" Binding="{Binding Price}" Width="*"/>
+                     </DataGrid.Columns>
+                 </DataGrid>
 
                 <TreeView Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=Prices}" ItemTemplate="{StaticResource PriceTemplate}" />
 
@@ -163,7 +201,7 @@
                     <TextBlock Text="Pricelist items sum:"/>
                     <TextBox Text="{Binding Path=OrderSum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
                     <TextBlock Text="Coefficient:"/>
-                    <TextBox Text="{Binding Path=Coeff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox Text="{Binding Path=Coeff, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger  EventName="TextChanged">
                                 <i:InvokeCommandAction Command="{Binding Path=PriceParameterChangedCommand, Mode=OneWay}"/>
@@ -239,7 +277,18 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Grid.Row="0"  x:Name="OkClickButton" Content="ОК" Command="{Binding OkCommand}" IsEnabled="{Binding IsOkButtonEnabled}"/>
+            <Button Grid.Column="0" Grid.Row="0"  x:Name="OkClickButton" Content="ОК" Command="{Binding OkCommand}">
+                <Button.IsEnabled>
+                    <MultiBinding Converter="{StaticResource BooleanOrConverter}" ConverterParameter="not">
+                        <Binding ElementName="DeviceBox" Path="(Validation.HasError)"/>
+                        <Binding ElementName="DeviceModelBox" Path="(Validation.HasError)"/>
+                        <Binding ElementName="ManufacturerBox" Path="(Validation.HasError)"/>
+                        <Binding ElementName="SerialNumberBox" Path="(Validation.HasError)"/>
+                        <Binding Path="IsOkButtonEnabled"></Binding>
+                    </MultiBinding>
+                </Button.IsEnabled>
+            </Button>
+            
             <Button Grid.Column="1" Grid.Row="0"  x:Name="CancelClickButton" Content="Cancel" Command="{Binding CancelCommand}"/>
         </Grid>
     </Grid>

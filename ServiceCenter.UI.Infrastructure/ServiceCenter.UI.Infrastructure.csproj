@@ -96,6 +96,7 @@
     <Compile Include="Interfaces\ITabView.cs" />
     <Compile Include="Interfaces\IUserIdService.cs" />
     <Compile Include="Validation\PhoneValidationRule.cs" />
+    <Compile Include="Validation\RequiredFieldValidationRule.cs" />
     <Compile Include="Validation\ValidationRuleWithDataContext.cs" />
     <Compile Include="ViewModel\BaseDialogViewModel.cs" />
     <Compile Include="Behaviors\DialogWindowBehavior.cs" />
