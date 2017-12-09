@@ -12,16 +12,25 @@ namespace ServiceCenter.UI.CustomerModule.ViewModel
     public class AddEditCustomerWindowViewModel : BaseDialogViewModel
     {
         private readonly IWcfCustomerService _customerService;
+        private readonly IWcfOrderService _orderService;
         private ObservableCollection<CustomerItemViewModel> _customersFilteredCollection;
+        private ObservableCollection<OrderItemViewModel> _ordersFilteredCollection;
 
-        public AddEditCustomerWindowViewModel(CustomerDTO item, IWcfCustomerService customerService)
+        public AddEditCustomerWindowViewModel(CustomerDTO item, IWcfCustomerService customerService, IWcfOrderService orderService)
         {
             _customerService = customerService;
+            _orderService = orderService;
             Item = item ?? new CustomerDTO();
             SearchCustomerCommand = new DelegateCommand(Search);
             DoubleClickOnCustomerCommand = new DelegateCommand<CustomerItemViewModel>(DoubleClickOnCustomer);
+            GetOrdersByCustomer();
         }
         public CustomerDTO Item { get; set; }
+        public ObservableCollection<OrderItemViewModel> OrdersFilteredCollection
+        {
+            get { return _ordersFilteredCollection; }
+            set { SetProperty(ref _ordersFilteredCollection, value); }
+        }
 
         public ObservableCollection<CustomerItemViewModel> CustomerFilteredCollection
         {
@@ -39,10 +48,18 @@ namespace ServiceCenter.UI.CustomerModule.ViewModel
             base.OkClick(o);
         }
 
+        public async void  GetOrdersByCustomer()
+        {
+            if (Item.Id == Guid.Empty) return;
+            var filter = new OrderFilterDTO {Customer = Item};
+            var c = await _orderService.GetOrdersByFilter(filter);
+            OrdersFilteredCollection = new ObservableCollection<OrderItemViewModel>(c.Select(x => new OrderItemViewModel(x)));
+        }
+
         public async void Search()
         {
             if (Item.Id != Guid.Empty) return;
-            CustomerFilterDTO filter = new CustomerFilterDTO {FullName = Item.FullName, Info = Item.Info, Phone = Item.Phone};
+            var filter = new CustomerFilterDTO {FullName = Item.FullName, Info = Item.Info, Phone = Item.Phone};
             var c = await _customerService.GetCustomersByFilter(filter);
             CustomerFilteredCollection =
                 new ObservableCollection<CustomerItemViewModel>(c.Select(x => new CustomerItemViewModel(x)));

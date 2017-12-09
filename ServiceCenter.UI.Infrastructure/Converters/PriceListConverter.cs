@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Data;
 using ServiceCenter.BL.Common.DTO;
 
-namespace ServiceCenter.UI.OrderModule.Converters
+namespace ServiceCenter.UI.Infrastructure.Converters
 {
     public class PriceListConverter : IValueConverter
     {
@@ -13,7 +13,7 @@ namespace ServiceCenter.UI.OrderModule.Converters
         {
             string result = "";
             var collection = (IEnumerable<PricelistDTO>)value;
-            if(collection != null) result = String.Join(", ", collection.Select(x => x.Name));
+            if(collection != null) result = String.Join((string) ", ", (IEnumerable<string>) collection.Select(x => x.Name));
             return result;
         }
 

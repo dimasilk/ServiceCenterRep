@@ -92,6 +92,7 @@
     <Compile Include="Constants\TabNames.cs" />
     <Compile Include="Converters\BooleanOrConverter.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
+    <Compile Include="Converters\PriceListConverter.cs" />
     <Compile Include="Interfaces\ILoginService.cs" />
     <Compile Include="Interfaces\ITabView.cs" />
     <Compile Include="Interfaces\IUserIdService.cs" />
@@ -112,7 +113,12 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceCenter.BL.Common\ServiceCenter.BL.Common.csproj">
+      <Project>{A673D6D6-7787-4510-8565-B1711202BF4B}</Project>
+      <Name>ServiceCenter.BL.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

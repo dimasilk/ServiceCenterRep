@@ -135,6 +135,7 @@
     <Compile Include="ViewModel\AddEditCustomerWindowViewModel.cs" />
     <Compile Include="ViewModel\CustomerCollectionViewModel.cs" />
     <Compile Include="ViewModel\CustomerItemViewModel.cs" />
+    <Compile Include="ViewModel\OrderItemViewModel.cs" />
     <Compile Include="View\CustomerCollectionView.xaml.cs">
       <DependentUpon>CustomerCollectionView.xaml</DependentUpon>
     </Compile>

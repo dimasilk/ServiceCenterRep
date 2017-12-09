@@ -7,6 +7,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
             xmlns:myns="clr-namespace:ServiceCenter.UI.Infrastructure.Validation;assembly=ServiceCenter.UI.Infrastructure"
+        xmlns:converters="clr-namespace:ServiceCenter.UI.Infrastructure.Converters;assembly=ServiceCenter.UI.Infrastructure"
 
              behaviors:DialogWindowBehavior.DialogResult="{Binding DialogResult}" behaviors:DialogWindowBehavior.DialogResultData="{Binding DialogResultData}"
              mc:Ignorable="d" 
@@ -28,10 +29,15 @@
             <Setter Property="Margin" Value="4,0,4,0"/>
             <Setter Property="Height" Value="36"/>
         </Style>
+        
     </Window.Resources>
     <Grid>
+        <Grid.Resources>
+            <converters:PriceListConverter x:Key="myPriceListConverter"   />
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -114,7 +120,28 @@
             </DataGrid>
         </Grid>
 
-        <Grid Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right">
+        <GroupBox  Grid.Column="0" Grid.Row="2" Header="Info about customer's orders">
+            <ListView ItemsSource="{Binding Path=OrdersFilteredCollection}">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Device" DisplayMemberBinding = "{Binding Path=Item.Device}"></GridViewColumn>
+                        <GridViewColumn Header="Manufacturer" DisplayMemberBinding = "{Binding Path=Item.Manufacturer}"></GridViewColumn>
+                        <GridViewColumn Header="DeviceModel" DisplayMemberBinding = "{Binding Path=Item.DeviceModel}"></GridViewColumn>
+                        <GridViewColumn Header="SerialNumber" DisplayMemberBinding = "{Binding Path=Item.SerialNumber}"></GridViewColumn>
+                        <GridViewColumn Header="Urgently" DisplayMemberBinding = "{Binding Path=Item.Urgently}"></GridViewColumn>
+                        <GridViewColumn Header="Status" DisplayMemberBinding = "{Binding Path=Item.Status.StatusValue}"></GridViewColumn>
+                        <GridViewColumn Header="Work" DisplayMemberBinding = "{Binding Path=Item.PricelistItems, Converter={StaticResource myPriceListConverter}}"/>
+                        <GridViewColumn Header="Order amount" DisplayMemberBinding = "{Binding Path=Item.OrderAmount}"></GridViewColumn>
+                        <GridViewColumn Header="Price coefficient" DisplayMemberBinding = "{Binding Path=Item.PriceCoefficient}"></GridViewColumn>
+                        
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+            </GroupBox>
+
+        <Grid Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right">
             <Grid.RowDefinitions >
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
