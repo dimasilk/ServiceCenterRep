@@ -37,7 +37,7 @@
     </UserControl.Resources>
     <StackPanel Orientation="Horizontal" Width="Auto"  >
         <TextBlock Text="Order status:"/>
-        <ComboBox ItemsSource="{Binding Path=ViewModel.Statuses}" DisplayMemberPath="StatusValue" SelectedItem="{Binding Path=ViewModel.Filter.Status, Mode=TwoWay}">
+        <ComboBox MinWidth="100" ItemsSource="{Binding Path=ViewModel.Statuses}" DisplayMemberPath="StatusValue" SelectedItem="{Binding Path=ViewModel.Filter.Status, Mode=TwoWay}">
             <i:Interaction.Triggers>
                 <i:EventTrigger  EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding Path=ViewModel.FilterChangedCommand, Mode=OneWay}"/>
@@ -56,7 +56,7 @@
             </i:Interaction.Triggers>
         </CheckBox>
             <TextBlock Text="SerialNumber:"/>
-            <TextBox Text="{Binding Path=ViewModel.Filter.SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <TextBox MinWidth="100"  Text="{Binding Path=ViewModel.Filter.SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <i:Interaction.Triggers>
                 <i:EventTrigger  EventName="TextChanged">
                     <i:InvokeCommandAction Command="{Binding Path=ViewModel.FilterChangedCommand, Mode=OneWay}"/>
@@ -64,7 +64,7 @@
             </i:Interaction.Triggers>
         </TextBox>
         <TextBlock Text="Date recieved, from:"/>
-        <DatePicker SelectedDate="{Binding Path=ViewModel.Filter.FromDateRecieved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <DatePicker MinWidth="100"  SelectedDate="{Binding Path=ViewModel.Filter.FromDateRecieved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <i:Interaction.Triggers>
                 <i:EventTrigger  EventName="SelectedDateChanged">
                     <i:InvokeCommandAction Command="{Binding Path=ViewModel.FilterChangedCommand, Mode=OneWay}"/>
@@ -72,7 +72,7 @@
             </i:Interaction.Triggers>
         </DatePicker>
         <TextBlock Text="Date recieved, till:"/>
-        <DatePicker SelectedDate="{Binding Path=ViewModel.Filter.TillDateRecieved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <DatePicker MinWidth="100"  SelectedDate="{Binding Path=ViewModel.Filter.TillDateRecieved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <i:Interaction.Triggers>
                 <i:EventTrigger  EventName="SelectedDateChanged">
                     <i:InvokeCommandAction Command="{Binding Path=ViewModel.FilterChangedCommand, Mode=OneWay}"/>

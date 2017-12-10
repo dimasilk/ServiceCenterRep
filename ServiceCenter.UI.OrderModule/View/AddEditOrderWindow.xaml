@@ -9,7 +9,7 @@
              xmlns:validation="clr-namespace:ServiceCenter.UI.Infrastructure.Validation;assembly=ServiceCenter.UI.Infrastructure"
             xmlns:converters="clr-namespace:ServiceCenter.UI.Infrastructure.Converters;assembly=ServiceCenter.UI.Infrastructure"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="300"
+             d:DesignHeight="600" d:DesignWidth="600"
              behaviors:DialogWindowBehavior.DialogResult="{Binding DialogResult}" behaviors:DialogWindowBehavior.DialogResultData="{Binding DialogResultData}"
              Background="{StaticResource ControlBackgroundNormal}">
     
@@ -213,9 +213,9 @@
 
                 <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
                     <TextBlock Text="Pricelist items sum:"/>
-                    <TextBox Text="{Binding Path=OrderSum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
+                    <TextBox Text="{Binding Path=OrderSum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" MinWidth="60"/>
                     <TextBlock Text="Coefficient:"/>
-                    <TextBox Text="{Binding Path=Coeff, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
+                    <TextBox Text="{Binding Path=Coeff, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" MinWidth="60">
                         <i:Interaction.Triggers>
                             <i:EventTrigger  EventName="TextChanged">
                                 <i:InvokeCommandAction Command="{Binding Path=PriceParameterChangedCommand, Mode=OneWay}"/>
@@ -223,7 +223,7 @@
                         </i:Interaction.Triggers>
                     </TextBox>
                     <TextBlock Text="Order amount:"/>
-                    <TextBox Text="{Binding Path=OrderAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
+                    <TextBox Text="{Binding Path=OrderAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" MinWidth="60"/>
                 </StackPanel>
                 <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding Path=Messages.PriceListMessage, Mode=OneWay}"  Foreground="Red" Visibility="{Binding Path=NoSelectedWorks, Converter={StaticResource VisibilityConverter}}"/>
             </Grid>
