@@ -7,6 +7,7 @@
              xmlns:behaviors="clr-namespace:ServiceCenter.UI.Infrastructure.Behaviors;assembly=ServiceCenter.UI.Infrastructure"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:validation="clr-namespace:ServiceCenter.UI.Infrastructure.Validation;assembly=ServiceCenter.UI.Infrastructure"
+            xmlns:converters="clr-namespace:ServiceCenter.UI.Infrastructure.Converters;assembly=ServiceCenter.UI.Infrastructure"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="300"
              behaviors:DialogWindowBehavior.DialogResult="{Binding DialogResult}" behaviors:DialogWindowBehavior.DialogResultData="{Binding DialogResultData}"
@@ -84,6 +85,9 @@
         </Style>
     </Window.Resources>
     <Grid>
+        <Grid.Resources>
+            <converters:ControlVisibilityConverter x:Key="VisibilityConverter"   />
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
@@ -170,9 +174,18 @@
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Urgently:"/>
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Order recieved:"/>
                 <TextBlock Grid.Column="0" Grid.Row="3" Text="Order ready:"/>
-                <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="StatusValue" SelectedItem="{Binding Path=Item.Status, Mode=TwoWay}"/>
-                <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding Item.Urgently, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <DatePicker Grid.Column="1" Grid.Row="2" SelectedDate="{Binding Path=Item.DateRecieved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="StatusValue" SelectedItem="{Binding Path=Item.Status, Mode=TwoWay}" SelectedIndex="0"/>
+                <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding Item.Urgently, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <DatePicker Grid.Column="1" Grid.Row="2" Name="RecieveDate" Validation.ErrorTemplate="{StaticResource TextBoxValidationTemplate}">
+                    <DatePicker.SelectedDate>
+                        <Binding Path="Item.DateRecieved" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <validation:RequiredFieldValidationRule Field="Date recieved" ValidatesOnTargetUpdated="True"/>
+                                <ExceptionValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                </DatePicker>
                 <DatePicker Grid.Column="1" Grid.Row="3" SelectedDate="{Binding Path=Item.DateReady, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </GroupBox>
@@ -181,7 +194,8 @@
             <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -211,6 +225,7 @@
                     <TextBlock Text="Order amount:"/>
                     <TextBox Text="{Binding Path=OrderAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
                 </StackPanel>
+                <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding Path=Messages.PriceListMessage, Mode=OneWay}"  Foreground="Red" Visibility="{Binding Path=NoSelectedWorks, Converter={StaticResource VisibilityConverter}}"/>
             </Grid>
            
         </GroupBox>
@@ -268,6 +283,7 @@
                 </Button>
             </Grid>
         </GroupBox>
+        <TextBlock Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding Path=Messages.CustomerCompanyMessage, Mode=OneWay}"  Foreground="Red" Visibility="{Binding Path=NoSelectedCustomerCompany, Converter={StaticResource VisibilityConverter}}"/>
 
         <Grid Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right">
             <Grid.RowDefinitions >
@@ -284,7 +300,10 @@
                         <Binding ElementName="DeviceModelBox" Path="(Validation.HasError)"/>
                         <Binding ElementName="ManufacturerBox" Path="(Validation.HasError)"/>
                         <Binding ElementName="SerialNumberBox" Path="(Validation.HasError)"/>
-                        <Binding Path="IsOkButtonEnabled"></Binding>
+                        <Binding ElementName="RecieveDate" Path="(Validation.HasError)"/>
+                        <Binding Path="NoSelectedWorks"/>
+                        <Binding Path="NoSelectedCustomerCompany"/>
+                        <!--Binding Path="IsOkButtonDisabled"/-->
                     </MultiBinding>
                 </Button.IsEnabled>
             </Button>

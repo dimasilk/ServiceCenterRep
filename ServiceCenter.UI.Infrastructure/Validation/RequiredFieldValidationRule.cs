@@ -13,7 +13,8 @@ namespace ServiceCenter.UI.Infrastructure.Validation
         public string Field { get; set; }
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (string.IsNullOrEmpty((string) value)) return new ValidationResult(false, "Field " + Field + " is required");
+            if (string.IsNullOrEmpty(value?.ToString()))
+                return new ValidationResult(false, "Field " + Field + " is required");
             return new ValidationResult(true, null);
         }
     }

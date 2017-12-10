@@ -91,6 +91,7 @@
     <Compile Include="Behaviors\OverrideMetadataBehavior.cs" />
     <Compile Include="Constants\TabNames.cs" />
     <Compile Include="Converters\BooleanOrConverter.cs" />
+    <Compile Include="Converters\ControlVisibilityConverter.cs" />
     <Compile Include="Converters\InvertBooleanConverter.cs" />
     <Compile Include="Converters\PriceListConverter.cs" />
     <Compile Include="Interfaces\ILoginService.cs" />

@@ -12,6 +12,7 @@ using ServiceCenter.UI.CustomerModule.View;
 using ServiceCenter.UI.Infrastructure.DialogService;
 using ServiceCenter.UI.Infrastructure.Interfaces;
 using ServiceCenter.UI.Infrastructure.ViewModel;
+using ServiceCenter.UI.OrderModule.Validation;
 
 
 namespace ServiceCenter.UI.OrderModule.ViewModel
@@ -26,10 +27,11 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
 
         public OrderDTO Item { get; set; }
-        public bool IsOkButtonEnabled
+        public AddEditOrderValidationMessages Messages { get; set; } = new AddEditOrderValidationMessages();
+        public bool IsOkButtonDisabled
         {
-            get { return _isOkButtonEnabled; }
-            set { SetProperty(ref _isOkButtonEnabled, value); }
+            get { return _isOkButtonDisabled; }
+            set { SetProperty(ref _isOkButtonDisabled, value); }
         }
 
         public ObservableCollection<PricelistDTO> SelectedPricelistItems
@@ -61,6 +63,17 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             get { return _orderAmount; }
             set { SetProperty(ref _orderAmount, value); }
         }
+
+        public bool NoSelectedWorks
+        {
+            get { return _noSelectedWorks; }
+            set { SetProperty(ref _noSelectedWorks, value); }
+        }
+        public bool NoSelectedCustomerCompany
+        {
+            get { return _noSelectedCustomerCompany; }
+            set { SetProperty(ref _noSelectedCustomerCompany, value); }
+        }
         public AddEditOrderWindowViewModel(OrderDTO item, IWcfOrderService serviceClient, IUserIdService userIdService, IEventAggregator eventAggregator, IDialogService dialogService, IWcfCustomerService customerService, IWcfCompanyService companyService)
         {
             Item = item ?? new OrderDTO();
@@ -87,6 +100,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             _selectedPricelistItems = new ObservableCollection<PricelistDTO>();
             GetPrices();
             GetStatuses();
+            Validate();
         }
 
         private readonly IWcfOrderService _serviceClient;
@@ -101,14 +115,17 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         private double _coeff;
         private double _orderSum;
         private double _orderAmount;
-        private bool _isOkButtonEnabled = true;
+        private bool _isOkButtonDisabled = true;
+        private bool _noSelectedWorks;
+        private bool _noSelectedCustomerCompany;
 
 
         public override void OkClick(object o)
         {
+            Validate();
             if (Item.Customer == null && Item.Company == null)
             {
-                IsOkButtonEnabled = false;
+                IsOkButtonDisabled = true;
                 return;
             }
             
@@ -139,6 +156,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             if (priceListViewModel.PricelistDto.Price != null)
                 OrderSum += (double) priceListViewModel.PricelistDto.Price;
             CountOrderAmount();
+            Validate();
         }
         public void DoubleClickOnSelectedPriceItem(PricelistDTO pricelistDto)
         {
@@ -146,6 +164,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             Item.PricelistItems = _selectedPricelistItems.ToArray();
             if (pricelistDto.Price != null) OrderSum -= (double) pricelistDto.Price;
             CountOrderAmount();
+            Validate();
         }
 
         public void EditCustomer(CustomerDTO customerDto)
@@ -161,7 +180,8 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
                 Item.Customer = _customerService.GetCustomerById(id);
                 Item.OnPropertyChanged(nameof(Item.Customer));
             }
-            IsOkButtonEnabled = true;
+            IsOkButtonDisabled = false;
+            Validate();
 
         }
 
@@ -178,7 +198,8 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
                 Item.Company = _companyService.GetCompanyById(id);
                 Item.OnPropertyChanged(nameof(Item.Company));
             }
-            IsOkButtonEnabled = true;
+            IsOkButtonDisabled = false;
+            Validate();
         }
 
         public void PriceParameterChanged()
@@ -201,6 +222,19 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
                 if (element.Price != null) x += (double) element.Price;
             }
             OrderSum = x;
+        }
+
+        private void Validate()
+        {
+            if (Item.PricelistItems == null || Item.PricelistItems.Count == 0)
+                NoSelectedWorks = true;
+            else
+                NoSelectedWorks = false;
+
+            if ((Item.Customer == null || Item.Customer.Id == Guid.Empty) && (Item.Company == null || Item.Company.Id == Guid.Empty))
+                NoSelectedCustomerCompany = true;
+            else
+                NoSelectedCustomerCompany = false;
         }
         
     }
