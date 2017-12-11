@@ -17,5 +17,10 @@ namespace ServiceCenter.BL.Common.DTO
         public string Info { get; set; }
         [DataMember]
         public ICollection<OrderDTO> Orders { get; set; }
+
+        public override string ToString()
+        {
+            return FullName + ", " + Phone;
+        }
     }
 }

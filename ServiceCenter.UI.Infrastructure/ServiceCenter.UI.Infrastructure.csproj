@@ -86,6 +86,7 @@
     <Compile Include="AggregatedEvent\EditEntityEvent.cs" />
     <Compile Include="Attributes\ModuleInfoAttribute.cs" />
     <Compile Include="Attributes\ShowOnStartupAttribute.cs" />
+    <Compile Include="Behaviors\TextChangedCommandBehavior.cs" />
     <Compile Include="Behaviors\LoaderBehavior.cs" />
     <Compile Include="Behaviors\MouseDoubleClickCommandBehaviour.cs" />
     <Compile Include="Behaviors\OverrideMetadataBehavior.cs" />

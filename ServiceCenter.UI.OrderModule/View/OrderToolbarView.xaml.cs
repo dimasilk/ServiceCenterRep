@@ -12,6 +12,7 @@ namespace ServiceCenter.UI.OrderModule.View
         {
             InitializeComponent();
             DataContext = orderToolbarViewModel;
+           
         }
     }
 }

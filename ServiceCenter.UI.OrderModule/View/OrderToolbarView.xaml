@@ -5,6 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ServiceCenter.UI.OrderModule.View"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+             xmlns:converters="clr-namespace:ServiceCenter.UI.Infrastructure.Converters;assembly=ServiceCenter.UI.Infrastructure"
+             xmlns:behaviors="clr-namespace:ServiceCenter.UI.Infrastructure.Behaviors;assembly=ServiceCenter.UI.Infrastructure"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Width="Auto"
@@ -21,6 +24,7 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="4,0,0,0"/>
         </Style>
+        
         <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -79,6 +83,20 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </DatePicker>
+        <ComboBox MinWidth="100" Height="40" 
+                                  Text="{Binding FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  ItemsSource="{Binding CustomerFilteredCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                  SelectedItem="{Binding Path=ViewModel.Filter.Customer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                   IsEditable="True"
+                                    IsTextSearchEnabled="True"
+                                  >
+            <i:Interaction.Triggers>
+                
+                <i:EventTrigger  EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding Path=ViewModel.FilterChangedCommand, Mode=OneWay}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
             
         
     </StackPanel>
