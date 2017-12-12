@@ -176,7 +176,7 @@
                 <TextBlock Grid.Column="0" Grid.Row="3" Text="Order ready:"/>
                 <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="StatusValue" SelectedItem="{Binding Path=Item.Status, Mode=TwoWay}" SelectedIndex="0"/>
                 <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding Item.Urgently, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <DatePicker Grid.Column="1" Grid.Row="2" Name="RecieveDate" Validation.ErrorTemplate="{StaticResource TextBoxValidationTemplate}">
+                <DatePicker Grid.Column="1" Grid.Row="2" Name="RecieveDate" Validation.ErrorTemplate="{StaticResource DatePickerValidationTemplate}">
                     <DatePicker.SelectedDate>
                         <Binding Path="Item.DateRecieved" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                             <Binding.ValidationRules>

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace ServiceCenter.UI.Shell
 {
@@ -10,7 +11,15 @@ namespace ServiceCenter.UI.Shell
         protected override void OnStartup(StartupEventArgs e)
         {
             this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+            Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
             new ServiceCenterBootstrapper().Run();
         }
+
+        private void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            MessageBox.Show(MainWindow, e.Exception.Message);
+        }
+        
     }
 }
