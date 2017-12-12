@@ -176,7 +176,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
                 _customerService.UpdateCustomer(result);
             else
             {
-                var id = _customerService.AddCustomer(result);
+                var id = result.Id == Guid.Empty ? _customerService.AddCustomer(result) : result.Id;
                 Item.Customer = _customerService.GetCustomerById(id);
                 Item.OnPropertyChanged(nameof(Item.Customer));
             }
@@ -194,7 +194,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
                 _companyService.UpdateCompany(result);
             else
             {
-                var id = _companyService.AddCompany(result);
+                var id = result.Id == Guid.Empty ? _companyService.AddCompany(result) : result.Id;
                 Item.Company = _companyService.GetCompanyById(id);
                 Item.OnPropertyChanged(nameof(Item.Company));
             }
