@@ -19,5 +19,9 @@ namespace ServiceCenter.BL.Common.DTO
         public string Adress { get; set; }
         [DataMember]
         public ICollection<OrderDTO> Orders { get; set; }
+        public override string ToString()
+        {
+            return Name + ", " + Phone;
+        }
     }
 }

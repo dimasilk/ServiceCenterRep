@@ -49,6 +49,8 @@ namespace ServiceCenter.BL.Mappings
             IdUserCreated = u.IdUserCreated,
             OrderAmount = u.OrderAmount,
             PriceCoefficient = u.PriceCoefficient,
+            DateReady = u.DateOrderReady,
+            DateRecieved = u.DateRecieved,
             Status = OrderStatusMapper.SelectExpression.Invoke(u.Status),
             PricelistItems =
                 u.PricelistOrders.Select(x => PriceListMapper.SelectExpression.Invoke(x.Pricelist)).ToList(),

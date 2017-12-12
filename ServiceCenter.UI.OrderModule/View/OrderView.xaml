@@ -11,6 +11,7 @@
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" behaviors:LoaderBehavior.IsBusy="{Binding IsBusy}">
         <Grid.Resources>
             <converters:PriceListConverter x:Key="myPriceListConverter"   />
+            <converters:DateToStringConverter x:Key="myDateToStringConverter"/>
         </Grid.Resources>
         <ListView Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path=OrdersCollection}" SelectedItem="{Binding Path=SelectedItem, Mode=OneWayToSource}">
             <ListView.View>
@@ -25,6 +26,8 @@
                         <GridViewColumn Header="Work" DisplayMemberBinding = "{Binding Path=Item.PricelistItems, Converter={StaticResource myPriceListConverter}}"/>
                         <GridViewColumn Header="Order amount" DisplayMemberBinding = "{Binding Path=Item.OrderAmount}"></GridViewColumn>
                         <GridViewColumn Header="Price coefficient" DisplayMemberBinding = "{Binding Path=Item.PriceCoefficient}"></GridViewColumn>
+                        <GridViewColumn Header="Order recieved" DisplayMemberBinding = "{Binding Path=Item.DateRecieved, Converter={StaticResource myDateToStringConverter}}"></GridViewColumn>
+                        <GridViewColumn Header="Order ready" DisplayMemberBinding = "{Binding Path=Item.DateReady, Converter={StaticResource myDateToStringConverter}}"></GridViewColumn>
                         <GridViewColumn Header="Customer" DisplayMemberBinding = "{Binding Path=Item.Customer.FullName}"></GridViewColumn>
                         <GridViewColumn Header="Customer phone" DisplayMemberBinding = "{Binding Path=Item.Customer.Phone}"></GridViewColumn>
                         <GridViewColumn Header="Company" DisplayMemberBinding = "{Binding Path=Item.Company.Name}"></GridViewColumn>
