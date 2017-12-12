@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
@@ -8,6 +9,7 @@ namespace ServiceCenter.WcfService.WcfCustomers
 {
     // ПРИМЕЧАНИЕ. Команду "Переименовать" в меню "Рефакторинг" можно использовать для одновременного изменения имени класса "WcfCustomerService" в коде, SVC-файле и файле конфигурации.
     // ПРИМЕЧАНИЕ. Чтобы запустить клиент проверки WCF для тестирования службы, выберите элементы WcfCustomerService.svc или WcfCustomerService.svc.cs в обозревателе решений и начните отладку.
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Multiple, AutomaticSessionShutdown = true)]
     public class WcfCustomerService : IWcfCustomerService
     {
         private readonly IOrderService _orderService;

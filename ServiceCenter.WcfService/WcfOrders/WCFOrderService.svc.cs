@@ -8,8 +8,8 @@ using ServiceCenter.BL.Interfaces;
 
 namespace ServiceCenter.WcfService.WcfOrders
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)] 
-  
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall, ConcurrencyMode = ConcurrencyMode.Multiple, AutomaticSessionShutdown = true)]
+
     public class WcfOrderService : IWcfOrderService
     {
         private readonly IOrderService _orderService;

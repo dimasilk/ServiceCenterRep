@@ -81,7 +81,9 @@ namespace ServiceCenter.UI.Infrastructure
             var channel = _lazyFactory.Value.CreateChannel();
             try
             {
-                ((IClientChannel)channel).Open();
+                var communicationObject = (IClientChannel)channel;
+                communicationObject.Faulted += CommunicationObject_Faulted;
+                communicationObject.Open();
                 return channel;
             }
             catch (Exception)
@@ -91,6 +93,15 @@ namespace ServiceCenter.UI.Infrastructure
                 Init();
                 throw;
             }
+        }
+
+        private void CommunicationObject_Faulted(object sender, EventArgs e)
+        {
+            var communicationObject = (IClientChannel)sender;
+            communicationObject.Faulted -= CommunicationObject_Faulted;
+            CleanupChannel(communicationObject);
+            CleanupChannelFactory(_lazyFactory.Value);
+            Init();
         }
 
         private ChannelFactory<T> CreateChannelFactory()

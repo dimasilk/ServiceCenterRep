@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using LinqKit;
 using ServiceCenter.BL.Common.DTO;
@@ -40,9 +41,18 @@ namespace ServiceCenter.BL.CustomerService
             if (c != null)
             {
                 _context.Customers.Remove(c);
-                _context.SaveChanges();
+                try
+                {
+                    _context.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    
+                    return;
+                }
+               
             }
-            return;
+            
         }
 
         public CustomerDTO[] GetAllCustomers()

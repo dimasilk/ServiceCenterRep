@@ -215,13 +215,7 @@
                     <TextBlock Text="Pricelist items sum:"/>
                     <TextBox Text="{Binding Path=OrderSum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" MinWidth="60"/>
                     <TextBlock Text="Coefficient:"/>
-                    <TextBox Text="{Binding Path=Coeff, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" MinWidth="60">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger  EventName="TextChanged">
-                                <i:InvokeCommandAction Command="{Binding Path=PriceParameterChangedCommand, Mode=OneWay}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </TextBox>
+                    <TextBox Text="{Binding Path=StringCoeff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="60"/>
                     <TextBlock Text="Order amount:"/>
                     <TextBox Text="{Binding Path=OrderAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" MinWidth="60"/>
                 </StackPanel>

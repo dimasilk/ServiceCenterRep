@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.BL.Interfaces;
 using ServiceCenter.BL.Tests.Common;
@@ -10,6 +11,7 @@ namespace ServiceCenter.BL.Tests.CustomersTest
     public class CustomersTest : BaseTestClass
     {
         private readonly ICustomerService _serviceCustomers;
+        private readonly IOrderService _orderService;
 
         private readonly CustomerDTO _customerDto =
             new CustomerDTO()
@@ -22,6 +24,7 @@ namespace ServiceCenter.BL.Tests.CustomersTest
         {
            base.InitContainer();
             _serviceCustomers = Container.Resolve<ICustomerService>();
+            _orderService = Container.Resolve<IOrderService>();
         }
 
         [TestMethod]
@@ -58,6 +61,16 @@ namespace ServiceCenter.BL.Tests.CustomersTest
             Assert.IsTrue(c.Length > 1);
             _serviceCustomers.DeleteCustomer(a);
             _serviceCustomers.DeleteCustomer(b);
+        }
+        [Ignore]
+        public void TryDeleteCustomerWithOrder()
+        {
+            var a = _serviceCustomers.AddCustomer(_customerDto);
+            var b = _orderService.GetOrderById(new Guid("CA7597A8-E6DD-E711-9BD6-1C1B0DF74675"));
+            b.Customer = _serviceCustomers.GetCustomerById(a);
+            _orderService.UpdateOrder(b);
+
+            _serviceCustomers.DeleteCustomer(a);
         }
 
 

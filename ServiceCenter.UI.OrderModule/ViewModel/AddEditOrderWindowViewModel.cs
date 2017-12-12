@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
@@ -23,7 +24,6 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         public ICommand DoubleClickOnSelectedPriceItemCommand { get; set; }
         public ICommand EditCustomerCommand { get; set; }
         public ICommand EditCompanyCommand { get; set; }
-        public ICommand PriceParameterChangedCommand { get; set; }
 
 
         public OrderDTO Item { get; set; }
@@ -53,11 +53,19 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             get { return _orderSum; }
             set { SetProperty(ref _orderSum, value); }
         }
-        public double Coeff
+        public string StringCoeff
         {
-            get { return _coeff; }
-            set { SetProperty(ref _coeff, value); }
+            get { return _stringCoeff; }
+            set
+            {
+                SetProperty(ref _stringCoeff, value);
+                double c;
+                if (!double.TryParse(_stringCoeff, out c)) return;
+                _coeff = c;
+                CountOrderAmount();
+            }
         }
+        
         public double OrderAmount
         {
             get { return _orderAmount; }
@@ -80,9 +88,10 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
             if (Item.PricelistItems.Count != 0) CountOrderSum();
             if (Item.PriceCoefficient != null)
-                Coeff = (double)Item.PriceCoefficient;
+                _coeff = (double)Item.PriceCoefficient;
             else
-                Coeff = 1;
+                _coeff = 1;
+            _stringCoeff = _coeff.ToString(CultureInfo.InvariantCulture);
             if (Item.OrderAmount != null) OrderAmount = (double)Item.OrderAmount;
 
             _serviceClient = serviceClient;
@@ -95,7 +104,6 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             DoubleClickOnSelectedPriceItemCommand = new DelegateCommand<PricelistDTO>(DoubleClickOnSelectedPriceItem);
             EditCustomerCommand = new DelegateCommand<CustomerDTO>(EditCustomer);
             EditCompanyCommand = new DelegateCommand<CompanyDTO>(EditCompany);
-            PriceParameterChangedCommand = new DelegateCommand(PriceParameterChanged);
 
             _selectedPricelistItems = new ObservableCollection<PricelistDTO>();
             GetPrices();
@@ -113,6 +121,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         private OrderStatusDTO[] _statuses;
         private PriceListTreeViewModel _prices;
         private double _coeff;
+        private string _stringCoeff;
         private double _orderSum;
         private double _orderAmount;
         private bool _isOkButtonDisabled = true;
@@ -202,16 +211,12 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             Validate();
         }
 
-        public void PriceParameterChanged()
-        {
-            CountOrderAmount();
-        }
 
         private void CountOrderAmount()
         {
-            OrderAmount = OrderSum * Coeff;
+            OrderAmount = OrderSum * _coeff;
             Item.OrderAmount = OrderAmount;
-            Item.PriceCoefficient = Coeff;
+            Item.PriceCoefficient = _coeff;
         }
 
         private void CountOrderSum()
