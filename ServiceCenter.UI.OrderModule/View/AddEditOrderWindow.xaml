@@ -83,6 +83,7 @@
             <Setter Property="Stretch" Value="Uniform"/>
             <Setter Property="Margin" Value="10"></Setter>
         </Style>
+        
     </Window.Resources>
     <Grid>
         <Grid.Resources>
@@ -172,15 +173,15 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Status:"/>
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Urgently:"/>
-                <TextBlock Grid.Column="0" Grid.Row="2" Text="Order recieved:"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Order received:"/>
                 <TextBlock Grid.Column="0" Grid.Row="3" Text="Order ready:"/>
                 <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=Statuses}" DisplayMemberPath="StatusValue" SelectedItem="{Binding Path=Item.Status, Mode=TwoWay}" SelectedIndex="0"/>
                 <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding Item.Urgently, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <DatePicker Grid.Column="1" Grid.Row="2" Name="RecieveDate" Validation.ErrorTemplate="{StaticResource DatePickerValidationTemplate}">
+                <DatePicker Grid.Column="1" Grid.Row="2" Name="Receivedate" Validation.ErrorTemplate="{StaticResource DatePickerValidationTemplate}">
                     <DatePicker.SelectedDate>
-                        <Binding Path="Item.DateRecieved" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                        <Binding Path="Item.DateReceived" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
-                                <validation:RequiredFieldValidationRule Field="Date recieved" ValidatesOnTargetUpdated="True"/>
+                                <validation:RequiredFieldValidationRule Field="Date received" ValidatesOnTargetUpdated="True"/>
                                 <ExceptionValidationRule/>
                             </Binding.ValidationRules>
                         </Binding>
@@ -190,7 +191,7 @@
             </Grid>
         </GroupBox>
         
-        <GroupBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Header="Selected services (double click for add service)">
+        <GroupBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Header="Selected services (double click for add service, double click on selected for delete it)">
             <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -214,8 +215,17 @@
                 <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
                     <TextBlock Text="Pricelist items sum:"/>
                     <TextBox Text="{Binding Path=OrderSum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" MinWidth="60"/>
-                    <TextBlock Text="Coefficient:"/>
-                    <TextBox Text="{Binding Path=StringCoeff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="60"/>
+                    <TextBlock Text="Ratio:"/>
+                    <TextBox MinWidth="60" Name="CoefficientBox" Validation.ErrorTemplate="{StaticResource TextBoxValidationTemplate}">                    
+                        <TextBox.Text>
+                            <Binding Path="StringCoeff" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <validation:DoubleStringValidationRule ValidatesOnTargetUpdated="True"/>
+                                    <ExceptionValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Text="Order amount:"/>
                     <TextBox Text="{Binding Path=OrderAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" MinWidth="60"/>
                 </StackPanel>
@@ -294,7 +304,8 @@
                         <Binding ElementName="DeviceModelBox" Path="(Validation.HasError)"/>
                         <Binding ElementName="ManufacturerBox" Path="(Validation.HasError)"/>
                         <Binding ElementName="SerialNumberBox" Path="(Validation.HasError)"/>
-                        <Binding ElementName="RecieveDate" Path="(Validation.HasError)"/>
+                        <Binding ElementName="Receivedate" Path="(Validation.HasError)"/>
+                        <Binding ElementName="CoefficientBox" Path="(Validation.HasError)"/>
                         <Binding Path="NoSelectedWorks"/>
                         <Binding Path="NoSelectedCustomerCompany"/>
                         <!--Binding Path="IsOkButtonDisabled"/-->

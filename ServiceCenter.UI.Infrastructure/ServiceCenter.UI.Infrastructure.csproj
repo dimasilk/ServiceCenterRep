@@ -99,6 +99,7 @@
     <Compile Include="Interfaces\ILoginService.cs" />
     <Compile Include="Interfaces\ITabView.cs" />
     <Compile Include="Interfaces\IUserIdService.cs" />
+    <Compile Include="Validation\DoubleStringValidationRule.cs" />
     <Compile Include="Validation\PhoneValidationRule.cs" />
     <Compile Include="Validation\RequiredFieldValidationRule.cs" />
     <Compile Include="Validation\ValidationRuleWithDataContext.cs" />

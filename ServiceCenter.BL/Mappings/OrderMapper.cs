@@ -19,7 +19,7 @@ namespace ServiceCenter.BL.Mappings
             dataModel.DeviceModel = dto.DeviceModel;
             dataModel.IdUserCreated = dto.IdUserCreated;
             dataModel.StatusId = dto.Status.Id;
-            dataModel.DateRecieved = dto.DateRecieved;
+            dataModel.DateReceived = dto.DateReceived;
             dataModel.DateOrderReady = dto.DateReady;
             dataModel.OrderAmount = dto.OrderAmount;
             dataModel.PriceCoefficient = dto.PriceCoefficient;
@@ -50,7 +50,7 @@ namespace ServiceCenter.BL.Mappings
             OrderAmount = u.OrderAmount,
             PriceCoefficient = u.PriceCoefficient,
             DateReady = u.DateOrderReady,
-            DateRecieved = u.DateRecieved,
+            DateReceived = u.DateReceived,
             Status = OrderStatusMapper.SelectExpression.Invoke(u.Status),
             PricelistItems =
                 u.PricelistOrders.Select(x => PriceListMapper.SelectExpression.Invoke(x.Pricelist)).ToList(),

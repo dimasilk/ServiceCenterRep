@@ -31,8 +31,8 @@ namespace ServiceCenter.BL.OrderService
             if (filter.Company != null) query = query.Where(x => x.CompanyId == filter.Company.Id);
             if (!string.IsNullOrEmpty(filter.SerialNumber))
                 query = query.Where(x => x.SerialNumber.Contains(filter.SerialNumber));
-            if (filter.FromDateRecieved != null) query = query.Where(x => x.DateRecieved >= filter.FromDateRecieved);
-            if (filter.TillDateRecieved != null) query = query.Where(x => x.DateRecieved <= filter.TillDateRecieved);
+            if (filter.FromDateReceived != null) query = query.Where(x => x.DateReceived >= filter.FromDateReceived);
+            if (filter.TillDateReceived != null) query = query.Where(x => x.DateReceived <= filter.TillDateReceived);
             return query.Select(OrderMapper.SelectExpression).ToArray();
         }
 

@@ -72,8 +72,8 @@ namespace ServiceCenter.UI.CompanyModule.ViewModel
             if (dialogResult.HasValue && dialogResult.Value && result != null)
             {
                 _serviceClient.UpdateCompany(result);
-                GetCompanies();
             }
+            GetCompanies();
         }
 
     }

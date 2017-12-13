@@ -26,7 +26,7 @@
                         <GridViewColumn Header="Work" DisplayMemberBinding = "{Binding Path=Item.PricelistItems, Converter={StaticResource myPriceListConverter}}"/>
                         <GridViewColumn Header="Order amount" DisplayMemberBinding = "{Binding Path=Item.OrderAmount}"></GridViewColumn>
                         <GridViewColumn Header="Price coefficient" DisplayMemberBinding = "{Binding Path=Item.PriceCoefficient}"></GridViewColumn>
-                        <GridViewColumn Header="Order recieved" DisplayMemberBinding = "{Binding Path=Item.DateRecieved, Converter={StaticResource myDateToStringConverter}}"></GridViewColumn>
+                        <GridViewColumn Header="Order received" DisplayMemberBinding = "{Binding Path=Item.DateReceived, Converter={StaticResource myDateToStringConverter}}"></GridViewColumn>
                         <GridViewColumn Header="Order ready" DisplayMemberBinding = "{Binding Path=Item.DateReady, Converter={StaticResource myDateToStringConverter}}"></GridViewColumn>
                         <GridViewColumn Header="Customer" DisplayMemberBinding = "{Binding Path=Item.Customer.FullName}"></GridViewColumn>
                         <GridViewColumn Header="Customer phone" DisplayMemberBinding = "{Binding Path=Item.Customer.Phone}"></GridViewColumn>

@@ -47,6 +47,7 @@ namespace ServiceCenter.UI.CustomerModule.ViewModel
            // if (Item.IdUserCreated == Guid.Empty) Item.IdUserCreated = _userIdService.GetCreatorId();
             base.OkClick(o);
         }
+       
 
         public async void  GetOrdersByCustomer()
         {

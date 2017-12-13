@@ -159,7 +159,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
         public void DoubleClickOnPriceItem(PriceListViewModel priceListViewModel)
         {
-            if (_selectedPricelistItems.Select(x => x.Id).Contains(priceListViewModel.PricelistDto.Id)) return;
+            if (_selectedPricelistItems.Select(x => x.Id).Contains(priceListViewModel.PricelistDto.Id) || priceListViewModel.PricelistDto.Price == null) return;
             _selectedPricelistItems.Add(priceListViewModel.PricelistDto);
             Item.PricelistItems = _selectedPricelistItems.ToArray();
             if (priceListViewModel.PricelistDto.Price != null)
@@ -180,7 +180,16 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         {
             CustomerDTO result;
             var dialogResult = Item.Customer == null ? _dialogService.ShowDialog<CustomerView, CustomerDTO>("Edit Customer", out result) : _dialogService.ShowDialog<CustomerView, CustomerDTO>("Edit Customer", out result, new ParameterOverride("item", Item.Customer));
-            if (!dialogResult.HasValue || !dialogResult.Value || result == null) return;
+             if (!dialogResult.HasValue || !dialogResult.Value || result == null)
+            {
+                if (Item.Customer != null && Item.Customer.Id != Guid.Empty)
+                {
+                    Item.Customer = _customerService.GetCustomerById(Item.Customer.Id);
+                    Item.OnPropertyChanged(nameof(Item.Customer));
+                }
+
+                return;
+            }
             if (Item.Customer != null)
                 _customerService.UpdateCustomer(result);
             else
@@ -198,7 +207,12 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         {
             CompanyDTO result;
             var dialogResult = Item.Company == null ? _dialogService.ShowDialog<CompanyView, CompanyDTO>("Edit Company", out result) : _dialogService.ShowDialog<CompanyView, CompanyDTO>("Edit Company", out result, new ParameterOverride("item", Item.Company));
-            if (!dialogResult.HasValue || !dialogResult.Value || result == null) return;
+            if (!dialogResult.HasValue || !dialogResult.Value || result == null)
+            {
+                if (Item.Company != null && Item.Company.Id != Guid.Empty)
+                    Item.Company = _companyService.GetCompanyById(Item.Company.Id);
+                return;
+            }
             if (Item.Company != null)
                 _companyService.UpdateCompany(result);
             else

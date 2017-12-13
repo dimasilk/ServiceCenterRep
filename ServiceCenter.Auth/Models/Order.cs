@@ -17,7 +17,7 @@ namespace ServiceCenter.Auth.Models
         public bool Urgently { get; set; }
 
         public Guid IdUserCreated { get; set; }
-        public DateTime? DateRecieved { get; set; }
+        public DateTime? DateReceived { get; set; }
         public DateTime? DateOrderReady { get; set; }
 
         public Guid StatusId { get; set; }

@@ -72,8 +72,8 @@ namespace ServiceCenter.UI.CustomerModule.ViewModel
             if (dialogResult.HasValue && dialogResult.Value && result != null)
             {
                 _serviceClient.UpdateCustomer(result);
-                GetCustomers();
             }
+            GetCustomers();
         }
     }
 }

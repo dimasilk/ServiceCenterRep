@@ -11,9 +11,9 @@ namespace ServiceCenter.BL.Common.DTO
         [DataMember]
         public CompanyDTO Company { get; set; }
         [DataMember]
-        public DateTime? FromDateRecieved { get; set; }
+        public DateTime? FromDateReceived { get; set; }
         [DataMember]
-        public DateTime? TillDateRecieved { get; set; }
+        public DateTime? TillDateReceived { get; set; }
         [DataMember]
         public bool Urgently { get; set; }
         [DataMember]

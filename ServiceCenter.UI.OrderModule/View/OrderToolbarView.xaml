@@ -64,16 +64,16 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>
-        <TextBlock Text="Date recieved, from:"/>
-        <DatePicker MinWidth="100"  SelectedDate="{Binding Path=ViewModel.Filter.FromDateRecieved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <TextBlock Text="Date received, from:"/>
+        <DatePicker MinWidth="100"  SelectedDate="{Binding Path=ViewModel.Filter.FromDateReceived, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <i:Interaction.Triggers>
                 <i:EventTrigger  EventName="SelectedDateChanged">
                     <i:InvokeCommandAction Command="{Binding Path=ViewModel.FilterChangedCommand, Mode=OneWay}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </DatePicker>
-        <TextBlock Text="Date recieved, till:"/>
-        <DatePicker MinWidth="100"  SelectedDate="{Binding Path=ViewModel.Filter.TillDateRecieved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <TextBlock Text="Date received, till:"/>
+        <DatePicker MinWidth="100"  SelectedDate="{Binding Path=ViewModel.Filter.TillDateReceived, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <i:Interaction.Triggers>
                 <i:EventTrigger  EventName="SelectedDateChanged">
                     <i:InvokeCommandAction Command="{Binding Path=ViewModel.FilterChangedCommand, Mode=OneWay}"/>
