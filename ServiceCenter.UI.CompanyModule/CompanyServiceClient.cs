@@ -11,7 +11,7 @@ namespace ServiceCenter.UI.CompanyModule
     {
         public Task<CompanyDTO[]> GetAllCompanies()
         {
-            return Channel.GetAllCompanies();
+            return AsyncChannel.ContinueWith(x => x.Result.GetAllCompanies()).Unwrap();
         }
 
         public Task<CompanyDTO[]> GetCompaniesByFilter(CompanyFilterDTO filter)

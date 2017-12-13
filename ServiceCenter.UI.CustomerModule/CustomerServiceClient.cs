@@ -11,7 +11,7 @@ namespace ServiceCenter.UI.CustomerModule
     {
         public Task<CustomerDTO[]> GetAllCustomers()
         {
-            return Channel.GetAllCustomers();
+            return AsyncChannel.ContinueWith(x => x.Result.GetAllCustomers()).Unwrap();
         }
 
         public Task<CustomerDTO[]> GetCustomersByFilter(CustomerFilterDTO filter)
