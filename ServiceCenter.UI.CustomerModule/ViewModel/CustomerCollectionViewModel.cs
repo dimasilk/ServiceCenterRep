@@ -1,11 +1,14 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.UI.CustomerModule.View;
+using ServiceCenter.UI.Infrastructure.Constants;
 using ServiceCenter.UI.Infrastructure.DialogService;
 using ServiceCenter.UI.Infrastructure.ViewModel;
 
@@ -15,6 +18,7 @@ namespace ServiceCenter.UI.CustomerModule.ViewModel
     {
         private readonly IWcfCustomerService _serviceClient;
         private readonly IDialogService _dialogService;
+        private readonly IRegionManager _regionManager;
         private ObservableCollection<CustomerItemViewModel> _customersCollection;
 
         public CustomerCollectionViewModel(IWcfCustomerService serviceClient, IEventAggregator eventAggregator,
@@ -22,11 +26,14 @@ namespace ServiceCenter.UI.CustomerModule.ViewModel
         {
             _serviceClient = serviceClient;
             _dialogService = dialogService;
-
+            _regionManager = regionManager;
+            FilterChangedCommand = new DelegateCommand(FilterChandeg);
             GetCustomers();
         }
 
         public CustomerItemViewModel SelectedItem { get; set; }
+        public CustomerFilterDTO Filter { get; set; } = new CustomerFilterDTO();
+        public ICommand FilterChangedCommand { get; set; }
 
         public ObservableCollection<CustomerItemViewModel> CustomerCollection
         {
@@ -36,11 +43,18 @@ namespace ServiceCenter.UI.CustomerModule.ViewModel
 
         private async void GetCustomers()
         {
-            var c = await _serviceClient.GetAllCustomers();
+            IsBusy = true;
+            //var c = await _serviceClient.GetAllCustomers();
+            var c = await _serviceClient.GetCustomersByFilter(Filter);
             CustomerCollection =
                 new ObservableCollection<CustomerItemViewModel>(c.Select(x => new CustomerItemViewModel(x)));
+            IsBusy = false;
         }
 
+        public void FilterChandeg()
+        {
+            GetCustomers();
+        }
 
         protected override void DeleteEntity(object parametr)
         {
@@ -74,6 +88,10 @@ namespace ServiceCenter.UI.CustomerModule.ViewModel
                 _serviceClient.UpdateCustomer(result);
             }
             GetCustomers();
+        }
+        protected override void InitModuleToolbar()
+        {
+            _regionManager.RequestNavigate(RegionNames.ModuleMenuRegion, nameof(CustomerToolbarView));
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Practices.Unity;
 using ServiceCenter.BL.Common;
 using ServiceCenter.UI.CustomerModule.View;
+using ServiceCenter.UI.CustomerModule.ViewModel;
 using ServiceCenter.UI.Infrastructure.Constants;
 
 namespace ServiceCenter.UI.CustomerModule
@@ -17,7 +18,9 @@ namespace ServiceCenter.UI.CustomerModule
         public void Initialize()
         {
             _container.RegisterType<IWcfCustomerService, CustomerServiceClient>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<CustomerCollectionViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<object, CustomerCollectionView>(TabNames.CustomersTab);
+            _container.RegisterType<object, CustomerToolbarView>(nameof(CustomerToolbarView));
         }
     }
 }

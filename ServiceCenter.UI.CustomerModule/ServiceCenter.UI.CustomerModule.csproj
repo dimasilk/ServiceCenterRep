@@ -135,9 +135,13 @@
     <Compile Include="ViewModel\AddEditCustomerWindowViewModel.cs" />
     <Compile Include="ViewModel\CustomerCollectionViewModel.cs" />
     <Compile Include="ViewModel\CustomerItemViewModel.cs" />
+    <Compile Include="ViewModel\CustomerToolbarViewModel.cs" />
     <Compile Include="ViewModel\OrderItemViewModel.cs" />
     <Compile Include="View\CustomerCollectionView.xaml.cs">
       <DependentUpon>CustomerCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerToolbarView.xaml.cs">
+      <DependentUpon>CustomerToolbarView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CustomerView.xaml.cs">
       <DependentUpon>CustomerView.xaml</DependentUpon>
@@ -159,6 +163,10 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="View\CustomerCollectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomerToolbarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

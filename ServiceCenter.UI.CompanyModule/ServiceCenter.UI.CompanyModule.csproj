@@ -111,8 +111,12 @@
     <Compile Include="ViewModel\AddEditCompanyWindowViewModel.cs" />
     <Compile Include="ViewModel\CompanyCollectionViewModel.cs" />
     <Compile Include="ViewModel\CompanyItemViewModel.cs" />
+    <Compile Include="ViewModel\CompanyToolbarViewModel.cs" />
     <Compile Include="View\CompanyCollectionView.xaml.cs">
       <DependentUpon>CompanyCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CompanyToolbarView.xaml.cs">
+      <DependentUpon>CompanyToolbarView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CompanyView.xaml.cs">
       <DependentUpon>CompanyView.xaml</DependentUpon>
@@ -134,6 +138,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\CompanyCollectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CompanyToolbarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

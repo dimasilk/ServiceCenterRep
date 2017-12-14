@@ -1,11 +1,14 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using ServiceCenter.BL.Common;
 using ServiceCenter.BL.Common.DTO;
 using ServiceCenter.UI.CompanyModule.View;
+using ServiceCenter.UI.Infrastructure.Constants;
 using ServiceCenter.UI.Infrastructure.DialogService;
 using ServiceCenter.UI.Infrastructure.ViewModel;
 
@@ -15,6 +18,7 @@ namespace ServiceCenter.UI.CompanyModule.ViewModel
     {
         private readonly IWcfCompanyService _serviceClient;
         private readonly IDialogService _dialogService;
+        private readonly IRegionManager _regionManager;
         private ObservableCollection<CompanyItemViewModel> _customersCollection;
 
         public CompanyCollectionViewModel(IWcfCompanyService serviceClient, IEventAggregator eventAggregator,
@@ -22,11 +26,15 @@ namespace ServiceCenter.UI.CompanyModule.ViewModel
         {
             _serviceClient = serviceClient;
             _dialogService = dialogService;
+            _regionManager = regionManager;
+            FilterChangedCommand = new DelegateCommand(FilterChanged);
 
             GetCompanies();
         }
 
         public CompanyItemViewModel SelectedItem { get; set; }
+        public CompanyFilterDTO Filter { get; set; } = new CompanyFilterDTO();
+        public ICommand FilterChangedCommand { get; set; }
 
         public ObservableCollection<CompanyItemViewModel> CompanyCollection
         {
@@ -36,9 +44,12 @@ namespace ServiceCenter.UI.CompanyModule.ViewModel
 
         private async void GetCompanies()
         {
-            var c = await _serviceClient.GetAllCompanies();
+            IsBusy = true;
+            // var c = await _serviceClient.GetAllCompanies();
+            var c = await _serviceClient.GetCompaniesByFilter(Filter);
             CompanyCollection =
             new ObservableCollection<CompanyItemViewModel>(c.Select(x => new CompanyItemViewModel(x)));
+            IsBusy = false;
         }
 
 
@@ -74,6 +85,15 @@ namespace ServiceCenter.UI.CompanyModule.ViewModel
                 _serviceClient.UpdateCompany(result);
             }
             GetCompanies();
+        }
+
+        private void FilterChanged()
+        {
+            GetCompanies();
+        }
+        protected override void InitModuleToolbar()
+        {
+            _regionManager.RequestNavigate(RegionNames.ModuleMenuRegion, nameof(CompanyToolbarView));
         }
 
     }
