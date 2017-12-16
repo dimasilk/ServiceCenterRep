@@ -38,8 +38,8 @@ namespace ServiceCenter.UI.Infrastructure.Behaviors
         {
             FrameworkElement element = d as FrameworkElement;
             if (element == null) return;
-            element.MouseDown -= Element_MouseDown;
-            if (args.NewValue != null) element.MouseDown += Element_MouseDown;
+            element.PreviewMouseDown -= Element_MouseDown;
+            if (args.NewValue != null) element.PreviewMouseDown += Element_MouseDown;
         }
 
         private static void Element_MouseDown(object sender, MouseButtonEventArgs e)

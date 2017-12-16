@@ -28,12 +28,14 @@ namespace ServiceCenter.UI.CustomerModule.ViewModel
             _dialogService = dialogService;
             _regionManager = regionManager;
             FilterChangedCommand = new DelegateCommand(FilterChandeg);
+            DoubleClickOnCustomerCommand = new DelegateCommand<CustomerItemViewModel>(DoubleClickOnCustomer);
             GetCustomers();
         }
 
         public CustomerItemViewModel SelectedItem { get; set; }
         public CustomerFilterDTO Filter { get; set; } = new CustomerFilterDTO();
         public ICommand FilterChangedCommand { get; set; }
+        public ICommand DoubleClickOnCustomerCommand { get; set; }
 
         public ObservableCollection<CustomerItemViewModel> CustomerCollection
         {
@@ -92,6 +94,12 @@ namespace ServiceCenter.UI.CustomerModule.ViewModel
         protected override void InitModuleToolbar()
         {
             _regionManager.RequestNavigate(RegionNames.ModuleMenuRegion, nameof(CustomerToolbarView));
+        }
+        public void DoubleClickOnCustomer(CustomerItemViewModel itemViewModel)
+        {
+
+            SelectedItem = itemViewModel;
+            EditEntity(SelectedItem);
         }
     }
 }

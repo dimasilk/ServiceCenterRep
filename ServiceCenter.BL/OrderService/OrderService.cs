@@ -6,6 +6,7 @@ using ServiceCenter.BL.Interfaces;
 using ServiceCenter.BL.Mappings;
 using LinqKit;
 using System.Data.Entity;
+using System.Threading;
 
 namespace ServiceCenter.BL.OrderService
 {
@@ -25,7 +26,7 @@ namespace ServiceCenter.BL.OrderService
         public OrderDTO[] GetOrdersByFilter(OrderFilterDTO filter)
         {
             var query = _context.Orders.AsExpandable();
-            if (filter.Status != null) query = query.Where(x => x.StatusId == filter.Status.Id);
+            if (filter.Status != null && filter.Status.Id != Guid.Empty) query = query.Where(x => x.StatusId == filter.Status.Id);
             if (filter.Urgently) query = query.Where(x => x.Urgently);
             if (filter.Customer != null) query = query.Where(x => x.ClientId == filter.Customer.Id);
             if (filter.Company != null) query = query.Where(x => x.CompanyId == filter.Company.Id);

@@ -33,12 +33,13 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
             _dialogService = dialogService;
             _regionManager = regionManager;
             FilterChangedCommand = new DelegateCommand(FilterChanged);
-
+            DoubleClickOnOrderCommand = new DelegateCommand<OrderItemViewModel>(DoubleClickOnOrder);
             Filter = new OrderFilterDTO();
             GetOrders();
             GetStatuses();
-           
-           
+            
+
+
         }
 
         public OrderStatusDTO[] Statuses
@@ -55,6 +56,7 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
 
         public OrderFilterDTO Filter { get; set; }
         public ICommand FilterChangedCommand { get; set; }
+        public ICommand DoubleClickOnOrderCommand { get; set; }
 
         private async void GetOrders()
         {
@@ -75,7 +77,14 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         private async void GetStatuses()
         {
             Statuses = await _orderServiceClient.GetOrderStatuses();
-          
+            AddEmptyStatus();
+        }
+
+        private void AddEmptyStatus()
+        {
+            var orderStatusDtos = Statuses.ToList();
+            orderStatusDtos.Insert(0, new OrderStatusDTO());
+            Statuses = orderStatusDtos.ToArray();
         }
 
         protected override void DeleteEntity(object parametr)
@@ -115,6 +124,13 @@ namespace ServiceCenter.UI.OrderModule.ViewModel
         protected override void InitModuleToolbar()
         {
             _regionManager.RequestNavigate(RegionNames.ModuleMenuRegion, nameof(OrderToolbarView));
+        }
+
+        public void DoubleClickOnOrder(OrderItemViewModel itemViewModel)
+        {
+           
+            SelectedItem = itemViewModel;
+            EditEntity(SelectedItem);
         }
     }
 }

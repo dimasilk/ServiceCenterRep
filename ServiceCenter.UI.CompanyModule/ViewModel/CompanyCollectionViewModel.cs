@@ -28,13 +28,14 @@ namespace ServiceCenter.UI.CompanyModule.ViewModel
             _dialogService = dialogService;
             _regionManager = regionManager;
             FilterChangedCommand = new DelegateCommand(FilterChanged);
-
+            DoubleClickOnCompanyCommand = new DelegateCommand<CompanyItemViewModel>(DoubleClickOnCompany);
             GetCompanies();
         }
 
         public CompanyItemViewModel SelectedItem { get; set; }
         public CompanyFilterDTO Filter { get; set; } = new CompanyFilterDTO();
         public ICommand FilterChangedCommand { get; set; }
+        public ICommand DoubleClickOnCompanyCommand { get; set; }
 
         public ObservableCollection<CompanyItemViewModel> CompanyCollection
         {
@@ -94,6 +95,12 @@ namespace ServiceCenter.UI.CompanyModule.ViewModel
         protected override void InitModuleToolbar()
         {
             _regionManager.RequestNavigate(RegionNames.ModuleMenuRegion, nameof(CompanyToolbarView));
+        }
+        public void DoubleClickOnCompany(CompanyItemViewModel itemViewModel)
+        {
+
+            SelectedItem = itemViewModel;
+            EditEntity(SelectedItem);
         }
 
     }

@@ -13,25 +13,27 @@
             <converters:PriceListConverter x:Key="myPriceListConverter"   />
             <converters:DateToStringConverter x:Key="myDateToStringConverter"/>
         </Grid.Resources>
-        <ListView Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path=OrdersCollection}" SelectedItem="{Binding Path=SelectedItem, Mode=OneWayToSource}">
+        <ListView Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Path=OrdersCollection}" SelectedItem="{Binding Path=SelectedItem, Mode=OneWayToSource}"
+                  behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommand="{Binding DoubleClickOnOrderCommand}"
+                  behaviors:MouseDoubleClickCommandBehaviour.DoubleClickCommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=SelectedItem}">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
-                        <GridViewColumn Header="Device" DisplayMemberBinding = "{Binding Path=Item.Device}"></GridViewColumn>
-                        <GridViewColumn Header="Manufacturer" DisplayMemberBinding = "{Binding Path=Item.Manufacturer}"></GridViewColumn>
-                        <GridViewColumn Header="DeviceModel" DisplayMemberBinding = "{Binding Path=Item.DeviceModel}"></GridViewColumn>
-                        <GridViewColumn Header="SerialNumber" DisplayMemberBinding = "{Binding Path=Item.SerialNumber}"></GridViewColumn>
-                        <GridViewColumn Header="Urgently" DisplayMemberBinding = "{Binding Path=Item.Urgently}"></GridViewColumn>
-                        <GridViewColumn Header="Status" DisplayMemberBinding = "{Binding Path=Item.Status.StatusValue}"></GridViewColumn>
+                        <GridViewColumn Header="Device" DisplayMemberBinding = "{Binding Path=Item.Device}"/>
+                        <GridViewColumn Header="Manufacturer" DisplayMemberBinding = "{Binding Path=Item.Manufacturer}"/>
+                        <GridViewColumn Header="DeviceModel" DisplayMemberBinding = "{Binding Path=Item.DeviceModel}"/>
+                        <GridViewColumn Header="SerialNumber" DisplayMemberBinding = "{Binding Path=Item.SerialNumber}"/>
+                        <GridViewColumn Header="Urgently" DisplayMemberBinding = "{Binding Path=Item.Urgently}"/>
+                        <GridViewColumn Header="Status" DisplayMemberBinding = "{Binding Path=Item.Status.StatusValue}"/>
                         <GridViewColumn Header="Work" DisplayMemberBinding = "{Binding Path=Item.PricelistItems, Converter={StaticResource myPriceListConverter}}"/>
-                        <GridViewColumn Header="Order amount" DisplayMemberBinding = "{Binding Path=Item.OrderAmount}"></GridViewColumn>
-                        <GridViewColumn Header="Price coefficient" DisplayMemberBinding = "{Binding Path=Item.PriceCoefficient}"></GridViewColumn>
-                        <GridViewColumn Header="Order received" DisplayMemberBinding = "{Binding Path=Item.DateReceived, Converter={StaticResource myDateToStringConverter}}"></GridViewColumn>
-                        <GridViewColumn Header="Order ready" DisplayMemberBinding = "{Binding Path=Item.DateReady, Converter={StaticResource myDateToStringConverter}}"></GridViewColumn>
-                        <GridViewColumn Header="Customer" DisplayMemberBinding = "{Binding Path=Item.Customer.FullName}"></GridViewColumn>
-                        <GridViewColumn Header="Customer phone" DisplayMemberBinding = "{Binding Path=Item.Customer.Phone}"></GridViewColumn>
-                        <GridViewColumn Header="Company" DisplayMemberBinding = "{Binding Path=Item.Company.Name}"></GridViewColumn>
-                        <GridViewColumn Header="Company phone" DisplayMemberBinding = "{Binding Path=Item.Company.Phone}"></GridViewColumn>
+                        <GridViewColumn Header="Order amount" DisplayMemberBinding = "{Binding Path=Item.OrderAmount}"/>
+                        <GridViewColumn Header="Price coefficient" DisplayMemberBinding = "{Binding Path=Item.PriceCoefficient}"/>
+                        <GridViewColumn Header="Order received" DisplayMemberBinding = "{Binding Path=Item.DateReceived, Converter={StaticResource myDateToStringConverter}}"/>
+                        <GridViewColumn Header="Order ready" DisplayMemberBinding = "{Binding Path=Item.DateReady, Converter={StaticResource myDateToStringConverter}}"/>
+                        <GridViewColumn Header="Customer" DisplayMemberBinding = "{Binding Path=Item.Customer.FullName}"/>
+                        <GridViewColumn Header="Customer phone" DisplayMemberBinding = "{Binding Path=Item.Customer.Phone}"/>
+                        <GridViewColumn Header="Company" DisplayMemberBinding = "{Binding Path=Item.Company.Name}"/>
+                        <GridViewColumn Header="Company phone" DisplayMemberBinding = "{Binding Path=Item.Company.Phone}"/>
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
