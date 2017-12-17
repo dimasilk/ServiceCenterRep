@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using Microsoft.Practices.ServiceLocation;
+using ServiceCenter.UI.Infrastructure.Interfaces;
 
 namespace ServiceCenter.UI.Shell
 {
@@ -18,6 +20,7 @@ namespace ServiceCenter.UI.Shell
         private void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             e.Handled = true;
+            ServiceLocator.Current.GetInstance<ILogExceptionService>()?.Log(e.Exception);
             MessageBox.Show(MainWindow, e.Exception.Message);
         }
         

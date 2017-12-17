@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Windows;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
@@ -7,8 +8,10 @@ using ServiceCenter.BL.Common;
 using ServiceCenter.UI.Infrastructure.Behaviors;
 using ServiceCenter.UI.Infrastructure.DialogService;
 using ServiceCenter.UI.Infrastructure.Interfaces;
+using ServiceCenter.UI.Infrastructure.LogService;
 using ServiceCenter.UI.Shell.Interfaces;
 using ServiceCenter.UI.Shell.Login;
+using SharpRaven;
 
 namespace ServiceCenter.UI.Shell
 {
@@ -45,6 +48,9 @@ namespace ServiceCenter.UI.Shell
             Container.RegisterInstance<ILoginSetCredentialsService>(loginService);
             Container.RegisterInstance<IUserIdService>(loginService);
             Container.RegisterType<IWcfLoginService, LoginServiceClient>(new ContainerControlledLifetimeManager());
+            Container.RegisterInstance(new RavenClient(ConfigurationManager.AppSettings[nameof(RavenClient)]), new ContainerControlledLifetimeManager());
+            Container.RegisterType<ILogExceptionService, LogExceptionService>(new ContainerControlledLifetimeManager());
+            
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
