@@ -20,6 +20,12 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="4,0,0,0"/>
+            <Setter Property="Foreground" Value="#FF32EBFB"/>
+        </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="4,0,0,0"/>
         </Style>
         
         <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
@@ -57,7 +63,7 @@
             </i:Interaction.Triggers>
         </CheckBox>
             <TextBlock Text="SerialNumber:"/>
-        <TextBox MinWidth="100"  Text="{Binding Path=ViewModel.Filter.SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <TextBox MinWidth="70"  Text="{Binding Path=ViewModel.Filter.SerialNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <i:Interaction.Triggers>
                 <i:EventTrigger  EventName="TextChanged">
                     <i:InvokeCommandAction Command="{Binding Path=ViewModel.FilterChangedCommand, Mode=OneWay}"/>
@@ -80,6 +86,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </DatePicker>
+        <TextBlock Text="Filter by customer:"/>
         <ComboBox MinWidth="100" Height="40" 
                                   Text="{Binding FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   ItemsSource="{Binding CustomerFilteredCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -95,6 +102,7 @@
             </i:Interaction.Triggers>
         </ComboBox>
 
+        <TextBlock Text="Filter by company:"/>
         <ComboBox MinWidth="100" Height="40" 
                   Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding CompanyFilteredCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 

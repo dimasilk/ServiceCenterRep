@@ -15,7 +15,7 @@
                 <GridView>
                     <GridView.Columns>
                         <GridViewColumn Header="Full Name" DisplayMemberBinding = "{Binding Path=Item.Name}"></GridViewColumn>
-                        <GridViewColumn Header="Info" DisplayMemberBinding = "{Binding Path=Item.Adress}"></GridViewColumn>
+                        <GridViewColumn Header="Address" DisplayMemberBinding = "{Binding Path=Item.Adress}"></GridViewColumn>
                         <GridViewColumn Header="Phone" DisplayMemberBinding = "{Binding Path=Item.Phone}"></GridViewColumn>
                         <GridViewColumn Header="Info" DisplayMemberBinding = "{Binding Path=Item.Info}"></GridViewColumn>
                     </GridView.Columns>

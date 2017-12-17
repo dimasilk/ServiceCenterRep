@@ -70,9 +70,9 @@
             <Setter Property="Margin" Value="2"/>
         </Style>
         <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="Margin" Value="4"></Setter>
+            <Setter Property="Margin" Value="4,0,4,0"></Setter>
             <Setter Property="Width" Value="60"></Setter>
-            <Setter Property="Height" Value="40"></Setter>
+            <Setter Property="Height" Value="36"></Setter>
             <Setter Property="TextBlock.FontSize" Value="16"></Setter>
             <Setter Property="TextBlock.Foreground" Value="{StaticResource FillPath}"></Setter>
         </Style>
@@ -235,7 +235,7 @@
         </GroupBox>
         
         <GroupBox Grid.Column="0" Grid.Row="2" Header="Customer Info">
-            <Grid DataContext="{Binding  Item.Customer}">
+            <Grid DataContext="{Binding  Item.Customer}" Margin="4,0,4,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -262,7 +262,7 @@
     </GroupBox>
 
         <GroupBox Grid.Column="1" Grid.Row="2" Header="Company Info">
-            <Grid  DataContext="{Binding  Item.Company}">
+            <Grid  DataContext="{Binding  Item.Company}"  Margin="4,0,4,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -277,7 +277,7 @@
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Full name:"/>
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Phone:"/>
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Info:"/>
-                <TextBlock Grid.Column="0" Grid.Row="3" Text="Order ready"/>
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Order ready:"/>
                 <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="0" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="1" Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBox IsEnabled="False" Grid.Column="1" Grid.Row="2" Text="{Binding Info, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>

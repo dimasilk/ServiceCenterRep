@@ -11,12 +11,18 @@
              Height="Auto">
 
     <UserControl.Resources>
-        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="4,0,0,0"/>
+                <Setter Property="Foreground" Value="#FF32EBFB"/>
+            </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="4,0,0,0"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="4,0,4,0"/>
+            <Setter Property="Height" Value="36"/>
         </Style>
-        
     </UserControl.Resources>
     <StackPanel Orientation="Horizontal" Width="Auto"  >
         <TextBlock Text="Customer fullname:"/>

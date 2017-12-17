@@ -141,7 +141,7 @@
                         <GridViewColumn Header="Status" DisplayMemberBinding = "{Binding Path=Item.Status.StatusValue}"></GridViewColumn>
                         <GridViewColumn Header="Work" DisplayMemberBinding = "{Binding Path=Item.PricelistItems, Converter={StaticResource myPriceListConverter}}"/>
                         <GridViewColumn Header="Order amount" DisplayMemberBinding = "{Binding Path=Item.OrderAmount}"></GridViewColumn>
-                        <GridViewColumn Header="Price coefficient" DisplayMemberBinding = "{Binding Path=Item.PriceCoefficient}"></GridViewColumn>
+                        <GridViewColumn Header="Ratio" DisplayMemberBinding = "{Binding Path=Item.PriceCoefficient}"></GridViewColumn>
                         
                     </GridView.Columns>
                 </GridView>
